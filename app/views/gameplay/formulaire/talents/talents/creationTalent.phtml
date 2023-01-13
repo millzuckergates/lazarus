@@ -1,0 +1,97 @@
+<?php
+echo $this->tag->hiddenField(["idArbre", "value" => $arbre->id]);
+echo $this->tag->hiddenField(["rang", "value" => $rang]);
+echo $this->tag->hiddenField(["position", "value" => $position]);
+?>
+<div class="popupTalentTalent" id="popupTalentTalent">
+    <!-- En-tête -->
+    <div class="entetePopupTalent" id="entetePopupTalentTalent">
+        <div class="divTitreTalent"><span class="titrePopup">Créer un nouveau Talent</span></div>
+    </div>
+
+    <!-- Données du formulaire -->
+    <div class="formPopupTalent" id="formPopupTalent">
+
+        <!-- Les images, à afficher à gauche -->
+        <div id="divBlocImageFormTalent" class="blocImageFormTalent">
+            <div id="divImageTalentGris" class="divImageTalentCouleur">
+                <div class="imgTalentMiniature imgTalentGrise" id="imgTalentGris"
+                     style="opacity:1;background-image: url('public/img/site/illustrations/talents/defaut.png');">
+                    <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/spacer.gif', "class" => 'talenticon talentgris', 'id' => 'imageTalentGris']); ?>
+                </div>
+            </div>
+
+            <div id="divImageTalentVert" class="divImageTalentCouleur">
+                <div class="imgTalentMiniature" id="imgTalentVert"
+                     style="opacity:1;background-image: url('public/img/site/illustrations/talents/defaut.png');">
+                    <div class="buttonnumber" id="numberTalentVert" style="color: rgb(46, 255, 0);">0/0</div>
+                    <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/spacer.gif', "class" => 'talenticon talentvert', 'id' => 'imageTalentVert']); ?>
+                </div>
+            </div>
+
+            <div id="divImageTalentJaune" class="divImageTalentCouleur">
+                <div class="imgTalentMiniature" id="imgTalentJaune"
+                     style="opacity:1;background-image: url('public/img/site/illustrations/talents/defaut.png');">
+                    <div class="buttonnumber" id="numberTalentJaune" style="color: rgb(255, 209, 0);">0/0</div>
+                    <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/spacer.gif', "class" => 'talenticon talentjaune', 'id' => 'imageTalentJaune']); ?>
+                </div>
+            </div>
+
+            <div id="divGestionImageTalent">
+                <div id="divListeImagesTalent">
+                    <?php echo Talents::genererListeImagesVide($this->getDI()->get('config')->application->imgDir); ?>
+                </div>
+                <div id="divAjouterImageTalent">
+                    <?php
+                    echo Phalcon\Tag::textField(array("newImageTalentTalent", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                    echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageTalent', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- les données du formulaire -->
+        <div id="divBlocFormulaireTalent">
+
+            <!-- Nom du talent -->
+            <div class="divDataPopupTalent">
+                <label for="nomTalent">Nom </label>
+                <?php echo Phalcon\Tag::textField(array("nomTalent", "class" => "formulaireField", "value" => "Nom du Talent")); ?>
+            </div>
+
+            <!-- Description -->
+            <div class="divDescriptionPopupTalent" id="divDescriptionPopupTalentTalent">
+                <?php echo Phalcon\Tag::textArea(["descriptionTalent", "value" => "Entrez une description.", "class" => "texteDescriptionPopupTalent"]); ?>
+            </div>
+
+            <!-- Niveau Max du talent -->
+            <div class="divDataPopupTalent">
+                <label for="maxTalent">Nombre de points attribuables </label>
+                <?php echo Phalcon\Tag::textField(array("maxTalent", "class" => "formulaireField", "value" => "0", "size" => 2)); ?>
+            </div>
+
+            <!-- Arbre associé -->
+            <div class="divDataPopupTalent" id="blocSelectArbreTalent">
+                <label for="selectArbreTalent">Arbre </label>
+                <span id="selectArbreTalent"><?php echo $arbre->nom; ?></span>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div class="divDataPopupTalent">
+                <?php
+                echo "<label for='isActifTalent'>Talent actif ? </label><input type='checkbox' id='isActifTalent' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionTalentTalent">
+        <div id="boutonCreerPopupTalentTalent" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerTalent', 'class' => 'bouton', 'title' => "Permet de créer un nouveau talent.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentTalent" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalent', 'class' => 'bouton', 'title' => "Permet d'annuler la création du talent.")); ?>
+        </div>
+    </div>
+</div>

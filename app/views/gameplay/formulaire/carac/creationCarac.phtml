@@ -1,0 +1,95 @@
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        //Si Carac Primaires
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_CREATION_CARAC, $auth['autorisations'])
+          || Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_CARAC_PRIMAIRE, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerCarac', 'class' => 'bouton', 'title' => "Permet de créer la caractéristique."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour liste", 'id' => 'retourListeCarac', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des caractéristiques."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la caractéristique -->
+<div id="divGlobalCarac" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormCarac", "class" => "formulaireField titreEdition", "value" => "Nom")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuCarac" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageCarac" class="imageCentreeEdition">
+            <?php echo Phalcon\Tag::image(['public/img/site/illustrations/caracteristiques/defaut.png', "class" => 'imageCarac', 'id' => 'imageCarac']); ?>
+            <div id="listeImageCarac">
+                <?php echo Caracteristiques::genererListeImageCaracVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterImageCrac">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageCarac", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageCarac', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionCaracCreation">
+            <?php echo Phalcon\Tag::textArea(["descriptionCarac", "value" => "Entrez une description pour la caractéristique.", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <div id="divInformationCaracCreation" class="divInformationCarac">
+
+            <!-- Genre -->
+            <div id="divGenreCarac" class="divContenuInformationReferentiel">
+                <label for="genreCarac">Genre </label>
+                <span id="genreCarac"><?php echo Constantes::genererSelectGenre(null, "selectGenreCarac"); ?></span>
+            </div>
+
+            <!-- Trigramme -->
+            <div id="divTrigrammeCarac" class="divContenuInformationReferentiel">
+                <label for="trigrammeCarac">Trigramme </label>
+                <?php echo Phalcon\Tag::textField(array("trigrammeCarac", "class" => "formulaireField", "value" => "XXX", "size" => 3)); ?>
+            </div>
+
+            <!-- Type -->
+            <div id="divTypeCarac" class="divContenuInformationReferentiel">
+                <label for="typeCarac">Type </label>
+                <span id="typeCarac"><?php echo Caracteristiques::genererListeTypeVide($auth); ?></span>
+            </div>
+
+            <!-- Valeur min -->
+            <div id="divValMinCarac" class="divContenuInformationReferentiel">
+                <label for="valMinCarac">Valeur minimum </label>
+                <?php echo Phalcon\Tag::textField(array("valMinCarac", "class" => "formulaireField", "value" => "")); ?>
+            </div>
+
+            <!-- Valeur max -->
+            <div id="divValMaxCarac" class="divContenuInformationReferentiel">
+                <label for="valMaxCarac">Valeur maximum </label>
+                <?php echo Phalcon\Tag::textField(array("valMaxCarac", "class" => "formulaireField", "value" => "")); ?>
+            </div>
+
+            <div id="divFormuleCarac" style="display:none;" class="divContenuInformationReferentiel">
+                <label for="formuleCarac">Formule </label>
+                <span id="formuleCarac">Non définie</span>
+                <input type="button" class="boutonFormule" value="Changer formule"
+                       onclick="afficherFormulaireFormule('formuleCarac');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Checkbox isModifiable - Uniquement pour les patrons -->
+            <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_CARAC_PRIMAIRE, $auth['autorisations'])) { ?>
+                <div id="divIsModifiableCarac" class="divContenuInformationReferentiel">
+                    <?php echo "<label for='isModifiableCarac'>Peut-être modifiée ? </label><input type='checkbox' id='isModifiableCarac' class='tickcrossFormulaireGameplay' />"; ?>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

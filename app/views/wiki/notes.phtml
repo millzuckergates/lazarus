@@ -1,0 +1,20 @@
+<?php
+if (!empty($article->notes) && count($article->notes) != 0) {
+    foreach ($article->notes as $note) {
+        echo "<div class='noteArticle'>";
+        echo "<span class='titreNote'>Note de &nbsp;</span><span class='profil'>" . $note->auteur->nom . "</span>";
+        echo "<input type='button' class='boutonDelete' id='deleteNote' onclick='boxDeleteNote(" . $note->id . ");'/>";
+        echo "<br/>";
+        echo "<span class='petitLabel'>Le " . date('d/M/Y H:i:s', $note->dateNote) . "</span>";
+        echo "<br/><br/>";
+        echo "<span class='contenuNote'>" . nl2br($note->contenu) . "</span>";
+        echo "</div>";
+    }
+}
+echo "<div class='ajouterNote'>";
+echo "<span class='titreNote'>Laissez une note :</span>";
+echo "<textarea id='newNote' class='contenuNote'></textarea><br/>";
+echo Phalcon\Tag::SubmitButton(array("Envoyer", 'id' => 'envoyerNoteArticle', 'class' => 'bouton', 'title' => "Permet d'envoyer la note."));
+echo $this->tag->hiddenField(["idNote", "value" => '']);
+echo "</div>";
+?>

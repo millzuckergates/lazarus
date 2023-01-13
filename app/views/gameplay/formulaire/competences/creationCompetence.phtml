@@ -1,0 +1,136 @@
+<div class="contenuPopupCompetence" id="contenuPopupCompetence">
+    <div class="entetePopupCompetence" id="entetePopupCompetence">
+        <div class="divTitreCompetence"><span class="titrePopup">Créer une nouvelle compétence</span></div>
+    </div>
+
+    <div class="formPopupComptence" id="formPopupCompetence">
+        <!-- On Affiche l'image à gauche -->
+        <div class='divBlocImageCompetence' id='divBlocImageCompetence'>
+            <div id="divImageCompetence">
+                <?php echo Phalcon\Tag::image(['/public/img/site/illustrations/competences/defaut.png', "class" => 'imageCompetence', 'id' => 'imageCompetence']); ?>
+            </div>
+            <div id="divGestionImageCompetence">
+                <div id="divListeImagesCompetence">
+                    <?php echo Competences::genererListeImagesVide($this->getDI()->get('config')->application->imgDir); ?>
+                </div>
+                <div id="divAjouterImageCompetence">
+                    <?php
+                    echo Phalcon\Tag::textField(array("newImageCompetence", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                    echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageCompetence', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="formCompetence" id="formCompetenceCreation">
+            <!-- Nom de la compétence -->
+            <div class="divDataPopupCompetence">
+                <label for="nomCompetence">Nom </label>
+                <?php echo Phalcon\Tag::textField(array("nomCompetence", "class" => "formulaireField", "value" => "Nom de la compétence")); ?>
+            </div>
+
+            <!-- Description -->
+            <div class="divTextePopupCompetence" id="divDescriptionPopupCompetence">
+                <?php echo Phalcon\Tag::textArea(["descriptionCompetence", "value" => "Entrez une description.", "class" => "texteDescriptionPopupCompetence"]); ?>
+            </div>
+
+            <!-- Type -->
+            <div class="divDataPopupCompetence" id="blocSelectTypeCompetence">
+                <label for="selectTypeCompetence">Type </label>
+                <span id="selectTypeCompetence"><?php echo Competences::getListeTypeVide(); ?></span>
+            </div>
+
+            <!-- Disponible en jeu -->
+            <div id="divDisponibleCompetence" class="divDataPopupCompetence">
+                <?php
+                echo "<label for='isDispoCompetence'>Disponible en jeu ? </label><input type='checkbox' id='isDispoCompetence' class='tickcrossFormulaireGameplay' checked />";
+                ?>
+            </div>
+
+            <!-- Compétence activable -->
+            <div id="divCompetenceActivalbe" class="divDataPopupCompetence">
+                <label for='isCompetenceActivable'>Cette compétence doit elle être activée ? </label>
+                <input type='checkbox' id='isCompetenceActivable' class='tickcrossFormulaireGameplay'
+                       onClick='gererBlocActif();'/>
+                <div class='divAide' id='divAideCompetenceActivable'
+                     onMouseOver='afficherAide("Une compétence active recquiert de dépenser des PA pour être lancée. Une compétence passive, elle, ne le nécessite pas, mais peut, ou non, être entraînée.","divAideCompetenceActivable");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <!-- Bloc Activable -->
+            <div id="divBlocActif" class="blocActifCompetence" style="display:none">
+                <!-- MessageRP -->
+                <div class="divTextePopupCompetence" id="divMessageRPPopupCompetence">
+                    <?php echo Phalcon\Tag::textArea(["messageRPCompetence", "value" => "Entrez le message qui s'affichera en RP.", "class" => "texteMessageRPPopupCompetence"]); ?>
+                    <div class='divAide' id='divAideCompetenceMessageRP'
+                         onMouseOver='afficherAide("Correspond au message qui s&#39;affichera sur le plateau de jeu lors de l&#39;utilisation de la compétence.","divAideCompetenceMessageRP");'
+                         onMouseOut='cacherAide();'></div>
+                </div>
+
+                <!-- Evenement Lanceur -->
+                <div class="divTextePopupCompetence" id="divEventLanceurPopupCompetence">
+                    <?php echo Phalcon\Tag::textArea(["eventLanceurCompetence", "value" => "Entrez l'évenement que l'utilisateur de la compétence verra.", "class" => "texteEventPopupCompetence"]); ?>
+                    <div class='divAide' id='divAideCompetenceEventLanceur'
+                         onMouseOver='afficherAide("Correspond au message qui s&#39;affichera dans la liste des évenements du personnage ayant utilisé la compétence.","divAideCompetenceEventLanceur");'
+                         onMouseOut='cacherAide();'></div>
+                </div>
+
+                <!-- Evenement Monde -->
+                <div class="divTextePopupCompetence" id="divEventGlobalPopupCompetence">
+                    <?php echo Phalcon\Tag::textArea(["eventGlobalCompetence", "value" => "Entrez l'évenement que les observateurs verront.", "class" => "texteEventPopupCompetence"]); ?>
+                    <div class='divAide' id='divAideCompetenceEventGlobal'
+                         onMouseOver='afficherAide("Correspond au message qui s&#39;affichera dans la liste des évenements des personnages ayant observé l&#39;utilisation de la compétence. Ne rien mettre impliquera qu&#39;aucun évenement ne sera affiché.","divAideCompetenceEventGlobal");'
+                         onMouseOut='cacherAide();'></div>
+                </div>
+
+                <!-- Cout en PA -->
+                <div class="divDataPopupTalent">
+                    <label for="coutPACompetence" id="labelCoutPA">Coût en PA </label>
+                    <?php echo Phalcon\Tag::textField(array("coutPACompetence", "class" => "formulaireField", "value" => "1", "size" => 2)); ?>
+                </div>
+
+                <!-- Entrainable ?-->
+                <div id="divEntrainableCompetence" class="divDataPopupCompetence">
+                    <?php
+                    echo "<label for='isEntrainableCompetence' id='labelIsEntrainable'>Peut on entraîner la compétence ? </label><input type='checkbox' id='isEntrainableCompetence' class='tickcrossFormulaireGameplay' checked />";
+                    ?>
+                    <div class='divAide' id='divAideCompetenceEntrainable'
+                         onMouseOver='afficherAide("Affichera le bouton Entraîner sur la compétence. Ne rien mettre implique que cette compétence évoluera par d&#39;autres moyen que cette action (déplacement sur la carte, utilisation de techniques, etc...). Cocher la case permet également aux deux options d&#39;être disponibles.".","divAideCompetenceEntrainable");'
+                         onMouseOut='cacherAide();'></div>
+                </div>
+            </div>
+
+            <!-- Bloc Apprentissage -->
+            <div id="divBlocApprentissageCompetence" class="blocApprentissageCompetence">
+                <!-- Enseignable ?-->
+                <div id="divEnseignableCompetence" class="divDataPopupCompetence">
+                    <?php
+                    echo "<label for='isEnseignableCompetence'>Peut on enseigner la compétence ? </label><input type='checkbox' id='isEnseignableCompetence' class='tickcrossFormulaireGameplay' checked />";
+                    ?>
+                </div>
+
+                <!-- Rang à partir duquel il est possible d'auto-apprendre la compétence -->
+                <div class="divDataPopupCompetence" id="blocSelectRangAutonomieCompetence">
+                    <label for="selectRangAutonomie">Autonomie dans l'apprentissage de la compétence à partir
+                        du </label>
+                    <span id="selectRangAutonomie"><?php echo Competences::getListeRangAutonomieVide(); ?></span>
+                    <div class='divAide' id='divAideCompetenceRangAutonomie'
+                         onMouseOver='afficherAide("Détermine le rang à partir duquel la compétence peut être apprise ou entraînée seul.","divAideCompetenceRangAutonomie");'
+                         onMouseOut='cacherAide();'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupCompetence" id="boutonsActionCompetence">
+        <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_COMPETENCE_MODIFIER, $auth['autorisations'])) { ?>
+            <div id="boutonCreerPopupCompetence" class="boutonActionPopupCompetence">
+                <?php echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerCompetence', 'class' => 'bouton', 'title' => "Permet de créer une nouvelle compétence.")); ?>
+            </div>
+        <?php } ?>
+
+        <div id="boutonFermerPopupCompetence" class="boutonFermerPopupCompetence">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupCompetence', 'class' => 'bouton', 'title' => "Permet d'annuler la création de la compétence.")); ?>
+        </div>
+    </div>
+</div>

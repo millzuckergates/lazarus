@@ -1,0 +1,79 @@
+<!-- Bloc bannière -->
+<div id="pageglobale">
+    <div class="banniere">
+        <img src="/img/site/interface/menu/Megabanniere3.jpg" title="" title="Megabanniere3" width="1515" height="265">
+    </div>
+
+    <!-- Bloc menu -->
+    <div class="menu" id="menu">
+        <?php
+        $auth = $this->session->get("auth");
+        if (!isset($auth)) {
+            echo Fonctions::genererMenu("init");
+        } else {
+            echo $auth["menu"];
+        }
+        ?>
+    </div>
+
+    <div class="blocGauche">
+        <?php if (!$this->session->get("auth")) { ?>
+            <div class="blocConnection">
+                <h2>Connexion</h2>
+                <?php echo $this->tag->form('accueil/connection') ?>
+                <p>
+                    <label for="name">Nom </label>
+                    <?php echo $this->tag->textField("login") ?>
+                </p>
+                <p>
+                    <label for="pwd">Mot de passe</label>
+                    <?php echo $this->tag->passwordField("pwd") ?>
+                </p>
+                <p>
+                    <?php echo $this->tag->submitButton("Connexion") ?>
+                </p>
+                <?php echo $this->tag->endForm(); ?>
+            </div>
+        <?php } else { ?>
+            <?php echo $this->tag->form('accueil/deconnexion') ?>
+            <!-- Bloc Profil Personnage -->
+            <div>Connecté !</div>
+            <?php echo Phalcon\Tag::SubmitButton(array("Déconnexion", 'id' => 'deconnexion', 'class' => 'button', 'title' => "Vous déconnecte du jeu.")); ?>
+            <?php echo $this->tag->endForm(); ?>
+            <?php
+            if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_ACCES_INTERFACE_MJ, $auth['autorisations'])) {
+                if ($auth['modeMJ'] == false || $auth['modeMJ'] == "false") {
+                    echo $this->tag->form('accueil/accesMJ');
+                    echo $this->tag->hiddenField(["acces", "value" => true]);
+                    echo Phalcon\Tag::SubmitButton(array("Accès MJ", 'id' => 'buttonAccesMJ', 'class' => 'button', 'title' => "Permet d'accèder à l'interface MJ."));
+                    echo $this->tag->endForm();
+                } elseif ($auth['modeMJ'] == true || $auth['modeMJ'] == "true") {
+                    echo $this->tag->form('accueil/accesMJ');
+                    echo $this->tag->hiddenField(["acces", "value" => false]);
+                    echo Phalcon\Tag::SubmitButton(array("Retour joueur", 'id' => 'buttonRetourJoueur', 'class' => 'button', 'title' => "Permet de retourner à l'interface du joueur."));
+                    echo $this->tag->endForm();
+                }
+
+                echo "<a href='/gameplay' target='_self' id='gameplayLink'>Gameplay</a>";
+            }
+            ?>
+        <?php } ?>
+    </div>
+
+    <div class="container" style="width:87%;float:right;">
+        <?php echo $this->getContent(); ?>
+    </div>
+
+    <?php if (isset($this->session->get("auth")['profilTest']) && $this->session->get("auth")['profilTest'] != null) { ?>
+        <div id="connecterProfilTest">
+            <span id="texteConnectionProfilTest">Vous êtes actuellement connecté avec un profil de test.</span>
+            <?php echo Phalcon\Tag::SubmitButton(array("Déconnecter", 'id' => 'buttonDecoProfilTest', 'class' => 'button', 'title' => "Permet de se déconnecter du profil de test en cours.")); ?>
+        </div>
+    <?php } ?>
+
+    <?php
+    if (isset($this->session->get("auth")['perso']) && $this->session->get("auth")['perso']->id != null) {
+        echo $this->view->partial('global/aide');
+    }
+    ?>
+</div>

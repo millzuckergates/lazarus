@@ -1,0 +1,32 @@
+<div id="tableResultat">
+    <?php
+    if (count($listeLogs) > 0) {
+        ?>
+        <table class="tableLogs" id="tableLogs">
+            <tr>
+                <th width="15%">Auteur</th>
+                <th width="25%"><span id="enteteTabLogDate" onclick="trieDate();">Date</span></th>
+                <th width="45%">Action</th>
+            </tr>
+            <?php
+            $i = 0;
+            foreach ($listeLogs as $log) {
+                $auteur = Personnages::findFirst(['id = :id:', 'bind' => ['id' => $log->idPersonnage]]);
+                $numeroLigne = $i % 2;
+                echo "<tr class='ligne_" . $numeroLigne . "'>";
+                echo "<td>" . $auteur->nom . "</td>";
+                echo "<td>" . strftime('%d/%m/%Y %H:%M:%S', $log->dateLog) . "</td>";
+                echo "<td>" . $log->action . "</td>";
+                echo "</tr>";
+                $i++;
+            }
+            ?>
+        </table>
+        <div id="gestionPage">
+            <?php echo $detailPage; ?>
+        </div>
+    <?php } else {
+        ?>
+        <span id="resultatRechercheLog">Votre recherche ne renvoi aucun résultat.</span>
+    <?php } ?>
+</div>

@@ -1,0 +1,28 @@
+<div id="contenuBonus">
+    <?php
+    echo $this->tag->hiddenField(["nbParametre", "value" => ""]);
+    ?>
+
+    <div id="enteteBonus">
+        <div id="divTitreBonus"><span class="titrePopup">Ajouter un nouvau Bonus</span></div>
+    </div>
+
+    <div id="divSelectBonus">
+        <div id="divSelectTypeBonus" class='selectListeBonus'>
+            <label for="spanSelectBonus">Bonus </label>
+            <span id="spanSelectBonus"><?php echo Bonus::getListeBonus(); ?></span>
+        </div>
+    </div>
+
+    <div id="detailBonus" class="detailElement" style="display:none">
+
+    </div>
+
+    <div id="boutonAjouterPopupBonus" class="boutonActionPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Valider", 'id' => 'validerBonus', 'class' => 'bouton', 'title' => "Ajoute un bonus.")); ?>
+    </div>
+
+    <div id="boutonFermerPopupBonus" class="boutonFermerPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerAjoutBonus', 'class' => 'bouton', 'title' => "Annule l'ajout du bonus.")); ?>
+    </div>
+</div>

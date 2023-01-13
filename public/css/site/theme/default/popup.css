@@ -1,0 +1,403 @@
+/* Global */
+.titrePopup {
+  display: block;
+  font-size: 20px;
+  font-family: Times;
+  font-weight: bold;
+  color: brown;
+  text-shadow: 1px 1px #000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.detailTitrePopup {
+  float: left;
+  font-style: bold;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Questionnaire */
+#popupQuestionnaire {
+  position: fixed;
+  display: none;
+  left: 50%;
+  top: 50%;
+  z-index: 2000;
+  padding: 20px;
+  width: 560px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #202020;
+  border: 3px outset brown;
+  background: wheat;
+  display: grid;
+  border-radius: 40px;
+}
+
+#divChampQuestionnaire {
+  margin-top: 20px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+#divChampQuestionnaireQuestion {
+  display: inline-flex;
+  width: 90%;
+  margin-top: 5px;
+}
+
+#champQuestion {
+  margin-left: 10px;
+  width: 90%;
+  text-align: left;
+  min-height: 100px;
+  resize: none;
+}
+
+.divChoixQuestionnaire {
+  margin-top: 10px;
+}
+
+.choixQuestionnaire {
+  margin-left: 15px;
+  width: 64%;
+}
+
+#selectQuestionnaireReponse {
+  margin-left: 8px;
+}
+
+#divAideQuestionnaire {
+  margin-top: 10px;
+  margin-right: 30px;
+  text-align: right;
+  display: inline-block;
+  float: right;
+}
+
+#divChampQuestionnaireParagraphe {
+  margin-top: 5px;
+}
+
+#selectQuestionnaireParagraphe {
+  margin-left: 6px;
+}
+
+#divBoutonAction {
+  text-align: left;
+  margin-left: 60px;
+}
+
+#divBoutonClose {
+  text-align: right;
+  margin-right: 30px;
+}
+
+#autocompleteQuestionnaireWiki {
+  float: right;
+  display: flex;
+}
+
+#boutonsQuestionnaire {
+  display: inline-flex;
+  margin-top: 15px;
+}
+
+/* Popup Article */
+#popupWiki {
+  position: absolute;
+  display: none;
+  left: 50%;
+  margin-top: 140px;
+  z-index: 2000;
+  padding: 20px;
+  width: 60%;
+  font-size: 12px;
+  line-height: 16px;
+  color: #202020;
+  border: 3px outset brown;
+  background: wheat;
+  display: grid;
+  border-radius: 40px;
+}
+
+#divBoutonClose {
+  position: relative;
+}
+
+#enteteArticle {
+  text-align: center;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.imageArticle {
+  max-width: 250px;
+}
+
+#boutonClosePopupWiki {
+  position: relative;
+}
+
+/* Formule */
+#grayBackFormule {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 3999;
+  opacity: 0.5;
+}
+
+#popupFormule {
+  position: fixed;
+  display: none;
+  left: 50%;
+  top: 50%;
+  z-index: 4000;
+  padding: 20px;
+  width: 560px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #202020;
+  border: 3px outset brown;
+  background: wheat;
+}
+
+#blocDroite {
+  margin-left: 70px;
+  margin-top: -20px;
+}
+
+#enteteFormule {
+  width: 100%;
+  display: inline-flex;
+}
+
+#divOperation {
+  margin-top: 20px;
+}
+
+#divTitreFormule {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#valeurFormule {
+  margin-left: 10px;
+  width: 75%;
+}
+
+#divListeConstantes {
+  margin-top: 20px;
+}
+
+#selectListeTypesConstante {
+  margin-left: 40px;
+  margin-bottom: 8px;
+}
+
+#selectListeConstantes {
+  margin-left: 8px;
+}
+
+#divListeBoutonFormule {
+  float: right;
+}
+
+/* Table Ciblage */
+#popupTableCiblage {
+  position: fixed;
+  display: none;
+  left: 50%;
+  top: 25%;
+  z-index: 2000;
+  padding: 20px;
+  width: 560px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #202020;
+  border: 3px outset brown;
+  background: wheat;
+  display: grid;
+  border-radius: 40px;
+}
+
+#enteteTableCiblage {
+  text-align: center;
+}
+
+#divCiblagePersonnage {
+  margin-top: 40px;
+  margin-left: 10px;
+}
+
+#divCiblageCreature {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+#divCiblageEnvironnement {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+#isPersonnageCiblable {
+  margin-left: 20px;
+}
+
+#isCreatureCiblable {
+  margin-left: 40px;
+}
+
+#isEnvironnementCiblable {
+  margin-left: 25px;
+}
+
+#divBoutonModifierTableCiblage {
+  margin-top: 20px;
+  margin-left: 60px;
+}
+
+#fermerTableCiblage {
+  float: right;
+  margin-right: 30px;
+}
+
+#divBoutonAnnulerEditionTableCiblage {
+  margin-top: 20px;
+  margin-left: 60px;
+}
+
+/* Popup Effet */
+#popupEffet {
+  position: fixed;
+  display: none;
+  left: 50%;
+  top: 25%;
+  z-index: 3001;
+  padding: 20px;
+  width: 560px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #202020;
+  border: 3px outset brown;
+  background: wheat;
+  display: grid;
+  border-radius: 40px;
+}
+
+#graybackEffet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 3000;
+  opacity: 0.5;
+}
+
+#enteteEffet {
+  text-align: center;
+}
+
+#detailEffet {
+  margin-top: 20px;
+}
+
+#descriptionDetaillee {
+  margin-top: 15px;
+}
+
+.boutonActionPopupElement {
+  margin-top: 15px;
+}
+
+.boutonFermerPopupElement {
+  float: right;
+  margin-right: 20px;
+}
+
+#templateEffet {
+  margin-top: 10px;
+}
+
+#effets {
+  width: 100%;
+}
+
+.tableListeEffets {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+#listeEffet {
+  margin-top: 40px;
+  width: 95%;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+/* Popup Contrainte */
+#popupContrainte {
+  position: fixed;
+  display: none;
+  left: 50%;
+  top: 25%;
+  z-index: 3001;
+  padding: 20px;
+  width: 560px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #202020;
+  border: 3px outset brown;
+  background: wheat;
+  display: grid;
+  border-radius: 40px;
+}
+
+#graybackContrainte {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 3000;
+  opacity: 0.5;
+}
+
+#enteteContrainte {
+  text-align: center;
+}
+
+#detailContrainte {
+  margin-top: 20px;
+}
+
+#templateContrainte {
+  margin-top: 10px;
+}
+
+.tableListeContraintes {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+#listeContrainte {
+  margin-bottom: 15px;
+  margin-top: 40px;
+  width: 95%;
+  margin-left: 20px;
+}
+
+#ajouterContrainte {
+  float: right;
+  margin-right: 15px;
+  margin-top: 15px;
+}

@@ -1,0 +1,43 @@
+<?php
+if (!isset($simulation)) {
+    $simulation = true;
+}
+?>
+<!-- Bloc Droit -->
+<div id="divBlocDroitGestionTalent">
+
+    <!-- Bloc d'affichage des famille -->
+    <div id="blocFamilleTalent">
+        <div id="divListeFamille">
+            <?php
+            if ($categorie == null) {
+                echo "<span id='familleAbsent'>Aucune famille</span>";
+            } else {
+                if ($famille == null) {
+                    echo $categorie->genererListeFamille($auth, null, "admin");
+                } else {
+                    echo $categorie->genererListeFamille($auth, $famille->id, "admin");
+                }
+            }
+            ?>
+        </div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_TALENT_MODIFIER, $auth['autorisations'])) {
+            echo '<div id="divBoutonAjouterFamille">';
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'afficherAjouterFamille', 'class' => 'buttonPlus', 'title' => "Permet d'ouvrir le formulaire de création d'une famille."));
+            echo '</div>';
+        }
+        ?>
+    </div>
+</div>
+
+<!-- Corps de la page-->
+<div id="corpsGestionTalent">
+    <?php
+    if ($famille == null) {
+        echo "<span id='arbresAbsent'>Il n'y a aucun arbre.</span>";
+    } else {
+        echo $famille->genererArbresTalents($auth, "admin", $simulation);
+    }
+    ?>
+</div>

@@ -1,0 +1,92 @@
+<?php
+$listeRoyaumes = Royaumes::find();
+$listeRaces = Races::find();
+$listeReligions = Religions::find();
+$listeDroits = Droits::find();
+$perso = $auth['perso'];
+?>
+<!-- En tete -->
+<div class='entetePageAdministration'>
+    <span class="titrePage">Profil de test</span>
+</div>
+<?php if ($profilTest != null) { ?>
+    <div id="messageProfilTest">
+        <span class="text">Vous êtes déjà connecté avec un profil de test.</span>
+        <?php echo Phalcon\Tag::SubmitButton(array("Déconnecter", 'id' => 'buttonDecoProfilTest', 'class' => 'button', 'title' => "Permet de se déconnecter du profil de test en cours.")); ?>
+    </div>
+<?php } ?>
+<div id="selectionsProfilTest">
+    <div id="profilTestListeProfils" class="divProfilTest">
+        <label for="profilTestProfil">Profil </label>
+        <select id="profilTestProfil">
+            <option value="">Sélectionnez un profil</option>
+            <?php
+            if ($profilTest != null && $perso != null && count($perso->droits) == 0) {
+                echo '<option value="0" selected>Joueur</option>';
+            } else {
+                echo '<option value="0">Joueur</option>';
+            }
+            foreach ($listeDroits as $profil) {
+                if (isset($perso->droits[0]) && $perso->droits[0]->id == $profil->id) {
+                    echo '<option value="' . $profil->id . '" selected>' . $profil->libelle . '</option>';
+                } else {
+                    echo '<option value="' . $profil->id . '">' . $profil->libelle . '</option>';
+                }
+            }
+            ?>
+        </select>
+    </div>
+
+    <div id="profilTestListeRoyaumes" class="divProfilTest">
+        <label for="profilTestRoyaume">Royaume </label>
+        <select id="profilTestRoyaume">
+            <option value="">Sélectionnez un royaume</option>
+            <?php
+            foreach ($listeRoyaumes as $royaume) {
+                if ($profilTest != null && $perso->idRoyaume == $royaume->id) {
+                    echo '<option value="' . $royaume->id . '" selected>' . $royaume->nom . '</option>';
+                } else {
+                    echo '<option value="' . $royaume->id . '">' . $royaume->nom . '</option>';
+                }
+            }
+            ?>
+        </select>
+    </div>
+
+    <div id="profilTestListeRaces" class="divProfilTest">
+        <label for="profilTestRace">Race </label>
+        <select id="profilTestRace">
+            <option value="">Sélectionnez une race</option>
+            <?php
+            foreach ($listeRaces as $race) {
+                if ($profilTest != null && $perso->idRace == $race->id) {
+                    echo '<option value="' . $race->id . '" selected>' . $race->nom . '</option>';
+                } else {
+                    echo '<option value="' . $race->id . '">' . $race->nom . '</option>';
+                }
+            }
+            ?>
+        </select>
+    </div>
+
+    <div id="profilTestListeReligions" class="divProfilTest">
+        <label for="profilTestReligion">Religion </label>
+        <select id="profilTestReligion">
+            <option value="">Sélectionnez un religion</option>
+            <?php
+            foreach ($listeReligions as $religion) {
+                if ($profilTest != null && $perso->idReligion == $religion->id) {
+                    echo '<option value="' . $religion->id . '" selected>' . $religion->nom . '</option>';
+                } else {
+                    echo '<option value="' . $religion->id . '">' . $religion->nom . '</option>';
+                }
+            }
+            ?>
+        </select>
+    </div>
+
+
+    <div id="profilTestBoutonConnection" class="divProfilTest">
+        <?php echo Phalcon\Tag::SubmitButton(array("Connexion", 'id' => 'pt_connexion', 'class' => 'bouton', 'title' => "Permet de se connecter avec le profil de test renseigné.")); ?>
+    </div>
+</div>

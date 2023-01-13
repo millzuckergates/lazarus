@@ -1,0 +1,48 @@
+<?php
+if (isset($texture)) {
+    echo $this->tag->hiddenField(["idTexture", "value" => $texture->id]);
+}
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array(isset($texture) ? "Modifier" : "Créer", 'id' => 'modifierTexture', 'class' => 'bouton', 'title' => "Permet de créer la texture."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations']) && isset($texture)) {
+            echo Phalcon\Tag::SubmitButton(array("Supprimer", 'id' => 'supprimerTexture', 'class' => 'bouton', 'title' => "Permet de supprimer la texture."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour liste", 'id' => 'retourListeTexture', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des textures."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la texture -->
+<div id="divGlobalTexture" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormTexture", "class" => "formulaireField titreEdition", "value" => isset($texture) ? $texture->nom : "")); ?>
+    </div>
+    <?php if (isset($texture)) { ?>
+        <div id="divCurrentImage">
+            <?php echo Phalcon\Tag::image($texture->getImage()); ?>
+        </div>
+    <?php } ?>
+    <?php if (isset($fileUpload)) { ?>
+        <div id="divUploadImage">
+            <?php echo $fileUpload; ?>
+        </div>
+    <?php } ?>
+</div>
+	
+	

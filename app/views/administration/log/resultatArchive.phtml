@@ -1,0 +1,22 @@
+<div id="tableResultat">
+    <?php
+    if (count($listFiles) > 0) {
+        ?>
+        <ul id="listeFileLogs">
+            <?php foreach ($listFiles as $files) { ?>
+                <li class='fichierLog'
+                    onclick='downloadFiles("<?php echo str_replace('\\', '@', str_replace("/", "\\", $repertoire . $files)); ?>");'>
+                    <?php echo $files; ?>
+                </li>
+            <?php } ?>
+        </ul>
+        <?php
+    } else {
+        if ($init) {
+            echo "<span id='resultatRechercheLog'>Sélectionnez un type d'archive.</span>";
+        } else {
+            echo "<span id='resultatRechercheLog'>Il n'y a pas de résultat.</span>";
+        }
+    }
+    ?>
+</div>

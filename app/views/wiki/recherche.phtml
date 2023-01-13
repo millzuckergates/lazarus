@@ -1,0 +1,13 @@
+<span class="titreArticle">Résultat de la recherche</span>
+<div id="retourRecherche">
+    <?php if (count($articles) == 0){ ?>
+        <span class="texte">Votre recherche ne renvoi aucun résultat.</span>
+    <?php }else{ ?>
+    <ul>
+        <?php foreach ($articles as $article) {
+            echo $article->afficherArticleIndex($auth, "fils");
+        }
+        } ?>
+    </ul>
+</div>
+

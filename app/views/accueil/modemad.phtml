@@ -1,0 +1,25 @@
+<div id="divBlocAccueil" class='divBlocAccueil'>
+    <!-- Affichage des news -->
+    <div id="divListeNews">
+        <?php echo $this->view->partial("accueil/listeNews"); ?>
+    </div>
+</div>
+<?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_GESTION_NEWS, $auth['autorisations'])) { ?>
+    <div id="blocInformationsTechniquesAccueil">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueAcceuil">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesAccueil'>";
+                    echo "<span class='libelleBoutonTechnique'>Ajouter une News </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showAddNews', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideAddNews', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechniqueNews" style="display:none"></div>
+    </div>
+<?php } ?>

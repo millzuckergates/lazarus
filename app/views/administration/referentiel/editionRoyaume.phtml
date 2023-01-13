@@ -1,0 +1,138 @@
+<?php
+echo $this->tag->hiddenField(["idRoyaume", "value" => $royaume->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div id="divBoutonsRoyaumeEdition" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierRoyaume', 'class' => 'bouton', 'title' => "Permet de valider les modifications pour le royaume."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditerRoyaume', 'class' => 'bouton', 'title' => "Permet de retourner au royaume."));
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Liste royaumes", 'id' => 'retourListeRoyaume', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des royaumes."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour le royaume -->
+<div id="divRoyaume" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreRoyaumeEdition", "class" => "formulaireField titreEdition", "value" => $royaume->nom)); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuRoyaume" class="divContenuReferentiel">
+        <!-- Etendard -->
+        <div id="divEtendardRoyaumeEdition">
+            <?php echo Phalcon\Tag::image([$royaume->etendard, "class" => 'etendardRoyaumeEdition', 'id' => 'etendardRoyaume']); ?>
+            <div id="listeEtendardRoyaume">
+                <?php echo $royaume->genererListeEtendardsRoyaume(); ?>
+            </div>
+            <div id="divAjouterEtendardRoyaume">
+                <?php
+                echo Phalcon\Tag::textField(array("newEtendardRoyaume", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageRoyaume', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionRoyaumeEdition">
+            <?php echo Fonctions::rawTextArea("descriptionRoyaumeEdition", str_replace("\n", "&#13;&#10;", $royaume->description), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <div id="divInformationRoyaumeEdition" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleRoyaumeEdition" class="divArticleReferentiel">
+                <div id="autocompleteRoyaumeWiki">
+                    <label for="s">Article Wiki </label>
+                    <?php
+                    if ($royaume->article != null) {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field", "value" => $royaume->article->titre));
+                    } else {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    } ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurRoyaumeEdition" class="divContenuInformationReferentiel">
+                <label for="couleurRoyaumeEdition">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurRoyaumeEdition", "class" => "formulaireField couleurCarre", "value" => $royaume->couleur)); ?>
+                <span id="carreCouleurRoyaume" style="background-color:<?php echo $royaume->couleur; ?>"
+                      class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionRoyaumeEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($royaume->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionRoyaumeEdition'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionRoyaumeEdition' class='tickcrossFormulaireAdministration' checked />";
+                } else {
+                    echo "<label for='isDispoInscriptionRoyaumeEdition'>Disponible à l'incsription ? </label><input type='checkbox' id='isDispoInscriptionRoyaumeEdition' class='tickcrossFormulaireAdministration' />";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- div Autorisations -->
+    <div id="divAutorisationsRoyaume" class="divAutorisationReferentiel">
+        <!-- Religion -->
+        <div id="divAutorisationRoyaumeReligionEdition" class="divContenuAutoriseReferentiel">
+            <div id="resumeReligionsAutoriseesEdition">
+                <label for="religionAutoriseeRoyaumeEdition">Religions jouables dans le royaume </label>
+                <span id="religionAutoriseeRoyaumeEdition"
+                      class="contenuAutorisationReferentiel"><?php echo $royaume->genererReligionsAutorisees("modification"); ?></span>
+            </div>
+            <div id="selectReligionsAutoriseesRoyaume">
+                <label for="divSelectReligionsAutoriseesRoyaume">Ajoutez une religion </label>
+                <div id="divSelectReligionsAutoriseesRoyaume"
+                     class="contenuAutorisationReferentiel"><?php echo $royaume->genererSelectListeReligionsAutorisees(); ?></div>
+            </div>
+        </div>
+
+        <!-- Race -->
+        <div id="divAutorisationRoyaumeRaceEdition" class="divContenuAutoriseReferentiel">
+            <div id="resumeRaceAutoriseesEdition">
+                <label for="raceAutoriseeRoyaumeEdition">Races jouables dans le royaume </label>
+                <span id="raceAutoriseeRoyaumeEdition"
+                      class="contenuAutorisationReferentiel"><?php echo $royaume->genererRacesAutorisees("modification"); ?></span>
+            </div>
+            <div id="selectRacesAutoriseesRoyaume">
+                <label for="divSelectsRaceAutoriseesRoyaume">Ajoutez une race </label>
+                <div id="divSelectsRaceAutoriseesRoyaume"
+                     class="contenuAutorisationReferentiel"><?php echo $royaume->genererSelectListeRacesAutorisees(); ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueRoyaume">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesRoyaume'>";
+                    echo "<span class='libelleBoutonTechnique'>Bonus Inscription</span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteBonusRoyaume', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteBonusRoyaume', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<?php echo $this->tag->hiddenField(["logSelect", "value" => $logSelect]); ?>
+<!-- En tete -->
+<div class='entetePageAdministration'>
+    <span class="titrePage">Gestion des logs</span>
+</div>
+
+<!-- Liste des logs en accès -->
+<div id="divAccesLog">
+    <?php echo $listeAccesLogs; ?>
+</div>
+
+<!-- Bloc Droit de recherche et gestion -->
+<div id="contenuLog">
+    <div id="divBlocRechercheLogs">
+        <?php $this->partial('administration/log/recherche' . $logSelect); ?>
+    </div>
+
+    <!-- Résultat de la table -->
+    <div id="divResultatLogs">
+        <?php $this->partial('administration/log/resultat' . $logSelect); ?>
+    </div>
+</div>

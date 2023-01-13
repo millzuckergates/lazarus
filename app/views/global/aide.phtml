@@ -1,0 +1,12 @@
+<div id="aide">
+    <div id="aideBulle" style="display:none;">
+        <?php echo Phalcon\Tag::image(['/public/img/site/interface/aide_haut.png']); ?>
+        <div id="aide_contenu"></div>
+        <?php echo Phalcon\Tag::image(['/public/img/site/interface/aide_bas.png']); ?>
+    </div>
+    <div id="imagePiomAide"
+         onmouseover='aide("Salut, je suis Fael, Le Lukin.\n\n Je suis là pour t&#39;aider, te guider dans ce monde. Et comme tu m&#39;as l&#39;air d&#39;être quelqu&#39;un de bien, je te porterai même tes missives !\n\n Au fait, merci pour les vêtements !");'
+         onmouseout="cacherAide();">
+        <?php echo Phalcon\Tag::image([Personnages::getImagePiom($auth), "id" => "imagePiom", "class" => "imagePiom"]); ?>
+    </div>
+</div>

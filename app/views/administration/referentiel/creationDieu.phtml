@@ -1,0 +1,86 @@
+<!-- Div pour les boutons -->
+<div id="divBoutonsDieuCreation" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerDieu', 'class' => 'bouton', 'title' => "Permet de créer une dieu."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'retourListeDieu', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des dieus."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la dieu -->
+<div id="divDieu" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreDieuCreation", "class" => "formulaireField titreEdition", "value" => "Nom du Dieu")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuDieu" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageDieu">
+            <?php echo Phalcon\Tag::image(['img/site/illustrations/divinites/default.jpg', "class" => 'imageDieuCreation', 'id' => 'imageDieu']); ?>
+            <div id="listeImageDieu">
+                <?php echo Dieux::genererListeImagesDieuVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterImageDieu">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageDieu", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageDieu', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionDieuCreation">
+            <?php echo Phalcon\Tag::textArea(["descriptionDieuCreation", "value" => "Entrez une description.", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <!-- Detail  -->
+        <div id="divInformationDieuCreation" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleDieuCreation" class="divArticleReferentiel">
+                <div id="autocompleteDieuWiki">
+                    <label for="s">Article Wiki </label>
+                    <?php
+                    echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurDieuCreation" class="divContenuInformationReferentiel">
+                <label for="couleurDieuCreation">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurDieuCreation", "class" => "formulaireField", "value" => "")); ?>
+                <span id="carreCouleurDieu" style="background-color:white" class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionDieuCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isDispoInscriptionDieuCreation'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionDieuCreation' class='tickcrossFormulaireAdministration' checked />";
+                ?>
+            </div>
+
+            <!-- Race du dieu -->
+            <div id="divRaceDieuCreation" class="divContenuInformationReferentiel">
+                <label for="raceDieuCreation">Race </label>
+                <?php
+                $listeRace = Races::find();
+                echo "<select id='raceDieuCreation'><option value='0'>Selectionnez une race</option>";
+                foreach ($listeRace as $race) {
+                    echo "<option value='" . $race->id . "'>" . $race->nom . "</option>";
+                }
+                echo "</select>";
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

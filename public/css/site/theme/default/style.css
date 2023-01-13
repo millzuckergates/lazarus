@@ -1,0 +1,487 @@
+@charset "UTF-8";
+body {
+  background-image: url("/img/site/interface/menu/fondparchemin4.jpg");
+  background-position: left top;
+  background-size: auto;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  margin-bottom: 50px;
+}
+
+.container {
+  padding-left: 1px;
+}
+
+#pageglobale {
+  text-align: center;
+}
+
+.blocGauche {
+  background-color: #E5D2AA;
+  border: 3px solid black;
+  border-radius: 10px;
+  display: inline-block;
+  position: absolute;
+  left: 1%;
+  top: 10%;
+  min-width: 13%;
+}
+
+.blocConnection {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.blocConnection h2 {
+  font-size: 30px;
+  font-family: Times;
+  font-weight: bold;
+  color: brown;
+  text-shadow: 1px 1px #000;
+  margin: 10px 0;
+}
+
+.blocConnection input[type=submit] {
+  background-color: #50944E;
+  padding: 10px;
+  border: none;
+  margin: 20px 0 0;
+  font-weight: bold;
+}
+
+.blocConnection form p {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 0;
+}
+
+@media screen and (max-width: 998px) {
+  .banniere {
+    width: 938px;
+  }
+
+  .imageMenu {
+    max-width: 100px;
+  }
+}
+@media screen and (min-width: 1222px) {
+  .banniere {
+    width: 1175px;
+  }
+
+  .imageMenu {
+    max-width: 100px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .banniere {
+    width: 1350px;
+  }
+
+  .imageMenu {
+    max-width: 155px;
+  }
+}
+@media screen and (max-width: 1572px) {
+  .imageMenu {
+    max-width: 160px;
+  }
+}
+@media screen and (min-width: 1900px) {
+  .imageMenu {
+    max-width: 190px;
+  }
+}
+/* Bannière */
+.banniere {
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  max-width: 100%;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 30px;
+  width: 1350 xp;
+}
+
+/* Menu */
+.menu {
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 30px;
+  position: relative;
+  vertical-align: middle;
+}
+
+.menu ul {
+  width: 100%;
+  list-style-type: none;
+  margin: 0 auto;
+  overflow: hidden;
+  vertical-align: middle;
+  position: relative;
+}
+
+.menu li {
+  with: 100%;
+  float: left;
+  margin-right: 7px;
+  margin-left: auto;
+  position: relative;
+  vertical-align: middle;
+}
+
+.menu li a {
+  display: inline-block;
+  padding: 8px;
+  position: relative;
+}
+
+.menu li a:hover {
+  opacity: 0.9;
+  -webkit-transform: scale3d(1.1, 1.1, 1);
+  transform: scale3d(1.1, 1.1, 1);
+  transition: opacity 1s, transform 1s, -webkit-transform 1s;
+}
+
+.imageMenu {
+  min-height: 100px;
+  position: relative;
+  height: auto;
+}
+
+.menu .icon {
+  display: none;
+}
+
+/* Fonts */
+@font-face {
+  font-family: Morpheus;
+  src: url(../../../../fonts/MORPHEUS.TTF);
+}
+@font-face {
+  font-family: Metamorphous;
+  src: url(../../../../fonts/Metamorphous.otf);
+}
+/* Boutons */
+.buttonHide {
+  background-image: url(../../../../img/site/themes/default/boutons/haut.png);
+  border-color: black;
+  background-color: #C3E7FF;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.buttonShowDroit {
+  background-image: url(../../../../img/site/themes/default/boutons/droit.png);
+  border-color: black;
+  background-color: #C3E7FF;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.buttonHideGauche {
+  background-image: url(../../../../img/site/themes/default/boutons/gauche.png);
+  border-color: black;
+  background-color: #C3E7FF;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.buttonShow {
+  background-image: url(../../../../img/site/themes/default/boutons/bas.png);
+  border-color: black;
+  background-color: #C3E7FF;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.boutonDelete {
+  background-image: url("../../../../img/site/themes/default/boutons/fermer.png");
+  border-color: black;
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  display: inline;
+  width: 15px;
+  height: 15px;
+}
+
+.bouton {
+  font-size: 12px;
+  color: #F1F1F1;
+  font-weight: bold;
+  background-color: #3d6191;
+  border-radius: 5px;
+  margin: 1px;
+  width: 120px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.boutonAide {
+  background-image: url("../../../../img/site/themes/default/boutons/lunettes.png");
+  border-color: black;
+  background-color: #C3E7FF;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.buttonPlus {
+  background-image: url(../../../../img/site/themes/default/boutons/plus.png);
+  border-color: black;
+  background-color: #3d6191;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  width: 15px;
+  height: 15px;
+  display: inline;
+}
+
+.buttonMoins {
+  background-image: url(../../../../img/site/themes/default/boutons/moins.png);
+  border-color: black;
+  background-color: #3d6191;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+}
+
+.buttonActualiser {
+  background-image: url(../../../../img/site/themes/default/boutons/actualiser.png);
+  border-color: black;
+  background-color: #3d6191;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+}
+
+.buttonConsulter {
+  background-image: url(../../../../img/site/themes/default/boutons/lunettes.png);
+  border-color: black;
+  background-color: #3d6191;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+}
+
+.blocBoutons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-top: 10px;
+  display: inline;
+  font-size: 12px;
+}
+
+/* Gestion des autocomplétions */
+.listeDesSuggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #dfb670;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#suggestions {
+  clear: both;
+  float: left;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.listeDesSuggestions li {
+  border: 1px solid;
+  margin-bottom: 2px;
+  width: 15em;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.listeDesSuggestions li:hover, .listeDesSuggestions li:focus, .listeDesSuggestions li:active {
+  background: #dfb670;
+  text-decoration: underline;
+}
+
+#s {
+  color: black;
+  padding: 5px;
+  height: 25px;
+}
+
+/* Informations Techniques */
+#divBoutonsInformationsTechniques {
+  float: left;
+  text-align: end;
+}
+
+#contenuTechnique {
+  margin-left: 15px;
+  text-align: left;
+}
+
+#blocInformationsTechniques {
+  position: absolute;
+  top: 500px;
+  right: 300px;
+  display: flex;
+  overflow: auto;
+}
+
+#informationTechnique {
+  border-radius: 10px;
+  border: 1px solid black;
+  background: #dba35a;
+  width: 600px;
+  margin-left: 10px;
+}
+
+.libelleBoutonTechnique {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#descriptionGenerale {
+  text-align: left;
+  margin-left: 20px;
+}
+
+#boutonAjouterEffet {
+  float: right;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+#effets {
+  display: inline-block;
+}
+
+/* Gestion de Aide*/
+.divAide {
+  background-image: url("../../../../img/site/themes/default/boutons/lunettes.png");
+  border-color: black;
+  background-color: #3F95CE;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 10px;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  margin-left: 15px;
+}
+
+#aide {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 9999;
+}
+
+#aide_contenu {
+  text-align: justify;
+  font-size: 8pt;
+  padding-left: 2px;
+  padding-right: 2px;
+  width: 200px;
+  border-left: black solid 1px;
+  border-right: black solid 1px;
+  background-color: white;
+  color: black;
+}
+
+#aideBulle {
+  position: absolute;
+  bottom: 90px;
+  right: 5px;
+  width: 200px;
+  display: grid;
+}
+
+#gameplayLink {
+  margin: 5px;
+  display: inline-block;
+  background-color: white;
+  width: 150px;
+  border: black solid 1px;
+  color: black;
+}
+
+#editCartesLink {
+  margin: 5px;
+  display: inline-block;
+  background-color: white;
+  width: 150px;
+  border: black solid 1px;
+  color: black;
+}
+
+#gameplayLink:hover {
+  text-decoration: none;
+  background-color: #e1e1e1;
+}

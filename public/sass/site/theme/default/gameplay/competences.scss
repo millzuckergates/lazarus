@@ -1,0 +1,473 @@
+.niveauRang {
+    text-align: right;
+}
+
+#divGeneralCompetences {
+    display: inline-flex;
+    width: 95%;
+}
+
+#divBlocGaucheCompetences {
+    float: left;
+    width: 20%;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+#divListeRangCompetence {
+    display: grid;
+}
+
+.titreListerangCompetence {
+    font-family: Morpheus;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#divListeRangCompetence {
+    background-color: #e5d2aa;
+    border-radius: 10px;
+    border: 3px solid black;
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.nomRangCompetence {
+    font-style: italic;
+    font-size: 16px;
+    text-align: left;
+    width: 50%;
+}
+
+.valueRang {
+    width: 30%;
+    text-align: right;
+}
+
+.nomRangCompetence {
+    font-style: italic;
+    font-size: 16px;
+    text-align: left;
+    width: 50%;
+}
+
+.valueRang {
+    width: 30%;
+    text-align: right;
+}
+
+#tableListeRang {
+    margin-left: 20px;
+    width: 80%;
+}
+
+.divTitreListeRangCompetence {
+    margin-bottom: 15px;
+}
+
+#boutonRangCompetence {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.divDescriptionPopupRangCompetence {
+    margin-top: 15px;
+}
+
+.boutonrouge {
+    color: white;
+    background-color: #921406;
+    margin-left: 15px;
+}
+
+#blocGeneralCompetence {
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 70%;
+}
+
+#titreCompetence {
+    font-family: Morpheus;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#divBlocTitreCompetence {
+    margin-top: 10px;
+}
+
+.formPopupComptence {
+    display: inline-flex;
+}
+
+.divBlocImageCompetence {
+    display: grid;
+    max-height: 180px;
+    width: 30%;
+    text-align: center;
+}
+
+#newImageCompetence {
+    width: 150px;
+}
+
+#chargerNewImageCompetence {
+    margin-left: 15px;
+}
+
+#divAjouterImageCompetence {
+    margin-top: 10px;
+    display: grid;
+    margin-left: 15px;
+}
+
+/* Popup Rangs Competence */
+#popupRangCompetence {
+    position: fixed;
+    display: none;
+    left: 50%;
+    top: 40%;
+    z-index: 3001;
+    padding: 20px;
+    width: 400px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    border-radius: 40px
+}
+
+#graybackRangCompetence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 3000;
+    opacity: 0.5;
+}
+
+.entetePopupRangCompetence {
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.titrePopupRangCompetence {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.texteDescriptionPopupRangCompetence {
+    width: 90%;
+    text-align: left;
+    float: left;
+    min-height: 100px;
+    resize: none;
+}
+
+.formPopupRangCompetence {
+    display: grid;
+}
+
+.divDataPopupRangCompetence {
+    margin-top: 15px;
+}
+
+.boutonsActionPopupRangCompetence {
+    margin-top: 15px;
+}
+
+.boutonFermerPopupRangCompetence {
+    float: right;
+    margin-right: 20px;
+}
+
+#pointRangCompetence {
+    margin-left: 10px;
+    text-align: right;
+}
+
+/* Popup Competence */
+#popupCompetence {
+    position: fixed;
+    display: none;
+    left: 50%;
+    top: 35%;
+    z-index: 3001;
+    padding: 20px;
+    width: 50%;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    border-radius: 40px
+}
+
+#graybackCompetence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 3000;
+    opacity: 0.5;
+}
+
+.formCompetence {
+    margin-left: 60px;
+    display: grid;
+    width: 90%;
+}
+
+.divDataPopupCompetence {
+    margin-top: 10px;
+}
+
+.texteDescriptionPopupCompetence {
+    width: 70%;
+    text-align: left;
+    float: left;
+    min-height: 100px;
+    resize: none;
+    margin-top: 15px;
+}
+
+#nomCompetence {
+    margin-left: 15px;
+    width: 180px;
+}
+
+#selectTypeCompetence {
+    margin-left: 15px;
+}
+
+#isDispoCompetence {
+    margin-left: 10px;
+}
+
+#isCompetenceActivable {
+    margin-left: 10px;
+}
+
+#isEnseignableCompetence {
+    margin-left: 10px;
+}
+
+.blocActifCompetence {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #e5d2aa;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+    display: grid;
+    text-align: left;
+}
+
+.divTextePopupCompetence {
+    margin-top: 8px;
+    display: inline-flex;
+}
+
+.texteMessageRPPopupCompetence {
+    width: 90%;
+    text-align: left;
+    min-height: 60px;
+    resize: none;
+}
+
+.texteEventPopupCompetence {
+    width: 90%;
+    text-align: left;
+    min-height: 60px;
+    resize: none;
+}
+
+#labelCoutPA {
+    margin-left: 15px;
+}
+
+#labelIsEntrainable {
+    margin-left: 15px;
+}
+
+#coutPACompetence {
+    margin-left: 10px;
+    text-align: right;
+}
+
+#divEntrainableCompetence {
+    margin-bottom: 10px;
+}
+
+#isEntrainableCompetence {
+    margin-left: 10px;
+}
+
+.boutonsActionPopupCompetence {
+    text-align: center;
+}
+
+.boutonFermerPopupCompetence {
+    float: right;
+    margin-right: 15px;
+}
+
+.blocCompetences {
+    border: 1px solid black;
+    min-width: 30%;
+    margin-left: 20px;
+    max-width: 30%;
+    display: inline-table;
+    margin-bottom: 15px;
+    min-height: 200px;
+    margin-top: 15px;
+    background-color: #f6eede;
+}
+
+.enteteBlocCompetence {
+    border-bottom-style: double;
+    background-image: url('/public/img/site/themes/default/fondtexte/fond.png');
+}
+
+.titreBlocCompetence {
+    font-family: Morpheus;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.limiteRangCompetence {
+    float: right;
+    margin-right: 40px;
+    font-style: italic;
+}
+
+.divCompetence {
+    width: 100%;
+    text-align: left;
+    margin-left: 25px;
+}
+
+.divListeCompetenceType {
+    margin-top: 5px;
+}
+
+.resultatCompetenceVide {
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.compOrange {
+    margin-left: 8px;
+    font-size: 15px;
+    color: #ff8633;
+}
+
+.compRouge {
+    margin-left: 8px;
+    font-size: 15px;
+    color: #bf1d06;
+}
+
+.compClassique {
+    margin-left: 8px;
+    font-size: 15px;
+}
+
+#divInformationTechniqueCompetence {
+    z-index: 1;
+    float: right;
+    text-align: end;
+    display: grid;
+}
+
+#blocInformationsTechniquesCompetences {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    display: flex;
+    overflow: auto;
+}
+
+.titrePopupCompetence {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.entetePopupCompetence {
+    width: 100%;
+    text-align: center;
+}
+
+#blocInformationEvolutionCompetence {
+    display: inline-flex;
+}
+
+#blocRang {
+    margin-left: 25px;
+    width: 50%;
+}
+
+.titreBlocEvolution {
+    font-family: Morpheus;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.enteteBlocEvolution {
+    display: inline-flex;
+}
+
+#divRangBloqueEvolution {
+    margin-top: 15px;
+}
+
+#boutonModifierEvolutionCompetence {
+    text-align: center;
+}
+
+.inputRangEvolutionCompetence {
+    text-align: right;
+}
+
+.tableEvolutionCompetence {
+    width: 70%;
+}
+
+#blocCaracteristiques {
+    margin-left: 25px;
+    width: 50%;
+}
+
+#divSpecificiteCompetence {
+    position: absolute;
+    width: 280px;
+    z-index: 8;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    font-style: italic;
+    text-align: left;
+}

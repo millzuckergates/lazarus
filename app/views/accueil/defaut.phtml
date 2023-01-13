@@ -1,0 +1,59 @@
+<div id="divBlocAccueil" class='divBlocAccueil'>
+    <!-- Passage de présentation -->
+    <div id="divTexteAccueil">
+        <!-- Entete -->
+        <div id="enteteTexteAccueil" class='divTitreEntete'>
+            <span class='titreEntete'>Présentation</span>
+        </div>
+        <!-- Texte de présentation -->
+        <div id="texteAccueil">
+            <p>
+                <?php echo Phalcon\Tag::image(['public/img/site/interface/divers/logo_IDEO_grand.png', "class" => 'logAccueilIdeo']); ?>
+                Ideo : les Domaines Oubliés, est un jeu <i>de rôle</i> massivement multijoueur gratuit se jouant
+                exclusivement
+                sur internet, via une interface Web (ce site) qui comprend à la fois des forums et un plateau de jeu. Le
+                jeu se déroule dans
+                un univers médiéval fantastique qui paraîtra d'abord classique aux vieux routards du jeu de rôle, mais
+                qui révèlera graduellement sa profondeur et son originalité. Ainsi débutants comme joueurs confirmés
+                pourront rapidement trouver du plaisir à évoluer dans l'univers d'IDEO.
+            </p>
+            <p>
+                Le but d'IDEO est d'incarner au mieux un personnage, votre personnage que vous aurez créé de toutes
+                pièces
+                en accord avec l'univers du jeu. Vous pourrez faire interagir votre personnage avec son environnement
+                mais
+                aussi avec les autres habitants d'Ideo, qu'ils soient les personnages des autres joueurs ou interprétés
+                par
+                les Maîtres de Jeu. Vous-même pourrez impulser des changements non prévus, ni par les Maîtres de jeu, ni
+                par les autres joueurs. Cela fait d'IDEO un jeu vivant aux plaisirs imprévisibles.
+            </p>
+            <p>
+                La conception et l'animation du jeu sont le fait d'une équipe de bénévoles travaillant d'arrache-pied et
+                avec passion pour vous offrir un jeu toujours renouvelé. Depuis son lancement officiel (déjà 14 ans et 8
+                mois !)
+                le jeu a subi de nombreuses évolutions. Toutefois il n'y a jamais eu de coupure, de brisure temporelle
+                ou
+                de remise à zéro. En commençant à jouer aujourd'hui vous croiserez la route de personnages qui sont
+                joués
+                depuis plus de 14 ans et qui sont devenus de véritables légendes vivantes d'IDEO.
+            </p>
+            <p>
+                Avant de vous jeter sur l'inscription, il est plus que vivement conseillé de lire l'histoire et de vous
+                imprégner
+                de l'<a class='lienRedirection' href="/wiki">univers</a>. Un petit quizz est réalisé lors de
+                l'inscription pour
+                vérifier que vous avez les connaissances nécessaires pour créer un personnage cohérent et intéressant. A
+                la fin
+                du processus d'<a class='lienRedirection' href="/inscription">inscription</a> votre
+                profil sera examiné par un Maître de Jeu qui vous conseillera éventuellement sur les modifications à
+                apporter.
+            </p>
+        </div>
+    </div>
+
+    <!-- Affichage des news -->
+    <div id="divListeNews">
+        <?php echo $this->view->partial("accueil/listeNews"); ?>
+    </div>
+
+</div>

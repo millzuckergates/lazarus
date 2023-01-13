@@ -1,0 +1,24 @@
+<?php
+echo $this->tag->hiddenField(["type", "value" => $type]);
+echo $this->tag->hiddenField(["idType", "value" => $idType]);
+echo $this->tag->hiddenField(["idContrainte", "value" => $contrainte->id]);
+echo $this->tag->hiddenField(["position", "value" => $position]);
+?>
+
+<div id="contenuContrainte">
+    <div id="enteteContrainte">
+        <div id="divTitreContrainte"><span class="titrePopup"><?php echo $contrainte->nom; ?></span></div>
+    </div>
+
+    <div id="detailContrainte" class="detailElement">
+        <?php echo $contrainte->genererDetailContrainte("consultation", $type, $idType, $position); ?>
+    </div>
+
+    <div id="boutonEditerPopupContrainte" class="boutonActionPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerContrainte', 'class' => 'bouton editerContrainte', 'title' => "Permet d'accéder au formulaire de modification de la contrainte.")); ?>
+    </div>
+
+    <div id="boutonFermerPopupContrainte" class="boutonFermerPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'annulerAjoutContrainte', 'class' => 'bouton annulerAjoutContrainte', 'title' => "Annule la modification de la contrainte.")); ?>
+    </div>
+</div>

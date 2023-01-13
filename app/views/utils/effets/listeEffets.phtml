@@ -1,0 +1,25 @@
+<div id="contenuListeEffet">
+    <?php
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $element->id]);
+    ?>
+
+    <div id="enteteListeEffet">
+        <div id="divTitreListeEffet"><span class="titrePopup">Gestion des effets</span></div>
+    </div>
+
+    <div id="descriptionGenerale">
+        <?php echo $element->genererDescriptionGeneraleEffet(); ?>
+    </div>
+
+    <div id="effets">
+        <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo '<div id="boutonAjouterEffet">';
+            echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterEffet', 'class' => 'bouton', 'title' => "Permet d'ouvrir le formulaire de création d'un effet."));
+            echo '</div>';
+        } ?>
+        <div id="listeEffet">
+            <?php echo $element->genererListeEffet($auth); ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<?php
+echo $this->tag->hiddenField(["idTalent", "value" => $talent->id]);
+?>
+<div class="popupTalentTalent" id="popupTalentTalent">
+    <div class="entetePopupTalent" id="entetePopupTalentTalent">
+        <?php echo Phalcon\Tag::textField(array("nomTalent", "class" => "formulaireField titrePopupTalent", "value" => $talent->nom)); ?>
+    </div>
+
+    <!-- Les images, à afficher à gauche -->
+    <div id="divBlocImageFormTalent" class="blocImageFormTalent">
+        <div id="divImageTalentGris" class="divImageTalentCouleur">
+            <div class="imgTalentMiniature imgTalentGrise" id="imgTalentGris"
+                 style="opacity:1;background-image: url('<?php echo $talent->image; ?>');">
+                <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/spacer.gif', "class" => 'talenticon talentgris', 'id' => 'imageTalentGris']); ?>
+            </div>
+        </div>
+
+        <div id="divImageTalentVert" class="divImageTalentCouleur">
+            <div class="imgTalentMiniature" id="imgTalentVert"
+                 style="opacity:1;background-image: url('<?php echo $talent->image; ?>');">
+                <div class="buttonnumber" id="numberTalentVert"
+                     style="color: rgb(46, 255, 0);"><?php echo $talent->niveau_max; ?>
+                    /<?php echo $talent->niveau_max; ?></div>
+                <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/spacer.gif', "class" => 'talenticon talentvert', 'id' => 'imageTalentVert']); ?>
+            </div>
+        </div>
+
+        <div id="divImageTalentJaune" class="divImageTalentCouleur">
+            <div class="imgTalentMiniature" id="imgTalentJaune"
+                 style="opacity:1;background-image: url('<?php echo $talent->image; ?>');">
+                <div class="buttonnumber" id="numberTalentJaune" style="color: rgb(255, 209, 0);">
+                    1/<?php echo $talent->niveau_max; ?></div>
+                <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/spacer.gif', "class" => 'talenticon talentjaune', 'id' => 'imageTalentJaune']); ?>
+            </div>
+        </div>
+
+        <div id="divGestionImageTalent">
+            <div id="divListeImagesTalent">
+                <?php echo $talent->genererListeImages(); ?>
+            </div>
+            <div id="divAjouterImageTalent">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageTalentTalent", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageTalent', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- les données du formulaire -->
+    <div id="divBlocFormulaireTalent">
+        <!-- Description -->
+        <div class="divDescriptionPopupTalent" id="divDescriptionPopupTalentTalent">
+            <?php echo Fonctions::rawTextArea("descriptionTalent", str_replace("\n", "&#13;&#10;", $talent->description), "texteDescriptionPopupTalent"); ?>
+        </div>
+
+        <!-- Niveau Max du talent -->
+        <div class="divDataPopupTalent">
+            <label for="maxTalent">Nombre de points attribuables </label>
+            <?php echo Phalcon\Tag::textField(array("maxTalent", "class" => "formulaireField", "value" => $talent->niveau_max, "size" => 2)); ?>
+        </div>
+
+        <!-- Arbre associé -->
+        <div class="divDataPopupTalent" id="blocSelectArbreTalent">
+            <label for="selectArbreTalent">Arbre </label>
+            <span id="selectArbreTalent"><?php echo $talent->arbre->nom; ?></span>
+        </div>
+
+        <!-- Disponible utilisation bloquée -->
+        <div class="divDataPopupTalent">
+            <?php
+            if ($talent->isActif) {
+                echo "<label for='isActifTalent'>Talent actif ? </label><input type='checkbox' id='isActifTalent' class='tickcrossFormulaireGameplay' checked />";
+            } else {
+                echo "<label for='isActifTalent'>Talent actif ? </label><input type='checkbox' id='isActifTalent' class='tickcrossFormulaireGameplay' />";
+            }
+            ?>
+        </div>
+
+        <!-- Gestion de la généalogie -->
+        <div class="genealogieTalent" id="divGenealogieTalent">
+            <?php echo $talent->genererGenealogie(); ?>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionTalentTalent">
+        <div id="boutonEditerPopupTalentTalent" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierTalent', 'class' => 'bouton', 'title' => "Permet d'éditer le talent.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentTalent" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalent', 'class' => 'bouton', 'title' => "Permet d'annuler la modification du talent.")); ?>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniquesTalents">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueTalent">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Effets </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteEffetTalent', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteEffetTalent', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+
+                    echo "<div class='divBoutonsTechniquesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Contraintes </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContraintesTalent', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContraintesTalent', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+
+</div>

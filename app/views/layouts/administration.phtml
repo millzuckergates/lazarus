@@ -1,0 +1,13 @@
+<div id="pageAdministration">
+    <!-- Onglets Lateraux -->
+    <div class="ongletsLateraux" id="ongletsAdministration">
+        <?php echo $this->session->get("listeOngletAdministration"); ?>
+    </div>
+
+    <!-- Container -->
+    <div class="container" style="width:85%;float:left;">
+        <div id="blocAdministration" style="display:none">
+            <?php echo $this->getContent(); ?>
+        </div>
+    </div>
+</div>

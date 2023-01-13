@@ -1,0 +1,119 @@
+<?php
+echo $this->tag->hiddenField(["idReligion", "value" => $religion->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div id="divBoutonsReligionConsultation" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerReligion', 'class' => 'bouton', 'title' => "Permet d'afficher le formulaire de la religion en modification."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_QUESTIONNAIRE_INSCRIPTION_CONSULTATION, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Questionnaires", 'id' => 'consulterQuestionnaireInscriptionReligion', 'class' => 'bouton', 'title' => "Permet d'afficher le questionnaire lié à cette religion."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'retourListeReligion', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des religions."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour le religion -->
+<div id="divReligion" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <span id="titreReligion" class="titreReferentiel"><?php echo $religion->nom; ?></span>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuReligion" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageReligionConsultation">
+            <?php echo Phalcon\Tag::image([$religion->img, "class" => 'imgReligionConsultation']); ?>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionReligionConsultation">
+            <span id="descriptionReligionConsultation"><?php echo str_replace("\n", "<br/>", $religion->description); ?></span>
+        </div>
+
+        <!-- Detail  -->
+        <div id="divInformationReligionConsultation" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleReligionConsultation" class="divArticleReferentiel">
+                <label for="articleReligionConsultation">Article du wiki </label>
+                <?php if ($religion->article != null && $religion->article) { ?>
+                    <a href="#" id="articleReligionConsultation"
+                       onclick="openPopUpWiki(<?php echo $religion->idArticle; ?>)"><?php echo $religion->article->titre; ?></a>
+                <?php } else { ?>
+                    <span class="texte" id="articleReligionConsultation">Aucun</span>
+                <?php } ?>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionReligionConsultation" class="divContenuInformationReferentiel">
+                <?php
+                if ($religion->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionReligionConsultation'>Disponible à l'inscription ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaireAdministration', "id" => "isDispoInscriptionReligionConsultation"]);
+                } else {
+                    echo "<label for='isDispoInscriptionReligionConsultation'>Disponible à l'incsription ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaireAdministration', "id" => "isDispoInscriptionReligionConsultation"]);
+                }
+                ?>
+            </div>
+
+            <!-- Nature de Magie -->
+            <div id="divNatureMagieReligionConsultation" class="divContenuInformationReferentiel">
+                <label for="natureMagieReligionConsultation">Type de magie </label>
+                <span id="natureMagieReligionConsultation"><?php echo $religion->natureMagie->nom; ?></span>
+            </div>
+
+            <!-- Divinites de la religion -->
+            <div id="divDiviniteReligionConsultation">
+                <?php echo $religion->genererListeDivinites("consultation"); ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- div Autorisations -->
+    <div id="divAutorisationsReligion" class="divAutorisationReferentiel">
+        <!-- Royaume -->
+        <div id="divAutorisationReligionRoyaumeConsultation" class="divContenuAutoriseReferentiel">
+            <label for="royaumeAutoriseReligionConsultation">Cette religion est disponible à l'inscription dans les
+                royaumes </label>
+            <span id="royaumeAutoriseReligionConsultation"
+                  class="contenuAutorisationReferentiel"><?php echo $religion->genererPresenceRoyaume(); ?></span>
+        </div>
+
+        <!-- Race -->
+        <div id="divAutorisationReligionRaceConsultation" class="divContenuAutoriseReferentiel">
+            <label for="raceAutoriseeReligionConsultation">Religion jouable à l'inscription pour les races </label>
+            <span id="raceAutoriseeReligionConsultation"
+                  class="contenuAutorisationReferentiel"><?php echo $religion->genererPresenceRace(); ?></span>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueReligion">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesReligion'>";
+                    echo "<span class='libelleBoutonTechnique'>Bonus Inscription</span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteBonusReligion', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteBonusReligion', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>

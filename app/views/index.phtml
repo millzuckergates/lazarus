@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Lazarus</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/public/img/favicon.ico"/>
+    <?php $this->assets->outputCss(); ?>
+    <?php $this->assets->outputJs(); ?>
+</head>
+<body>
+<div id="popupTableCiblage" style="display:none"></div>
+<div id="popupBonus" style="display:none"></div>
+<div id="popupNews" style="display:none"></div>
+<div id="popupRangCompetence" style="display:none"></div>
+<div id="popupCompetence" style="display:none"></div>
+<div id="popupFormule" style="display:none"></div>
+<div id="popupEffet" style="display:none"></div>
+<div id="popupContrainte" style="display:none"></div>
+<div id="popupWiki" style="display:none"></div>
+<!-- Div cachée pour l'image en taille réelle -->
+<div id='divImageVilleGrande' style='display:none;' onclick='hideImageVilleReelle();'>
+    <img id='imageVilleGrande' src='' class='imageTailleReelle'/>
+</div>
+<div id="msgBox">
+    <form name="msgBox_form" action="" method="GET">
+        <div class="titre">
+            <div id="msgBox_titre"></div>
+        </div>
+        <div class="contenu">
+            <div id="msgBoxMsg">&nbsp;</div>
+            <select id="msgBoxListe" name="liste">
+                <option value=""></option>
+            </select>
+            <textarea id="msgBoxSaisie" name="saisie" maxlength="255" rows="1" cols="51"></textarea>
+        </div>
+        <div class="bas">
+            <div class="boutons">
+                <input type="button" class="bouton" name="boxOk" id="boxOk" value="OK" onclick="fermeMsgBox()">
+                <input type="button" class="bouton" name="ok" id="ok" value="OK" onclick="fermeMsgBox()">
+                <input type="button" class="bouton" name="oui" value="Oui" onclick="fermeMsgBox()">
+                <input type="button" class="bouton" name="non" value="Non" onclick="fermeMsgBox()">
+                <input type="button" class="bouton" name="aide" value="Aide" onclick="fermeMsgBox()">
+                <input type="button" class="bouton" name="annuler" value="Annuler" onclick="fermeMsgBox()">
+            </div>
+        </div>
+        <div class="imageMsgBox">
+            <?php Phalcon\Tag::image(['site/vide.gif', "id" => "imgMsgBox", "class" => "expression"]); ?>
+            <?php echo Phalcon\Tag::image([Personnages::getImagePiom(isset($auth) ? $auth : null), "id" => "imagePiom", "class" => "imagePiom"]); ?>
+            <div id="msgBox_infoMsgRestant">
+                Encore <span id="msgBox_nbreMsgRestant">0</span> msg
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container" style="width:100%">
+    <?php
+    echo $this->tag->hiddenField(["texte", "value" => ""]);
+    echo $this->tag->hiddenField(["start", "value" => ""]);
+    echo $this->tag->hiddenField(["end", "value" => ""]);
+    echo $this->getContent();
+    ?>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
+</body>
+</html>

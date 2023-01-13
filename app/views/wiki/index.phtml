@@ -1,0 +1,95 @@
+<div id="blocCentre">
+    <span class="titreArticle">Bienvenue sur le Wiki</span>
+    <br/>
+    <!-- Bouton Proposer -->
+    <div id="boutonProposer">
+        <?php echo $this->tag->form(["wiki/creerArticle", "autocomplete" => "off", "class" => "form-horizontal"]); ?>
+        <?php echo Phalcon\Tag::SubmitButton(array("Proposer Article", 'id' => 'proposerArticle', 'class' => 'bouton', 'title' => "Proposer un article")); ?>
+        <?php echo $this->tag->endForm(); ?>
+    </div>
+    <br/><br/>
+    <div id="texteIndex">
+        <p>Les textes qui suivent constituent l’Histoire officielle du jeu, son Background ou encore « BG ». Comment
+            devez-vous considérer ce BG ?</p>
+
+        <p>Le BG n’est tout d’abord pas un texte que l’on fait lire et apprendre par coeur à tout les habitants du
+            monde. Le faire citer à la lettre par votre personnage n’a donc aucun sens. Le BG est plus un ensemble
+            d’éléments de culture générale que possèdent tous plus ou moins les personnages.</p>
+
+        <p>Et tant qu’élément de culture générale, le BG peut comporter des inexactitudes ou même des contre-vérités
+            entérinées par l’Histoire.</p>
+
+        <p>Une fois ces éléments parcourus, n’hésitez pas à nouer des relations avec d’autres personnages par RP. Les
+            joueurs plus expérimentés pourront vous aiguiller et vous faire découvrir des nouveaux éléments de l’univers
+            très riche qui vous est présenté.</p>
+
+        <p>Bon voyage à vous dans le jeu. 😀</p>
+    </div>
+
+    <div id="listeArticleIndex">
+        <!-- index Autre -->
+        <?php
+        $compteurTitre = 0;
+        $listeFilsAutre = Articles::getListeFils($indexAutre->id);
+        $retour = "";
+        if (!empty($listeFilsAutre)) {
+            $compteurFils = 0;
+            foreach ($listeFilsAutre as $fils) {
+                $resultatFils = $fils->afficherArticleIndex($auth, "fils");
+                if ($resultatFils != "") {
+                    $compteurFils++;
+                    $retour .= $resultatFils;
+                }
+            }
+            $retour .= "</ul><br/>";
+            if ($compteurFils != 0) {
+                echo "<div class='boutonCategorie'>";
+                echo $indexAutre->afficherArticleIndex($auth, "titre");
+                $compteurTitre++; ?>
+                <input type="button" class="buttonShow" id="showcategorie<?php echo $compteurTitre; ?>"
+                       onclick="displayBlocCategorie('categorie<?php echo $compteurTitre; ?>');"
+                       style="margin-left:15px;"/>
+                <input type="button" class="buttonHide" id="hidecategorie<?php echo $compteurTitre; ?>"
+                       onclick="hideBlocCategorie('categorie<?php echo $compteurTitre; ?>');"
+                       style="margin-left:15px;"/>
+                <?php echo "</div>";
+                $retour = "<ul class='listeFils' id='categorie" . $compteurTitre . "' style='display:none;'>" . $retour;
+                echo $retour;
+            }
+        }
+
+        foreach ($listeIndex as $index) {
+            $compteurFils = 0;
+            $listeFils = Articles::getListeFils($index->id);
+            $retour = "";
+            foreach ($listeFils as $fils) {
+                $resultatFils = $fils->afficherArticleIndex($auth, "fils");
+                if ($resultatFils != "") {
+                    $compteurFils++;
+                    $retour .= $resultatFils;
+                }
+            }
+            $retour .= "</ul><br/>";
+            if ($compteurFils != 0) {
+                echo "<div class='boutonCategorie'>";
+                echo $index->afficherArticleIndex($auth, "titre");
+                $compteurTitre++;
+                ?>
+                <input type="button" class="buttonShow" id="showcategorie<?php echo $compteurTitre; ?>"
+                       onclick="displayBlocCategorie('categorie<?php echo $compteurTitre; ?>');"
+                       style="margin-left:15px;"/>
+                <input type="button" class="buttonHide" id="hidecategorie<?php echo $compteurTitre; ?>"
+                       onclick="hideBlocCategorie('categorie<?php echo $compteurTitre; ?>');"
+                       style="margin-left:15px;"/>
+                <?php echo "</div>";
+                $retour = "<ul class='listeFils' id='categorie" . $compteurTitre . "' style='display:none;'>" . $retour;
+                echo $retour;
+            }
+        }
+        echo $this->tag->hiddenField(["compteurTitre", "value" => $compteurTitre]);
+        ?>
+    </div>
+    <div id="resultatRecherche" style="display:none;">
+
+    </div>
+</div>

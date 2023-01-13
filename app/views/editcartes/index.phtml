@@ -1,0 +1,128 @@
+<script type="text/javascript">
+    const xMin = <?php echo $xMin;?>;
+    const xMax = <?php echo $xMax;?>;
+    const yMin = <?php echo $yMin;?>;
+    const yMax = <?php echo $yMax;?>;
+    const idCarte = <?php echo $idCarte;?>;
+</script>
+
+<div class="barreDeTaches">
+<!-- Affichage du nom de la carte -->
+<div class="nomDeLaCarte">
+        <h3 id="test"><?php echo "Nom de la carte : <span>$nomCarte</span>"; ?></h3>
+    </div>
+
+    <img src="https://zupimages.net/up/21/37/4752.png" alt="Logo d'IDEO">
+    <ul class="menuBarreDeTaches">
+        <li><a onclick="$('.submenuFichier').toggle();" >Fichier</a>
+            <ul class="submenuFichier" id="submenuFichier">
+                <li><button style="opacity : 0.3">Charger une carte</button></li>
+                <li><button onclick="saveCarte();">Sauvegarder</button></li>
+                <li><button style="opacity : 0.3">Paramètres</button></li>
+                <li><a id="gameplayBtn" href="/gameplay">Quitter Mapideo</a></li>
+            </ul>
+        </li>
+        <li><a style="opacity: 0.3">Carte</a></li>
+        <li><a style="opacity: 0.3">Outils</a></li>
+        <li><a onclick="$('.submenuAide').toggle();">Aide</a>
+            <ul class="submenuAide">
+                <li><button onclick="$('#aPropos').css('display', 'block');">À propos</button></li>
+                <li><button style="opacity: 0.3">Manuel d'utilisation</button></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<!-- Popup bouton "À propos" -->
+<div id="aPropos">
+    <div class="blocAPropos">
+        <div>
+            <img src="https://zupimages.net/up/21/37/2myw.png" alt="Logo IDEO">
+            <h2>Mapideo</h2>
+        </div>
+        <h3>Version 0.1.</h3>
+        <span onclick="$('#aPropos').css('display', 'none');">✖</span>
+    </div>
+</div>
+
+<div class="barreOutils">
+    <ul class="menuBarreOutils">
+        <!-- Bouton de retour à la page Gameplay -->
+        <li class="homeBtn"><a href="/gameplay"><img src="https://zupimages.net/up/21/34/da8v.png" alt="Bouton de retour gameplay" title="Gameplay"></a></li>
+        <!-- Bouton "charger une carte" et "sauvegarder la carte" -->
+        <li class="openBtn" style ="opacity: 0.2" title="Charger une carte"><a href="/gameplay"><img src="https://zupimages.net/up/21/34/7yu1.png" alt="Bouton de chargement de carte"></a></li>
+        <li class="saveBtn" onclick="saveCarte();"><a title="Sauvegarder les changements"><img src="https://zupimages.net/up/21/34/ref9.png" alt="Bouton sauvegarde de la carte"></a></li>
+        <!-- Boutons d'affichage des couches -->
+        <li class="coucheUneBtn" onclick="premiereCouche();"><img src="https://zupimages.net/up/21/34/n9kd.png" alt="Bouton première couche de texture" title="Couche 1"></li>
+        <li class="coucheDeuxBtn"  onclick="deuxiemeCouche();"><img src="https://zupimages.net/up/21/34/yf6v.png" alt="Bouton première couche de texture" title="Couche 2"></li>
+        <li class="coucheTroisBtn"  onclick="troisiemeCouche();"><img src="https://zupimages.net/up/21/34/fpfs.png" alt="Bouton première couche de texture" title="Couche 3"></li>
+        <li class="coucheQuatreBtn"  onclick="quatriemeCouche();"><img src="https://zupimages.net/up/21/34/9d8d.png" alt="Bouton première couche de texture" title="Couche 4"></li>
+        <li class="coucheCinqBtn"  onclick="cinquiemeCouche();"><img src="https://zupimages.net/up/21/34/59pp.png" alt="Bouton première couche de texture" title="Couche 5"></li>
+        <!-- Boutons de zoom/dezoom -->
+        <li class="zoomAvant" onclick="$('#grille').css('transform', 'scale(1.3)')"><img src="https://zupimages.net/up/21/34/gm90.png" alt="Bouton de zoom avant" title="Zoom avant"></li>
+        <li class="zoomArriere" onclick="$('#grille').css('transform', 'scale(1)')"><img src="https://zupimages.net/up/21/34/bkte.png" alt="Bouton de zoom arrière" title="Zoom arrière"></li>
+    </ul>
+</div>
+
+<div id="blocEditionDeCartes">
+<span id="doubleArrowEdition" onclick="
+$('#blocEditionDeCartes').animate({width: '20px'}, 0);
+$('#blocEditionDeCartes').css('padding-left','15px');
+$('#doubleLeftArrowEdition').css('display','block');
+$('#doubleArrowEdition').css('display','none');
+$('#blocInformations').css('right','20px');">››</span>
+<span id="doubleLeftArrowEdition" onclick="
+$('#blocEditionDeCartes').animate({width: '250px'}, 0);
+$('#blocEditionDeCartes').css('padding-left','0');
+$('#doubleLeftArrowEdition').css('display','none');
+$('#doubleArrowEdition').css('display','block');
+$('#blocInformations').css('right','250px')">‹‹</span>
+    <div class="contenuEditionTerrains">
+        <div class="menuTerrains">
+            <button id="terrainsBtn" onclick="$('#terrains').toggle();$('#textures').css('display', 'none');$('#terrainsBtn').css('background-color', '#535353');$('#texturesBtn').css('background-color', '#424242')">Terrains</button>
+            <button id="texturesBtn" style="opacity: 0.3">Propriétés</button>
+        </div>
+        <p>Cliquez sur l'onglet <b>Terrains</b> pour accèder aux ressources</p>
+    </div>
+     <div class="sousBarre">
+        <div><img src="https://zupimages.net/up/21/36/pkq0.png" alt="Bouton d'ajout de nouveau terrain" title="Ajouter terrain"></div>
+         <div><img src="https://zupimages.net/up/21/36/tvhs.png" alt="Bouton de suppression de terrain" title="Supprimer terrain"></div>
+    </div>    
+    <div class="contenuEditionTextures">
+        <div class="menuTextures">
+            <button id="terrainsBtn" onclick="$('#textures').toggle();$('#terrains').css('display', 'none');$('#texturesBtn').css('background-color', '#535353');$('#terrainsBtn').css('background-color', '#424242')">Textures</button>
+            <button id="texturesBtn" style="opacity: 0.3">Propriétés</button>
+        </div>
+        <p>Cliquez sur l'onglet <b>Textures</b> pour accèder aux ressources</p>
+    </div>
+</div>
+<div id="blocInformations">
+    <span id="doubleArrowInformations" onclick="
+    $('#blocInformations').animate({width: '20px'}, 0);
+    $('#doubleArrowInformations').css('display','none');
+    $('#doubleLeftArrowInformations').css('display','block');
+    $('.contenuBlocInformations').css('display','none');">››</span>
+    <span id="doubleLeftArrowInformations" onclick="
+    $('#blocInformations').animate({width: '150px'}, 0);
+    $('#doubleArrowInformations').css('display','block');
+    $('#doubleLeftArrowInformations').css('display','none');
+    $('.contenuBlocInformations').css('display','block');"">‹‹</span>
+    <div class="contenuBlocInformations">
+    <!-- Bloc d'affichage du terrain selectionné -->
+        <div class="elementTerrainSelectionne">
+            <span>Terrain sélectionné</span>
+            <div id="terrainSelectionne">Aucun</div>
+        </div>
+    <!-- Bloc d'affichage de la texture selectionné -->
+        <div class="elementTextureSelectionne">
+                <p class="selectedBtn">Texture sélectionnée</p>
+                <div id="textureSelectionnee">Aucune</div>
+        </div>
+
+        
+    </div>
+</div>
+<div id="terrains" style="display:none"></div>
+<div id="textures" style="display:none"></div>
+<div id="plateauJeu" oncontextmenu="rightClick(event)"></div>
+<div id="rightClickMenu" class="rightClickMenu" style="display:none;"></div>

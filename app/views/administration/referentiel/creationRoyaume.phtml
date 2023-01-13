@@ -1,0 +1,72 @@
+<!-- Div pour les boutons -->
+<div id="divBoutonsRoyaumeCreation" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerRoyaume', 'class' => 'bouton', 'title' => "Permet de créer un royaume."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'retourListeRoyaume', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des royaumes."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour le royaume -->
+<div id="divRoyaume" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreRoyaumeCreation", "class" => "formulaireField titreEdition", "value" => "Nom du Royaume")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuRoyaume" class="divContenuReferentiel">
+        <!-- Etendard -->
+        <div id="divEtendardRoyaume">
+            <?php echo Phalcon\Tag::image(['img/site/illustrations/royaumes/neutre.png', "class" => 'etendardRoyaumeCreation', 'id' => 'etendardRoyaume']); ?>
+            <div id="listeEtendardRoyaume">
+                <?php echo Royaumes::genererListeEtendardsRoyaumeVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterEtendardRoyaume">
+                <?php
+                echo Phalcon\Tag::textField(array("newEtendardRoyaume", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageRoyaume', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionRoyaumeCreation">
+            <?php echo Phalcon\Tag::textArea(["descriptionRoyaumeCreation", "value" => "Entrez une description.", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <div id="divInformationRoyaumeCreation" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleRoyaumeCreation" class="divArticleReferentiel">
+                <div id="autocompleteRoyaumeWiki">
+                    <label for="s">Article Wiki </label>
+                    <?php
+                    echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurRoyaumeCreation" class="divContenuInformationReferentiel">
+                <label for="couleurRoyaumeCreation">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurRoyaumeCreation", "class" => "formulaireField", "value" => "")); ?>
+                <span id="carreCouleurRoyaume" style="background-color:white" class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionRoyaumeCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isDispoInscriptionRoyaumeCreation'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionRoyaumeCreation' class='tickcrossFormulaireAdministration' checked />";
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

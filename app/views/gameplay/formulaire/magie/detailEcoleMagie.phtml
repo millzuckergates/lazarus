@@ -1,0 +1,127 @@
+<?php
+echo $this->tag->hiddenField(["idEcoleMagie", "value" => $ecole->id]);
+echo $this->tag->hiddenField(["idSortRetirer", "value" => ""]);
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerEcoleMagie', 'class' => 'bouton', 'title' => "Permet d'afficher le formulaire de l'école de magie en modification."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'retourListeEcolesMagie', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des écoles de magie."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour l'école de magie -->
+<div id="divTitreFormEcoleMagie" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <span id="titreFormEcoleMagie" class="titreReferentiel"><?php echo $ecole->nom; ?></span>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuEcoleMagie" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageEcoleMagie">
+            <?php echo Phalcon\Tag::image([$ecole->image, "class" => 'imageMagieConsultation']); ?>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionMagieConsultation">
+            <span id="descriptionEcoleMagieConsultation"><?php echo str_replace("\n", "<br/>", $ecole->description); ?></span>
+        </div>
+
+        <div id="divInformationEcoleMagieConsultation" class="divInformationMagie">
+            <!-- Article du wiki lié -->
+            <div id="divArticleEcoleMagieConsultation" class="divArticleReferentiel">
+                <label for="articleEcoleMagieConsultation">Article du wiki </label>
+                <?php if ($ecole->article != null && $ecole->article) { ?>
+                    <a href="#" id="articleEcoleMagieConsultation"
+                       onclick="openPopUpWiki(<?php echo $ecole->idArticle; ?>)"><?php echo $ecole->article->titre; ?></a>
+                <?php } else { ?>
+                    <span class="texte" id="articleEcoleMagieConsultation">Aucun</span>
+                <?php } ?>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurEcoleMagieConsultation" class="divContenuInformationReferentiel">
+                <label for="couleurEcoleMagieConsultation">Couleur </label>
+                <span id="couleurEcoleMagieConsultation" class="couleurCarre"><?php echo $ecole->couleur; ?></span>
+                <div id="carreCouleurEcoleMagie" style="background-color:<?php echo $ecole->couleur; ?>"
+                     class='carreCouleur'></div>
+            </div>
+
+            <!-- Nature de magie -->
+            <div id="divNatureMagieEcole" class="divContenuInformationReferentiel">
+                <label for="natureMagieEcole">Type de magie </label>
+                <?php if (isset($ecole->natureMagie) && $ecole->natureMagie != null) { ?>
+                    <span id="natureMagieEcole"><?php echo $ecole->natureMagie->nom; ?></span>
+                <?php } else { ?>
+                    <span id="natureMagieEcole">Aucun</span>
+                <?php } ?>
+            </div>
+
+            <!-- Fichier -->
+            <div id="divScriptEcoleMagie" class="divContenuInformationReferentiel">
+                <label for="scriptEcoleMagie">Script utilisé </label>
+                <?php if ($ecole->fichier != 0) { ?>
+                    <span id="scriptEcoleMagie"><?php echo $ecole->fichier; ?></span>
+                <?php } else { ?>
+                    <span id="scriptEcoleMagie">Aucun</span>
+                <?php } ?>
+            </div>
+
+            <!-- Compétence -->
+            <div id="divCompetenceEcoleMagie" class="divContenuInformationReferentiel">
+                <label for="competenceEcoleMagie">Compétence associée </label>
+                <span id="competenceEcoleMagie"><?php echo $ecole->competence->nom; ?></span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionEcoleMagieConsultation" class="divContenuInformationReferentiel">
+                <?php
+                if ($ecole->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionEcoleMagieConsultation'>Disponible à l'inscription ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isDispoInscriptionEcoleMagieConsultation"]);
+                } else {
+                    echo "<label for='isDispoInscriptionEcoleMagieConsultation'>Disponible à l'inscription ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isDispoInscriptionEcoleMagieConsultation"]);
+                }
+                ?>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div id="divBloqueEcoleMagieConsultation" class="divContenuInformationReferentiel">
+                <?php
+                if ($ecole->isBloque) {
+                    echo "<label for='isBloqueEcoleMagieConsultation'>Utilisation bloquée ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueEcoleMagieConsultation"]);
+                } else {
+                    echo "<label for='isBloqueEcoleMagieConsultation'>Utilisation bloquée ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueEcoleMagieConsultation"]);
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Div pour les sorts -->
+        <div class="listeElementAssocieMagie">
+            <div id="listeSortsAssocies">
+                <?php echo $ecole->genererListeSorts($auth); ?>
+            </div>
+
+            <div id="divAjoutSort">
+                <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) { ?>
+                    <div id="selectSort">
+                        <label for="divSelectSort">Ajoutez un sort </label>
+                        <div id="divSelectSort"
+                             class="contenuAjoutReferentiel"><?php echo $ecole->genererSelectListeSortsAutorises(); ?></div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>

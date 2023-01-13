@@ -1,0 +1,224 @@
+#blocRechercheCarte {
+    background-color: #f6f3d9;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 12px;
+    margin-left: 15px;
+    float: left;
+    margin-bottom: 30px;
+    z-index: 1;
+    margin-right: 15px;
+}
+
+.contenuBlocRecherche {
+    position: relative;
+    margin-left: 2px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+#tableRechercheCarte {
+    width: 95%;
+}
+
+#tableRechercheCarte td {
+    padding-top: 5px;
+}
+
+#selectSearchType {
+    width: 65%;
+    height: 20px;
+    font-size: 12px;
+    display: inline;
+    vertical-align: right;
+    float: right;
+}
+
+#boutonsBlocRechercheCartes {
+    margin-top: 10px;
+}
+
+.enteteTableCarte {
+    display: flex;
+}
+
+.nomTypeCarte {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Metamorphous;
+    letter-spacing: 1px;
+}
+
+.nombreTypeCarte {
+    margin-left: 6px;
+    font-style: italic;
+}
+
+.divListeCarteSaison {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.resultatVideCarte {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+#resultatVideCarte {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.tableCarteSaison tr:hover td {
+    background-color: rgba(116, 226, 255, 0.6);
+}
+
+.imageCarte {
+    max-width: 180px;
+}
+
+#descriptionCarte {
+    min-height: 250px;
+}
+
+.divInformationCarte {
+    display: inline-grid;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#divBlocCarteCoordoonnees {
+    margin-top: 40px;
+    display: grid;
+}
+
+#divChargeCarte {
+    margin-top: 20px;
+}
+
+#CoordoonneesRefCarteCreation {
+    text-align: left;
+}
+
+#formCarteCoordoonneesApercu {
+    margin-top: 10px;
+}
+
+.apercuImageCarte {
+    max-width: 100px;
+}
+
+.tableCoordoonneApercuCarte tr {
+    height: 50px;
+}
+
+.tableCoordoonneApercuCarte {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.apercuCarte {
+    width: 50%;
+}
+
+.coordoonnee {
+    margin-right: 10px;
+    margin-left: 4px;
+}
+
+#selectSaisonCarte {
+    margin-left: 20px;
+}
+
+#selectTypeCarte {
+    margin-left: 33px;
+}
+
+#isChargecarte {
+    margin-left: 15px;
+}
+
+#isDecouverteCarte {
+    margin-left: 15px;
+}
+
+#divTitreCartePJ {
+    margin-top: 20px;
+}
+
+.titreCartePJ {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Metamorphous;
+    letter-spacing: 1px;
+}
+
+#divImageCartePJ {
+    margin-top: 8px;
+    display: inline-flex;
+}
+
+#listeImageCarte {
+    margin-top: 72px;
+    margin-left: 10px;
+}
+
+#divAjouterImageCartePJ {
+    margin-top: 70px;
+    margin-left: 10px;
+}
+
+#chargerNewImageCartePJ {
+    margin-left: 5px;
+}
+
+#listeImagePJ {
+    height: 25px;
+}
+
+#divSpecificiteTypeCarte {
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 45%;
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#imgCarteCreature {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    max-width: 120px;
+    margin-left: 10px;
+    margin-left: 10px;
+}
+
+#selectCarteReligion {
+    margin-left: 30px;
+}
+
+#divChargeCarte {
+    margin-top: 20px;
+}
+
+#boutonChargerCarte {
+    margin-left: 15px;
+}
+
+.imageCartePJ {
+    max-width: 130px;
+}
+
+#listesTablesCartes {
+    width: 75%;
+}

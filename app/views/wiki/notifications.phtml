@@ -1,0 +1,63 @@
+<?php
+if (isset($auth['perso'])) {
+    if (Autorisations::hasAutorisation(Autorisations::CONSULTATION_WIKI, $auth['autorisations'])) {
+        $listeArticlesEnCours = Articles::find(["status = :status1: OR status = :status2: AND idAuteur = :idAuteur:",
+          "bind" => ["status1" => Articles::STATUS_PROPOSITION,
+            "status2" => Articles::STATUS_IN_PROGESS,
+            "idAuteur" => $auth['perso']->id]]);
+        if (!empty($listeArticlesEnCours) && count($listeArticlesEnCours) != 0) {
+            echo "<div class='ligneNotification'>";
+            echo "<span class='categorieNotificationWiki'>En cours de réalisation </span><span class='resultatRecapitulatif'>(" . count($listeArticlesEnCours) . " articles)</span>";
+            echo "<div class='buttonRight'>";
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteArticlesEnCours', 'class' => 'buttonShow'));
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteArticlesEnCours', 'class' => 'buttonHide'));
+            echo "</div>";
+            echo "<div id='listeArticlesEnCours' style='display:none'><ul>";
+            foreach ($listeArticlesEnCours as $articleEnCours) {
+                echo "<li class='articlesEnCours'>";
+                echo Phalcon\Tag::linkTo(["wiki/article?id=" . $articleEnCours->id, $articleEnCours->titre, "class" => "recapArticle"]);
+                echo "</li>";
+            }
+            echo "</ul></div></div><br/>";
+        }
+    }
+
+    if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_WIKI, $auth['autorisations'])) {
+        $listeArticlesEnValidation = Articles::find(["status = :status:", "bind" => ["status" => Articles::STATUS_WAITING_VALIDATION]]);
+        if (!empty($listeArticlesEnValidation) && count($listeArticlesEnValidation) != 0) {
+            echo "<div class='ligneNotification'>";
+            echo "<span class='categorieNotificationWiki'>En attente de validation </span><span class='resultatRecapitulatif'>(" . count($listeArticlesEnValidation) . " articles)</span>";
+            echo "<div class='buttonRight'>";
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteArticlesEnValidation', 'class' => 'buttonShow'));
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteArticlesEnValidation', 'class' => 'buttonHide'));
+            echo "</div>";
+            echo "<div id='listeArticlesEnValidation' style='display:none'><ul>";
+            foreach ($listeArticlesEnValidation as $articleEnCours) {
+                echo "<li class='articlesEnAttenteDeValidation'>";
+                echo Phalcon\Tag::linkTo(["wiki/article?id=" . $articleEnCours->id, $articleEnCours->titre, "class" => "recapArticle"]);
+                echo "</li>";
+            }
+            echo "</ul></div></div><br/>";
+        }
+    }
+
+    if (Autorisations::hasAutorisation(Autorisations::GESTION_WIKI, $auth['autorisations'])) {
+        $listeArticlesEnRevision = Articles::find(["status = :status:", "bind" => ["status" => Articles::STATUS_DEMANDE_DE_REVISION]]);
+        if (!empty($listeArticlesEnRevision) && count($listeArticlesEnRevision) != 0) {
+            echo "<div class='ligneNotification'>";
+            echo "<span class='categorieNotificationWiki'>Demande de révision </span><span class='resultatRecapitulatif'>(" . count($listeArticlesEnRevision) . " articles)</span>";
+            echo "<div class='buttonRight'>";
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteArticlesEnRevision', 'class' => 'buttonShow'));
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteArticlesEnRevision', 'class' => 'buttonHide'));
+            echo "</div>";
+            echo "<div id='listeArticlesEnRevision' style='display:none'><ul>";
+            foreach ($listeArticlesEnRevision as $articleEnCours) {
+                echo "<li class='articlesEnRevision'>";
+                echo Phalcon\Tag::linkTo(["wiki/article?id=" . $articleEnCours->id, $articleEnCours->titre, "class" => "recapArticle"]);
+                echo "</li>";
+            }
+            echo "</ul></div></div><br/>";
+        }
+    }
+}
+?>

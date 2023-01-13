@@ -1,0 +1,22 @@
+<?php
+echo $this->tag->hiddenField(["redirect", "value" => $this->session->get('redirect')]);
+?>
+
+<!-- Bloc Accueil -->
+<div id="blocAccueil">
+    <?php
+    if (!isset($auth) || $auth == null) {
+        echo $this->view->partial("accueil/defaut");
+    } else {
+        if (isset($auth['perso']) && ($auth['modeMJ'] == "false" || $auth['modeMJ'] == false)) {
+            echo $this->view->partial("accueil/modejoueur");
+        } else {
+            if (isset($auth['perso']) && ($auth['modeMJ'] == "true" || $auth['modeMJ'] == true)) {
+                echo $this->view->partial("accueil/modemad");
+            } else {
+                echo $this->view->partial("accueil/defaut");
+            }
+        }
+    }
+    ?>
+</div>

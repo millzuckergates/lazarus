@@ -1,0 +1,28 @@
+<?php
+echo $this->tag->hiddenField(["type", "value" => $type]);
+echo $this->tag->hiddenField(["idType", "value" => $idType]);
+echo $this->tag->hiddenField(["idBonus", "value" => $bonus->id]);
+echo $this->tag->hiddenField(["position", "value" => $position]);
+?>
+
+<div id="contenuBonus">
+    <div id="enteteBonus">
+        <div id="divTitreBonus">
+			<span class="titrePopup">
+				<?php echo $bonus->nom; ?>
+			</span>
+        </div>
+    </div>
+
+    <div id="detailBonus" class="detailElement">
+        <?php echo $bonus->genererDetailBonus("consultation", $type, $idType, $position); ?>
+    </div>
+
+    <div id="boutonEditerPopupBonus" class="boutonActionPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerBonus', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de modification du bonus.")); ?>
+    </div>
+
+    <div id="boutonFermerPopupBonus" class="boutonFermerPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'annulerAjoutBonus', 'class' => 'bouton', 'title' => "Annule la modification du bonus.")); ?>
+    </div>
+</div>

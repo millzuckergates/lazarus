@@ -1,0 +1,45 @@
+<?php
+$listeType = LogsADMIN::getListeTypes();
+?>
+
+<div id="LogsBlocRecherche">
+    <span class="labelTitreBlocRecherche">Outils de recherche</span>
+    <div id="logsType">
+        <label for="selectLogType">Type </label>
+        <select id="selectLogType" onchange="chargerType();">
+            <option value="0">Sélectionnez un type</option>
+            <?php
+            foreach ($listeType as $type) {
+                echo '<option value="' . $type . '">' . $type . '</option>';
+            }
+            ?>
+        </select>
+    </div>
+
+    <div id="logsAuteur">
+        <label for="logAuteur">Auteur </label>
+        <input type="text" class="rechercheInput" id="logAuteur" value=""/>
+    </div>
+
+    <div id="logsCible">
+        <label for="logCible">Cible </label>
+        <input type="text" class="rechercheInput" id="logCible" value=""/>
+    </div>
+    <div id="logFiltre">
+        <?php echo Phalcon\Tag::SubmitButton(array("Filtrer", 'id' => 'logsFiltre', 'class' => 'bouton', 'title' => "Permet de filtrer les résultats des logs.")); ?>
+    </div>
+</div>
+
+<?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_CONSULTATION_ARCHIVE_LOG, $auth['autorisations'])) { ?>
+    <div id="boutonExportLogs">
+        <?php echo Phalcon\Tag::SubmitButton(array("Exporter", 'id' => 'exporterLogs', 'class' => 'bouton', 'title' => "Permet d'exporter les logs vieux de plus de 30 jours.")); ?>
+    </div>
+<?php } ?>
+
+
+<div id="divEnregistrementPageLog">
+    <label for="enregistrementPageLog">Nombre d'enregistrement<br/> par page</label>
+    <input type="text" class="rechercheInput" id="enregistrementPageLog"
+           value="<?php echo $administration['nbEnregistrementParPage']; ?>"
+           onchange="changeLogNbEnregistrementParPage();"/>
+</div>

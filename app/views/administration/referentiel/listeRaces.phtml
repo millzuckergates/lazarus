@@ -1,0 +1,35 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterRace', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une race.")); ?>
+    </div>
+<?php } ?>
+<?php
+$listeRaces = Races::find();
+if (count($listeRaces) > 0) {
+    echo "<table id='referentielRace' class='referentielAdministration'>";
+    echo "<tr>";
+    echo "<th style='width:20%'></th>";
+    echo "<th style='width:20%'>Nom</th>";
+    echo "<th style='width:15%'>Jouable</th>";
+    echo "<th style='width:45%'>Description</th>";
+    echo "</tr>";
+    $i = 0;
+    foreach ($listeRaces as $race) {
+        $val = $i % 2;
+        echo "<tr class='ligneRace" . $val . "' onclick='afficherDetailRace(" . $race->id . ");'>";
+        echo "<td>" . Phalcon\Tag::image([$race->image, "class" => 'iconeRaceImage']) . "</td>";
+        echo "<td><span class='nomListeReferentiel'>" . $race->nom . "</span></td>";
+        if ($race->isDispoInscription) {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross']) . "</td>";
+        } else {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross']) . "</td>";
+        }
+        echo "<td><span class='descriptionReferentielAdministration'>" . str_replace("\n", "<br/>", $race->resumeDescription()) . "</span></td>";
+        echo "</tr>";
+        $i++;
+    }
+    echo "</table>";
+} else {
+    echo "<span class='resultatVide'>Il n'y a aucune race à afficher.</span>";
+}
+?>

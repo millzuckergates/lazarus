@@ -1,0 +1,119 @@
+<?php
+echo $this->tag->hiddenField(["idCarac", "value" => $carac->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        //Si Carac Primaires
+        if ($carac->type == Caracteristiques::CARAC_PRIMAIRE) {
+            if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_CARAC_PRIMAIRE, $auth['autorisations'])) {
+                echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerCarac', 'class' => 'bouton', 'title' => "Permet d'afficher le formulaire de la caractéristique en modification."));
+            }
+        } else {
+            if ((Autorisations::hasAutorisation(Autorisations::GAMEPLAY_CREATION_CARAC, $auth['autorisations']) && $carac->isModifiable)
+              || Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_CARAC_PRIMAIRE, $auth['autorisations'])) {
+                echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerCarac', 'class' => 'bouton', 'title' => "Permet d'afficher le formulaire de la caractéristique en modification."));
+            }
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'retourListeCarac', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des caractéristiques."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la caractéristique -->
+<div id="divGlobalCarac" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <span id="titreFormCarac" class="titreReferentiel"><?php echo $carac->nom; ?></span>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuCarac" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageCarac">
+            <?php echo Phalcon\Tag::image([$carac->image, "class" => 'imageCaracConsultation']); ?>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionCaracConsultation">
+            <span id="descriptionCaracConsultation"><?php echo str_replace("\n", "<br/>", $carac->description); ?></span>
+        </div>
+
+        <div id="divInformationCaracConsultation" class="divInformationCarac">
+
+            <!-- Genre -->
+            <div id="divGenreCarac" class="divContenuInformationReferentiel">
+                <label for="genreCarac">Genre </label>
+                <span id="genreCarac"><?php echo $carac->genre; ?></span>
+            </div>
+
+            <!-- Trigramme -->
+            <div id="divTrigrammeCarac" class="divContenuInformationReferentiel">
+                <label for="trigrammeCarac">Trigramme </label>
+                <span id="trigrammeCarac"><?php echo $carac->trigramme; ?></span>
+            </div>
+
+            <!-- Type -->
+            <div id="divTypeCarac" class="divContenuInformationReferentiel">
+                <label for="typeCarac">Type </label>
+                <span id="typeCarac"><?php echo $carac->type; ?></span>
+            </div>
+
+            <!-- Valeur min -->
+            <div id="divValMinCarac" class="divContenuInformationReferentiel">
+                <label for="valMinCarac">Valeur minimum </label>
+                <span id="valMinCarac">
+					<?php
+                    if ($carac->valMin == null || $carac->valMin == "") {
+                        echo "Non définie";
+                    } else {
+                        echo $carac->valrMin;
+                    }
+                    ?>
+				</span>
+            </div>
+
+            <!-- Valeur max -->
+            <div id="divValMaxCarac" class="divContenuInformationReferentiel">
+                <label for="valMaxCarac">Valeur maximum </label>
+                <span id="valMaxCarac">
+					<?php
+                    if ($carac->valMax == null || $carac->valMax == "") {
+                        echo "Non définie";
+                    } else {
+                        echo $carac->valMax;
+                    }
+                    ?>
+				</span>
+            </div>
+
+            <!-- Formule si Carac secondaire -->
+            <?php if ($carac->type == Caracteristiques::CARAC_SECONDAIRE) { ?>
+                <div id="divFormuleCarac">
+                    <label for="formuleCarac">Formule </label>
+                    <span id="formuleCarac"><?php echo $carac->formule; ?></span>
+                </div>
+            <?php } ?>
+
+
+            <!-- Checkbox isModifiable - Uniquement pour les patrons -->
+            <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_CARAC_PRIMAIRE, $auth['autorisations'])) { ?>
+                <div id="divIsModifiableCarac" class="divContenuInformationReferentiel">
+                    <?php
+                    if ($carac->isModifiable) {
+                        echo "<label for='isModifiableCarac'>Peut-être modifiée ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isModifiableCara"]);
+                    } else {
+                        echo "<label for='isModifiableCarac'>Peut-être modifiée ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isModifiableCara"]);
+                    }
+                    ?>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

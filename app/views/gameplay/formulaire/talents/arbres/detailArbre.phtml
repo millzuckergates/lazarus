@@ -1,0 +1,58 @@
+<?php
+echo $this->tag->hiddenField(["idArbreTalent", "value" => $arbre->id]);
+?>
+<div class="popupTalent" id="popupArbreTalent">
+    <div class="entetePopupTalent" id="entetePopupArbreTalent">
+        <div class="divTitreTalent"><span class="titrePopup"><?php echo $arbre->nom; ?></span></div>
+    </div>
+
+    <div id="blocFormulaire">
+        <div class="formPopupTalent" id="formPopupArbre">
+            <div class="divDataPopupTalent" id="blocFamilleArbre">
+                <label for="familleArbre">Famille </label>
+                <span id="familleArbre"><?php echo $arbre->famille->nom; ?></span>
+            </div>
+
+            <!-- Description -->
+            <div class="divDataPopupTalent" id="blocCategorieArbre">
+                <span id="descriptionArbreTalent"><?php echo str_replace("\n", "<br/>", $arbre->description); ?></span>
+            </div>
+        </div>
+
+        <!-- Image de l'arbre -->
+        <div class="divDataPopupTalent" id="blocImageArbre">
+            <div id="divImageArbrePopupTalent">
+                <?php echo Phalcon\Tag::image([$arbre->image, "class" => 'imagePopupTalent', 'id' => 'imageArbre']); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionArbreTalent">
+        <div id="boutonEditerPopupTalentArbre" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerArbreTalent', 'class' => 'bouton', 'title' => "Permet d'accéder à l'écran de modification de l'arbre.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentArbre" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentArbre', 'class' => 'bouton', 'title' => "Permet de fermer la popup.")); ?>
+        </div>
+    </div>
+
+
+    <div id="blocInformationsTechniquesTalentsContraintes">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueArbre">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsContraintesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Contraintes </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContraintesArbre', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContraintesArbre', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechniqueFamille" style="display:none"></div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div id="pageGameplay">
+    <!-- Onglets Lateraux -->
+    <div class="ongletsLateraux" id="ongletsGameplay">
+        <?php echo $this->session->get("listeOngletGameplay"); ?>
+    </div>
+
+    <!-- Container -->
+    <div class="container" style="width:85%;float:left;">
+        <div id="blocGameplay" style="display:none">
+            <?php echo $this->getContent(); ?>
+        </div>
+    </div>
+</div>

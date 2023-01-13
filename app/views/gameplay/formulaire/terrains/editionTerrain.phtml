@@ -1,0 +1,198 @@
+<?php
+echo $this->tag->hiddenField(["idTerrain", "value" => $terrain->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierTerrain', 'class' => 'bouton', 'title' => "Permet de créer le terrain."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditerTerrain', 'class' => 'bouton', 'title' => "Permet de retourner vers le terrain."));
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour liste", 'id' => 'retourListeTerrain', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des terrains."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour le terrain -->
+<div id="divGlobalTerrain" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormTerrain", "class" => "formulaireField titreEdition", "value" => $terrain->nom)); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuTerrain" class="divContenuReferentielTerrain">
+        <!-- Description -->
+        <div class="divDescriptionTerrain" style="width:100%">
+            <?php echo Fonctions::rawTextArea("descriptionTerrain", str_replace("\n", "&#13;&#10;", $terrain->description), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <div id="divInformationTerrainCreation" class="divInformationTerrain">
+            <!-- Genre -->
+            <div id="divGenreTerrain" class="divContenuInformationReferentiel">
+                <label for="genreTerrain">Genre </label>
+                <span id="genreTerrain"><?php echo Constantes::genererSelectGenre($terrain->genre, "selectGenreTerrain"); ?></span>
+            </div>
+
+            <!-- Saison -->
+            <div id="divSaisonTerrain" class="divContenuInformationReferentiel">
+                <label for="saisonTerrain">Saison </label>
+                <span id="saisonTerrain"><?php echo Constantes::genererSelectSaison($terrain->saison, 'selectSaisonTerrain'); ?></span>
+            </div>
+
+            <!-- Type d'accès -->
+            <div id="divTypeAccesTerrain" class="divContenuInformationReferentiel">
+                <label for="typeAccesTerrain">Type d'accès </label>
+                <span id="typeAccesTerrain"><?php echo Constantes::genererSelectAcces($terrain->typeAcces, 'selectTypeAccesTerrain'); ?></span>
+            </div>
+
+            <!-- Compétence -->
+            <div id="divCompetenceTerrain" class="divContenuInformationReferentiel">
+                <label for="competenceTerrain">Compétence </label>
+                <span id="competenceTerrain"><?php echo $terrain->getSelectListCompetence(); ?></span>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurTerrain" class="divContenuInformationReferentiel">
+                <label for="couleurTerrain">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurTerrain", "class" => "formulaireField", "value" => $terrain->couleur, "size" => 7)); ?>
+                <span id="carreCouleurTerrain" style="background-color:<?php echo $terrain->couleur; ?>"
+                      class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Mouvement de base -->
+            <div id="divMvtTerrain" class="divContenuInformationReferentiel">
+                <label for="mvtTerrain">Le modificateur de mouvement de base sur le terrain </label>
+                <?php echo Phalcon\Tag::textField(array("mvtTerrain", "class" => "formulaireField", "value" => $terrain->baseMvt, "size" => 3)); ?>
+            </div>
+
+            <!-- Modificateur de vision -->
+            <div id="divVisionTerrain" class="divContenuInformationReferentiel">
+                <label for="visionTerrain">Le modificateur de vision de base sur le terrain </label>
+                <?php echo Phalcon\Tag::textField(array("visionTerrain", "class" => "formulaireField", "value" => $terrain->baseVision, "size" => 3)); ?>
+            </div>
+
+            <!-- Z-index -->
+            <div id="divZIndexTerrain" class="divContenuInformationReferentiel">
+                <label for="zindexTerrain">Z-Index </label>
+                <?php echo Phalcon\Tag::textField(array("zindexTerrain", "class" => "formulaireField", "value" => $terrain->zIndex, "size" => 2)); ?>
+            </div>
+
+            <!-- Terrain bloque mouvement -->
+            <div id="divBloqueMvtTerrain" class="divContenuInformationReferentiel">
+                <?php
+                if ($terrain->bloqueMvt) {
+                    echo "<label for='isBloqueMvtTerrain'>Empêche le passage ? </label><input type='checkbox' id='isBloqueMvtTerrain' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isBloqueMvtTerrain'>Empêche le passage ? </label><input type='checkbox' id='isBloqueMvtTerrain' class='tickcrossFormulaireGameplay'/>";
+                }
+                ?>
+            </div>
+
+            <!-- Terrain bloque vue -->
+            <div id="divBloqueVueTerrain" class="divContenuInformationReferentiel">
+                <?php
+                if ($terrain->bloqueVue) {
+                    echo "<label for='isBloqueVueTerrain'>Bloque la vue ? </label><input type='checkbox' id='isBloqueVueTerrain' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isBloqueVueTerrain'>Bloque la vue ? </label><input type='checkbox' id='isBloqueVueTerrain' class='tickcrossFormulaireGameplay'/>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Div Gestion des images -->
+    <div id="divGeneralImageTerrain" class="divGeneralImageTerrain">
+        <div id="divGestionImageTerrain" class='divGestionImageTerrain'>
+            <div id="gestionImageTerrainJour" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de jour </span>
+                <div id="listeImageTerrainJour" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("jour", "edition"); ?>
+                </div>
+            </div>
+            <div id="gestionImageTerrainJourBrouillard" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de jour dans le brouillard (grisé) </span>
+                <div id="listeImageTerrainJourBrouillard" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("jourBrouillard", "edition"); ?>
+                </div>
+            </div>
+            <div id="gestionImageTerrainNuit" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de nuit</span>
+                <div id="listeImageTerrainNuit" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("nuit", "edition"); ?>
+                </div>
+            </div>
+            <div id="gestionImageTerrainNuitBrouillard" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de nuit dans le brouillard (grisé)</span>
+                <div id="listeImageTerrainNuitBrouillard" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("nuitBrouillard", "edition"); ?>
+                </div>
+            </div>
+        </div>
+
+        <div id="chargementImageTerrain" class='chargementImageTerrain'>
+            <div id="formDivSelectTypeJournee">
+                <select id="selectTypeJournee">
+                    <option value="jour">Jour</option>
+                    <option value="jourBrouillard">Jour grisé</option>
+                    <option value="nuit">Nuit</option>
+                    <option value="nuitBrouillard">Nuit grisé</option>
+                </select>
+            </div>
+            <div id="divAjouterImageTerrain">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageTerrain", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageTerrain', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <div id="divTerrainRepartition" class='terrainRepartition'>
+            <label for="repartitionTerrain">Repartition </label>
+            <?php echo Phalcon\Tag::textField(array("repartitionTerrain", "class" => "formulaireField", "value" => $terrain->repartition)); ?>
+            <div class="aideForm">Probabilités (en pourcentage) d'apparition de chaque gif, separées par des
+                point-virgule. 50;49;0;1 fait apparaitre 1.png 50% du temps, 2.png 49% du temps, jamais 3.png et 1% du
+                temps 4.png
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Div InformationTechnique -->
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueTerrain">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesTerrain'>";
+                    echo "<span class='libelleBoutonTechnique'>Effets </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteEffetsTerrains', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteEffetsTerrains', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+
+                    echo "<div class='divBoutonsTechniquesTerrain'>";
+                    echo "<span class='libelleBoutonTechnique'>Artisanat </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteArtisanatTerrain', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteArtisanatTerrain', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>
+	
+	

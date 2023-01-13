@@ -1,0 +1,667 @@
+#graybackCategorie {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1999;
+    opacity: 0.5;
+}
+
+#graybackFamille {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1999;
+    opacity: 0.5;
+}
+
+#graybackArbre {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1999;
+    opacity: 0.5;
+}
+
+#graybackTalent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1999;
+    opacity: 0.5;
+}
+
+/* Popup Catégorie */
+#popupCategorie {
+    position: absolute;
+    display: none;
+    left: 50%;
+    margin-top: 140px;
+    z-index: 2000;
+    padding: 20px;
+    width: 40%;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    border-radius: 40px;
+}
+
+.miniatureImageCategorieSelect {
+    max-width: 200px;
+}
+
+.miniatureImageCategorie {
+    max-width: 170px;
+}
+
+#listeCategories {
+    display: inline-flex;
+    width: 100%;
+    text-aligne: center;
+    margin-left: 50px;
+}
+
+.categorieTalentSelect {
+    display: grid;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.categorieTalent {
+    display: grid;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+}
+
+.nomCategorieTitre {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+}
+
+.divCategoriesTalent {
+    display: inline-flex;
+    width: 100%;
+}
+
+#divBoutonsCategories {
+    display: flex;
+    margin-right: 300px;
+}
+
+#blocFamilleTalent {
+    text-align: left;
+    float: left;
+    margin-left: 70px;
+    margin-top: 50px;
+    width: 20%;
+}
+
+#divBoutonAjouterFamille {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#corpsGestionTalent {
+    margin-top: 50px;
+    float: left;
+    margin-left: 40px;
+    border: 2px double black;
+    min-width: 900px;
+}
+
+.enteteListeArbreTalent {
+    margin-top: 10px;
+    border-bottom-style: double;
+    padding-bottom: 20px;
+}
+
+.titreFamilleListeArbre {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    margin-left: 120px;
+}
+
+.titreArbre {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+}
+
+#boutonAjouterNouvelArbre {
+    margin-bottom: -5px;
+}
+
+.boutonEnteteListeArbreTalent {
+    margin-right: 7px;
+    float: right;
+}
+
+.divDataPopupTalent {
+    float: left;
+    margin-top: 10px;
+}
+
+#blocImageCategorie {
+    float: right;
+    text-align: left;
+    display: inline;
+}
+
+.imagePopupTalent {
+    max-width: 150px;
+}
+
+#divAjouterImagePopupTalent {
+    display: grid;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+#divImageCategoriePopupTalent {
+    margin-right: 20px;
+}
+
+#descriptionCategorieTalent {
+    width: 297px;
+    height: 120px;
+    margin-top: 30px;
+    resize: none;
+}
+
+.formPopupTalent {
+    margin-top: 30px;
+}
+
+.boutonsActionPopupTalent {
+    display: inline-flex;
+    margin-top: 32px;
+}
+
+#nomCategorie {
+    margin-left: 8px;
+}
+
+.titrePopupTalent {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Popup Famille */
+#popupFamille {
+    position: absolute;
+    display: none;
+    left: 50%;
+    margin-top: 140px;
+    z-index: 2000;
+    padding: 20px;
+    width: 40%;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    border-radius: 40px;
+}
+
+#formPopupFamille {
+    display: grid;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+#descriptionFamilleTalent {
+    width: 297px;
+    height: 120px;
+    margin-top: 30px;
+    resize: none;
+}
+
+#nomFamille {
+    margin-left: 38px;
+}
+
+#categorieFamille {
+    margin-left: 10px;
+}
+
+#descriptionFamilleTalent {
+    font-style: italic;
+}
+
+.listeFamillesCategorie {
+    list-style-type: none;
+    display: grid;
+    padding-left: 0;
+    margin-left: 5px;
+}
+
+.liFamilleCategorie {
+    display: flex;
+}
+
+.spanFamille {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+
+.nbPointFamille {
+    margin-left: 8px;
+}
+
+.spanFamilleSelect {
+    font-size: 18px;
+    color: #c02f00;
+}
+
+#afficherAjouterFamille {
+    float: left;
+    margin-left: 15px;
+    margin-top: -10px;
+    margin-bottom: 8px;
+}
+
+/* Popup Arbre */
+#popupArbre {
+    position: absolute;
+    display: none;
+    left: 50%;
+    margin-top: 140px;
+    z-index: 2000;
+    padding: 20px;
+    width: 40%;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    border-radius: 40px;
+}
+
+
+#formPopupArbre {
+    display: grid;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+#descriptionArbreTalent {
+    width: 297px;
+    height: 120px;
+    margin-top: 30px;
+    resize: none;
+}
+
+#nomArbre {
+    margin-left: 38px;
+}
+
+#blocFormulaire {
+    display: flex;
+}
+
+#divImageArbrePopupTalent {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#familleArbre {
+    margin-left: 30px;
+}
+
+#blocArbres {
+    display: flex;
+    position: relative;
+}
+
+.divEnteteArbre {
+    display: inline;
+    margin-left: 20px;
+}
+
+.nombreDePointDepense {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+}
+
+/* Popup Talent */
+#popupTalent {
+    position: absolute;
+    display: none;
+    left: 50%;
+    margin-top: 140px;
+    z-index: 2000;
+    padding: 20px;
+    width: 40%;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    border-radius: 40px;
+}
+
+.imgTalentMiniature {
+    background-repeat: no-repeat;
+    background-size: 46px;
+    position: relative;
+    display: inline-flex;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 56px;
+    height: 54px;
+}
+
+.blocImageFormTalent {
+    display: grid;
+    float: left;
+    width: 30%;
+}
+
+.divImageTalentCouleur {
+    max-width: 56px;
+    margin-top: 15px;
+    margin-left: 25px;
+}
+
+.talenticon {
+    background-image: url('/public/img/site/illustrations/talents/borders.gif');
+    background-repeat: no-repeat;
+    width: 56px;
+    height: 54px;
+}
+
+.talenticonvide {
+    background-image: url('/public/img/site/vide.gif');
+    background-repeat: no-repeat;
+    width: 56px;
+    height: 54px;
+}
+
+.buttonnumber {
+    position: absolute;
+    color: #0F0;
+    font-size: 10px;
+    vertical-align: middle;
+    text-align: center;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    width: 21px;
+    height: 10px;
+    right: 3px;
+    bottom: 7px;
+}
+
+.talentjaune {
+    background-position: -224px 0px;
+}
+
+.talentvert {
+    background-position: -56px 0px;
+}
+
+.talentgris {
+    background-position: 0px 0px;
+}
+
+#divAjouterImageTalent {
+    margin-top: 10px;
+}
+
+#divBlocFormulaireTalent {
+    display: grid;
+    text-align: left;
+    margin-left: 180px;
+}
+
+#descriptionTalent {
+    width: 297px;
+    height: 120px;
+    margin-top: 20px;
+    resize: none;
+}
+
+#nomTalent {
+    margin-left: 15px;
+}
+
+#maxTalent {
+    margin-left: 8px;
+}
+
+#selectArbreTalent {
+    margin-left: 19px;
+}
+
+#rangTalent {
+    margin-left: 22px;
+}
+
+#positionTalent {
+    margin-left: 5px;
+}
+
+#isActifTalent {
+    margin-left: 8px;
+}
+
+.talent {
+    background-repeat: no-repeat;
+}
+
+.ligneArbreTalent {
+    margin-top: 3px;
+}
+
+.blocTotalArbre {
+    position: relative;
+}
+
+.hiddenMenuTalent {
+    position: absolute;
+    z-index: 25;
+    display: grid;
+}
+
+#selectTalentPere {
+    margin-left: 15px;
+    margin-right: 8px;
+}
+
+#boutonAjouterPere {
+    margin-top: 10px;
+    display: inline-flex;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+#divSelectTalentPere {
+    display: flex;
+}
+
+.genealogieTalent {
+    font-style: italic;
+    font-size: 10;
+    margin-left: 5px;
+}
+
+#divGenealogieTalent {
+    margin-top: 10px;
+    border: 3px outset brown;
+    border-radius: 10px;
+}
+
+#divInformationTechniqueTalent {
+    z-index: 1;
+    float: right;
+    text-align: end;
+    display: grid;
+}
+
+#blocInformationsTechniquesTalents {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    display: flex;
+    overflow: auto;
+}
+
+#blocInformationsTechniquesTalentsContraintes {
+    position: absolute;
+    top: 55px;
+    right: 12px;
+    display: flex;
+    overflow: auto;
+}
+
+.nonActifTalentImage {
+    z-index: 5;
+    position: absolute;
+    width: 47px;
+    height: 50px;
+    background-color: red;
+    opacity: 0.5;
+}
+
+.canvasArbre {
+    position: absolute;
+    z-index: 0;
+    left: 0;
+}
+
+.ui-draggable-dragging {
+    z-index: 10;
+}
+
+.divFamilleLI {
+    width: 75%;
+}
+
+.descriptionTalentCategorie {
+    position: absolute;
+    width: 280px;
+    z-index: 8;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    font-style: italic;
+    text-align: left;
+}
+
+.spanDescriptionTalentCategorie {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.descriptionTalentFamille {
+    position: absolute;
+    width: 280px;
+    z-index: 8;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    font-style: italic;
+    text-align: left;
+}
+
+.spanDescriptionTalentFamille {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.descriptionTalentArbre {
+    position: absolute;
+    width: 280px;
+    z-index: 28;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    display: grid;
+    font-style: italic;
+    text-align: left;
+}
+
+.spanDescriptionTalentArbre {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.descriptionTalent {
+    position: absolute;
+    width: 280px;
+    z-index: 28;
+    color: #FFFFFF;
+    border: 3px outset brown;
+    background: #000000;
+    display: grid;
+    text-align: left;
+}
+
+.divDescriptionTalentArbre {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.talentContrainteRouge {
+    color: red;
+}
+
+.talentContrainteVert {
+    color: green;
+}
+
+.descriptionTalentDescription {
+    font-style: italic;
+    color: grey;
+    font-size: smaller;
+}
+
+.descriptionTalentEffet {
+    color: yellow;
+}
+
+.imgTalentGrise {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+}

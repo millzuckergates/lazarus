@@ -1,0 +1,50 @@
+<?php
+echo $this->tag->hiddenField(["idFamilleTalent", "value" => $famille->id]);
+echo $this->tag->hiddenField(["idCategorie", "value" => $categorie->id]);
+?>
+<div class="popupTalent" id="popupFamilleTalent">
+    <div class="entetePopupTalent" id="entetePopupFamilleTalent">
+        <?php echo Phalcon\Tag::textField(array("nomFamille", "class" => "formulaireField titrePopupTalent", "value" => $famille->nom)); ?>
+    </div>
+
+    <div class="formPopupTalent" id="formPopupFamille">
+        <!-- Catégorie associée -->
+        <div class="divDataPopupTalent" id="blocSelectCategorieFamille">
+            <label for="categorieFamille">Catégorie </label>
+            <span id="categorieFamille"><?php echo $famille->categorie->nom; ?></span>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionPopupTalent" id="divDescriptionPopupFamilleTalent">
+            <?php echo Fonctions::rawTextArea("descriptionFamilleTalent", str_replace("\n", "&#13;&#10;", $famille->description), "texteDescriptionPopupTalent"); ?>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionFamilleTalent">
+        <div id="boutonEditerPopupTalentFamille" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierFamilleTalent', 'class' => 'bouton', 'title' => "Permet d'éditer la famille.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentFamille" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentFamille', 'class' => 'bouton', 'title' => "Permet d'annuler la modification de la famille.")); ?>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniquesTalentsContraintes">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueFamille">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsContraintesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Contraintes </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContraintesFamille', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContraintesFamille', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechniqueFamille" style="display:none"></div>
+    </div>
+</div>

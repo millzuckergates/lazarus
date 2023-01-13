@@ -1,0 +1,44 @@
+<?php
+echo $this->tag->hiddenField(["pointReference", "value" => $pointAAtteindreDefaut]);
+echo $this->tag->hiddenField(["niveauRangCompetence", "value" => $niveauDefaut]);
+?>
+<div class="contenuPopupRangCompetence" id="contenuPopupRangCompetence">
+    <div class="entetePopupRangCompetence" id="entetePopupCompetence">
+        <div class="divTitreRangCompetence"><span class="titrePopup">Créer un nouveau Rang</span></div>
+    </div>
+
+    <div class="formPopupRangCompetence" id="formPopupRangCompetence">
+
+        <!-- Nom du rang -->
+        <div class="divDataPopupRangCompetence">
+            <label for="nomRangCompetence">Nom </label>
+            <?php echo Phalcon\Tag::textField(array("nomRangCompetence", "class" => "formulaireField", "value" => "Nom du Rang")); ?>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionPopupRangCompetence" id="divDescriptionPopupRangCompetence">
+            <?php echo Phalcon\Tag::textArea(["descriptionRangCompetence", "value" => "Entrez une description.", "class" => "texteDescriptionPopupRangCompetence"]); ?>
+        </div>
+
+        <!-- Nombre de point à atteindre -->
+        <div class="divDataPopupRangCompetence">
+            <label for="pointRangCompetence">Nombre de points attribuables </label>
+            <?php echo Phalcon\Tag::textField(array("pointRangCompetence", "class" => "formulaireField", "value" => $pointAAtteindreDefaut, "size" => 5)); ?>
+            <div class='divAide' id='divAidePointRangCompetence'
+                 onMouseOver='afficherAide("Correspond au nombre de PA à dépenser pour atteindre ce rang par défaut. Cette donnée pourra être customisée pour chacune des compétences. Par défaut, à la création, la valeur proposée est la plus petite que vous pouvez renseigner.","divAidePointRangCompetence");'
+                 onMouseOut='cacherAide();'></div>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupRangCompetence" id="boutonsActionRangCompetence">
+        <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_COMPETENCE_MODIFIER, $auth['autorisations'])) { ?>
+            <div id="boutonCreerPopupRangCompetencee" class="boutonActionPopupRangCompetence">
+                <?php echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerRangCompetence', 'class' => 'bouton', 'title' => "Permet de créer le rang.")); ?>
+            </div>
+        <?php } ?>
+
+        <div id="boutonFermerPopupRangCompetence" class="boutonFermerPopupRangCompetence">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupRangCompetence', 'class' => 'bouton', 'title' => "Permet de fermer la fenêtre.")); ?>
+        </div>
+    </div>
+</div>

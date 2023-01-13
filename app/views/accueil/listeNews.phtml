@@ -1,0 +1,51 @@
+<!-- Entete -->
+<div id="enteteListeNews" class='divTitreEntete'>
+    <span class='titreEntete'>Actualités</span>
+</div>
+<input type='hidden' id='idNewsDelete' name='idNewsDelete' value=''/>
+<?php
+$listeNews = News::getListeNewsFiltrees($auth);
+if ($listeNews != false && count($listeNews) > 0) {
+
+    foreach ($listeNews as $date => $news) {
+        $retour = "<div class='news'>";
+        //-Entête
+        $retour .= "<div class='enteteNews'>";
+        //--Gestion des images miniatures
+        $miniature = "";
+        if ($news->typeDestinataire == News::TYPE_ROYAUME) {
+            $royaume = Royaumes::findFirst(['id = :id:', 'bind' => ['id' => $news->idDestinataire]]);
+            $miniature = Phalcon\Tag::image([$royaume->etendard, "class" => 'imagineMinimaliste']);
+        } else {
+            if ($news->typeDestinataire == News::TYPE_RELIGION) {
+                $religion = Religions::findFirst(['id = :id:', 'bind' => ['id' => $news->idDestinataire]]);
+                $miniature = Phalcon\Tag::image([$religion->img, "class" => 'imagineMinimaliste']);
+            }
+        }
+        $retour .= $miniature . "<span class='titreNews'>" . $news->titre . "</span>" . $miniature;
+        if ($auth['modeMJ'] == true && Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_GESTION_NEWS, $auth['autorisations'])) {
+            $retour .= "<div class='boutonMiniNews'><input type='button' class='buttonActualiser' onclick='editerNote(" . $news->id . ");' title='Permet d'accéder à l'écran de modification de cette actualité'/>";
+            $retour .= "<input type='button' class='buttonMoins' onclick='boxSupprimerNews(" . $news->id . ");' title='Permet de supprimer cette news.'/></div>";
+        }
+        $retour .= "</div>";
+
+        //Texte de la news
+        $retour .= "<div class='texteNews'>";
+        $retour .= Fonctions::formatTexte($news->texte, $auth);
+        $retour .= "</div>";
+
+        //Signature de la news
+        $retour .= "<div class='signatureNews'>";
+        $retour .= "<span class='auteurNews'>" . $news->nomAuteur . ", </span>";
+        $date = new Dates($news->date);
+        if ($news->type != "RP") {
+            $retour .= "<span class='dateNews'>" . $date->afficheDate("complet", "hrp") . "</span>";
+        } else {
+            $retour .= "<span class='dateNews'>" . $date->afficheDate("complet", "rp") . "</span>";
+        }
+        $retour .= "</div>";
+        $retour .= "</div>";
+        echo $retour;
+    }
+}
+?>

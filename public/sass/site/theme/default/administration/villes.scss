@@ -1,0 +1,147 @@
+.divVillesParRoyaume {
+    border: 1px solid black;
+    min-width: 30%;
+    margin-left: 20px;
+    max-width: 35%;
+    display: inline-table;
+    margin-bottom: 15px;
+    min-height: 200px;
+    margin-top: 15px;
+    background-color: #f6eede;
+}
+
+.enteteDivVilleParRoyaume {
+    border-bottom-style: double;
+    background-image: url('/public/img/site/themes/default/fondtexte/fond.png');
+}
+
+.titreVilleParRoyaume {
+    font-family: Morpheus;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.etendardMinimaliste {
+    max-width: 30px;
+}
+
+.listeVide {
+    text-align: center;
+}
+
+#listeVilleReferentielAdministration {
+    width: 100%;
+    display: inline-table;
+}
+
+.imageVille {
+    max-width: 250px;
+    cursor: zoom-in;
+}
+
+.texteDescriptionVilleReferentiel {
+    width: 100%;
+    text-align: left;
+    float: left;
+    min-height: 250px;
+    resize: none;
+}
+
+#divRoyaumeOriginVille {
+    margin-top: 10px;
+}
+
+#divRoyaumeActuelVille {
+    margin-top: 10px;
+}
+
+#royaumeOrigine {
+    margin-left: 15px;
+}
+
+#royaumeActuel {
+    margin-left: 15px;
+}
+
+#divRoyaumeActuelVilleConsultation {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.texteDescriptionMessageReferentiel {
+    width: 84%;
+    text-align: left;
+    float: right;
+    min-height: 150px;
+    resize: none;
+}
+
+#divPositionCarteVille {
+    display: grid;
+}
+
+.positionVille {
+    text-align: right;
+}
+
+#autocompleteVilleWiki {
+    float: right;
+    display: flex;
+}
+
+#divImageVilleGrande {
+    z-index: 20;
+    position: absolute;
+    cursor: zoom-out;
+}
+
+.imageVilleConsultation {
+    max-width: 250px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+#divDescriptionVille {
+    text-align: left;
+    margin-top: 25px;
+}
+
+#royaumeOrigineVille {
+    margin-left: 15px;
+}
+
+#royaumeActuelVille {
+    margin-left: 30px;
+}
+
+#messageAccueilVille {
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100%;
+    background-color: #f6eede;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-left: 15px;
+}
+
+#divIsNaissanceVille {
+    margin-top: 10px;
+}
+
+.nomVille {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 25px;
+    margin-right: 30px;
+}
+
+.ville {
+    height: 35px;
+    margin-top: 8px;
+    display: flex;
+}

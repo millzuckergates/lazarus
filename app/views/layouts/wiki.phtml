@@ -1,0 +1,111 @@
+<div id="pageWiki">
+    <!-- Droite de la page -->
+    <div class="blocDroitPageWiki">
+        <!-- Bloc Notification -->
+        <div id="blocNotificationWiki">
+            <span class="titreBlocSecondaire">Articles</span><br/><br/>
+            <?php echo $this->partial('wiki/notifications'); ?>
+        </div>
+
+        <!-- Bloc Notes -->
+        <?php
+        if (isset($article) && $article != null) {
+            echo '<div id="blocNoteWiki">';
+            echo "<span class='titreBlocSecondaire'>Notes </span><span class='resultatRecapitulatif'>(" . count($article->notes) . " note(s))</span>";
+            echo "<div class='buttonRight'>";
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContenuNotes', 'class' => 'buttonShow'));
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContenuNotes', 'class' => 'buttonHide'));
+            echo "</div>";
+            echo "<br/><br/>";
+            echo "<div id='listeContenuNotes' style='display:none'>";
+            echo $this->partial('wiki/notes');
+            echo "</div>";
+            echo "</div>";
+        }
+        ?>
+
+
+        <!-- Bloc Historique -->
+        <div id="blocHistorique">
+            <?php
+            if (isset($article) && $article != null) {
+                echo $this->tag->linkTo(['#', "Lien vers l'historique", 'id' => 'historiqueArticle', 'class' => 'lienHistorique']);
+                echo "<div id='popupHistoriqueArticle' style='display:none'>";
+                echo $this->partial('wiki/historique');
+                echo "</div>";
+            }
+            ?>
+        </div>
+
+        <!-- Bloc Administration du wiki -->
+        <?php if (isset($auth) && Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_WIKI, $auth['autorisations'])) { ?>
+            <div id="blocAdminWiki">
+                <span class='titreBlocSecondaire'>Outils d'Administration</span><br/><br/>
+                <div id="supprimerEnProgression">
+                    <?php echo Phalcon\Tag::SubmitButton(array("Purger", 'id' => 'boutonSupprimerEnProgression', 'class' => 'bouton', 'title' => "Purge les articles en progression depuis 3 jours")); ?>
+                </div>
+            </div>
+        <?php } ?>
+
+    </div>
+
+    <!-- Container -->
+    <div class="container" style="width:80%;float:left;">
+        <!-- Bloc Recherche -->
+
+        <div id="blocRechercheWiki">
+            <div id="titreBlocRechercheWiki" class="titreBlocRecherche">
+                <span class="labelTitreBlocRecherche">Outil de recherche</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showSearch', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideSearch', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+
+            <div id="contenuBlocRechercheWiki" class="contenuBlocRecherche" style="display:none;">
+                <table id="tableRechercheWiki">
+                    <tr>
+                        <td>
+                            <label for="searchTitle">Titre </label>
+                            <?php echo Phalcon\Tag::textField(array("searchTitle", "class" => "fieldSearch")); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="searchContent">Contenu </label>
+                            <?php echo Phalcon\Tag::textField(array("searchContent", "class" => "fieldSearch")); ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="searchKeyWord">Mots Clef </label>
+                            <?php echo Phalcon\Tag::textField(array("searchKeyWord", "class" => "fieldSearch")); ?>
+                        </td>
+                    </tr>
+                    <?php if (Autorisations::hasAutorisation(Autorisations::GESTION_WIKI, $auth['autorisations'])) { ?>
+                        <tr>
+                            <td>
+                                <label for="statusArticle">Statut </label>
+                                <?php $listeStatusArticle = Articles::getListeStatusArticles(); ?>
+                                <select id="statusArticle" name="statusArticle" class="statusArticle">
+                                    <option value="">Choisissez un statut :</option>
+                                    <?php
+                                    for ($i = 0; $i < count($listeStatusArticle); $i++) {
+                                        echo "<option value='" . $listeStatusArticle[$i] . "'>" . $listeStatusArticle[$i] . "</option>";
+                                    } ?>
+                                </select>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <br/>
+                <div id="boutonsBlocRechercheWiki" class="boutonBlocRecherche">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'boutonAideWiki', 'class' => 'boutonAide')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("Rechercher", 'id' => 'lancerRechercheWiki', 'class' => 'bouton', 'title' => "Lancer la recherche")); ?>
+                </div>
+            </div>
+        </div>
+        <?php echo $this->getContent(); ?>
+    </div>
+</div>
+

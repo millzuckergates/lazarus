@@ -1,0 +1,27 @@
+<div id="panneauBonus">
+    <?php
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $element->id]);
+    ?>
+    <div id="enteteListeBonus">
+        <div id="divTitreListeBonus"><span class="titrePopup">Gestion des bonus</span></div>
+    </div>
+
+    <div id="descriptionGenerale">
+        <span class='texteDescription'>Vous pouvez gérer ici les différents bonus qui seront accordés à l'inscription d'un personnage. Il en existe plusieurs types :</span>
+        <?php echo Bonus::getDescriptionGenerale(); ?>
+    </div>
+
+    <div id="bonus">
+        <div id="listeBonus">
+            <?php echo $element->genererListeBonus($auth); ?>
+        </div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo '<div id="boutonAjouterBonus">';
+            echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterBonus', 'class' => 'bouton', 'title' => "Permet d'ouvrir le formulaire d'ajout d'un bonus."));
+            echo '</div>';
+        }
+        ?>
+    </div>
+</div>

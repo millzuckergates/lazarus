@@ -1,0 +1,52 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterEcoleMagie', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une école de magie.")); ?>
+    </div>
+<?php } ?>
+<?php
+echo "<div id='listeEcolesMagie'>";
+$listeEcoles = Ecolesmagie::find(['order' => 'idNatureMagie ASC']);
+$idNatureMagie = -1;
+$fin = false;
+if (count($listeEcoles) > 0) {
+    $nomNatureMagie = "";
+    foreach ($listeEcoles as $ecole) {
+        if ($ecole->idNatureMagie != $idNatureMagie) {
+            if ($fin) {
+                echo "</table></div></br>";
+            }
+            $idNatureMagie = $ecole->idNatureMagie;
+            if ($idNatureMagie == "0" || $idNatureMagie == null) {
+                $nomNatureMagie = "Sans type de magie associé";
+            } else {
+                $natureMagie = Naturesmagie::findFirst(['id = :id:', 'bind' => ['id' => $idNatureMagie]]);
+                $nomNatureMagie = $natureMagie->nom;
+            }
+            echo "<div class='listeEcoleParTypeMagie'>";
+            echo "<span class='nomEcoleParTypeMagie'>" . $nomNatureMagie . "</span>";
+            echo "<table class='tableEcoleParTypeMagie referentielMagie'>";
+            echo "<tr>";
+            echo "<th style='width:20%'></th>";
+            echo "<th style='width:20%'>Nom</th>";
+            echo "<th style='width:15%'>Jouable</th>";
+            echo "<th style='width:45%'>Description</th>";
+            echo "</tr>";
+            $fin = true;
+        }
+        echo "<tr class='ligneEcole' onclick='afficherDetailEcole(" . $ecole->id . ");' style='background-color:" . $ecole->couleur . "'>";
+        echo "<td>" . Phalcon\Tag::image([$ecole->image, "class" => 'imgEcoleReferentiel']) . "</td>";
+        echo "<td><span class='nomListeReferentiel'>" . $ecole->nom . "</span></td>";
+        if ($ecole->isDispoInscription) {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross']) . "</td>";
+        } else {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross']) . "</td>";
+        }
+        echo "<td><span class='descriptionReferentielGameplay'>" . str_replace("\n", "<br/>", $ecole->resumeDescription()) . "</span></td>";
+        echo "</tr>";
+    }
+    echo "</table></div>";
+} else {
+    echo "<span class='resultatVide'>Il n'y a aucune école à afficher.</span>";
+}
+echo "</div>";
+?>

@@ -1,0 +1,29 @@
+<?php
+echo $this->tag->hiddenField(["idCategorieTalent", "value" => $categorie->id]);
+?>
+<div class="popupTalent" id="popupCategorieTalent">
+    <div class="entetePopupTalent" id="entetePopupCategorieTalent">
+        <div class="divTitreTalent"><span class="titrePopup"><?php echo $categorie->nom; ?></span></div>
+    </div>
+
+    <div class="formPopupTalent" id="formPopupCategorie">
+        <!-- Image de la catégorie -->
+        <div class="divDataPopupTalent" id="blocImageCategorie">
+            <div id="divImageCategoriePopupTalent">
+                <?php echo Phalcon\Tag::image([$categorie->image, "class" => 'imagePopupTalent', 'id' => 'imageCategorie']); ?>
+            </div>
+            <!-- Description -->
+            <span id="descriptionCategorieTalent"><?php echo str_replace("\n", "<br/>", $categorie->description); ?></span>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionCategorieTalent">
+        <div id="boutonEditerPopupTalentCategorie" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerCategorieTalent', 'class' => 'bouton', 'title' => "Permet d'accéder à l'écran de modification de la catégorie.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentCategorie" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentCategorie', 'class' => 'bouton', 'title' => "Permet de fermer la popup.")); ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+/* Balises */
+#baliseWiki {
+  background-color: #DFB670;
+  border: 1px solid;
+  padding: 5px 10px 5px;
+  border-radius: 20px;
+  margin-left: 25px;
+  display: inline-block;
+  width: 80%;
+}
+
+#blocContenuBaliseWiki {
+  margin-left: 20px;
+}
+
+#baliseGenerale {
+  clear: both;
+  float: left;
+}
+
+#divBaliseTaille {
+  float: left;
+}
+
+#divBaliseCouleur {
+  float: left;
+}
+
+#divBaliseRoyaume {
+  clear: both;
+  float: left;
+  margin-top: 5px;
+}
+
+#outils_royaume {
+  color: black;
+  height: 22px;
+  font-size: 12px;
+  max-width: 190px;
+  margin-right: 10px;
+}
+
+#divBaliseRace {
+  float: left;
+  margin-top: 5px;
+}
+
+#outils_race {
+  color: black;
+  height: 22px;
+  font-size: 12px;
+  max-width: 75px;
+  margin-right: 10px;
+}
+
+#divBaliseReligion {
+  float: left;
+  margin-top: 5px;
+}
+
+#outils_religion {
+  color: black;
+  height: 22px;
+  font-size: 12px;
+  max-width: 140px;
+  margin-right: 10px;
+}
+
+.balise {
+  font-size: 12px;
+  color: #F1F1F1;
+  font-weight: bold;
+  background-color: #3d6191;
+  border-radius: 5px;
+  margin: 1px;
+  margin-top: 5px;
+  margin-left: 8px;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,24 @@
+<?php
+echo $this->tag->hiddenField(["type", "value" => $type]);
+echo $this->tag->hiddenField(["idType", "value" => $idType]);
+echo $this->tag->hiddenField(["idEffet", "value" => $effet->id]);
+echo $this->tag->hiddenField(["position", "value" => $position]);
+?>
+
+<div id="contenuEffet">
+    <div id="enteteEffet">
+        <div id="divTitreEffet"><span class="titrePopup"><?php echo $effet->nom; ?></span></div>
+    </div>
+
+    <div id="detailEffet" class="detailElement">
+        <?php echo $effet->genererDetailEffet("consultation", $type, $idType, $position); ?>
+    </div>
+
+    <div id="boutonEditerPopupEffet" class="boutonActionPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerEffet', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de modification de l'effet.")); ?>
+    </div>
+
+    <div id="boutonFermerPopupEffet" class="boutonFermerPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'annulerAjoutEffet', 'class' => 'bouton', 'title' => "Annule la modification de l'effet.")); ?>
+    </div>
+</div>

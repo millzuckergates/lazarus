@@ -1,0 +1,52 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterDieu', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une divinité.")); ?>
+    </div>
+<?php } ?>
+<?php
+echo "<div id='listeDiviniteReferentielAdministration'>";
+$listeDieux = Dieux::find(['order' => 'idReligion ASC']);
+$idReligion = -1;
+$fin = false;
+if (count($listeDieux) > 0) {
+    $nomReligion = "";
+    foreach ($listeDieux as $dieu) {
+        if ($dieu->idReligion != $idReligion) {
+            if ($fin) {
+                echo "</table></div></br>";
+            }
+            $idReligion = $dieu->idReligion;
+            if ($idReligion == "0") {
+                $nomReligion = "Sans religion associée";
+            } else {
+                $religion = Religions::findFirst(['id = :id:', 'bind' => ['id' => $idReligion]]);
+                $nomReligion = $religion->nom;
+            }
+            echo "<div class='listeDiviniteParReligion'>";
+            echo "<span class='religionListeDiviniteParReligion'>" . $nomReligion . "</span>";
+            echo "<table class='tableDiviniteParReligion referentielAdministration'>";
+            echo "<tr>";
+            echo "<th style='width:20%'></th>";
+            echo "<th style='width:20%'>Nom</th>";
+            echo "<th style='width:15%'>Jouable</th>";
+            echo "<th style='width:45%'>Description</th>";
+            echo "</tr>";
+            $fin = true;
+        }
+        echo "<tr class='ligneDieu' onclick='afficherDetailDieu(" . $dieu->id . ");' style='background-color:" . $dieu->couleur . "'>";
+        echo "<td>" . Phalcon\Tag::image([$dieu->img, "class" => 'imgDieuReferentiel']) . "</td>";
+        echo "<td><span class='nomListeReferentiel'>" . $dieu->nom . "</span></td>";
+        if ($dieu->isDispoInscription) {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross']) . "</td>";
+        } else {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross']) . "</td>";
+        }
+        echo "<td><span class='descriptionReferentielAdministration'>" . str_replace("\n", "<br/>", $dieu->resumeDescription()) . "</span></td>";
+        echo "</tr>";
+    }
+    echo "</table></div>";
+} else {
+    echo "<span class='resultatVide'>Il n'y a aucune divinité à afficher.</span>";
+}
+echo "</div>";
+?>

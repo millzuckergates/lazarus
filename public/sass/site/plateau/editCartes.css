@@ -1,0 +1,650 @@
+#grille {
+  margin-top: 200px;
+}
+
+.rightClickMenu {
+  position: absolute;
+  z-index: 99;
+  width: 220px;
+  height: 120px;
+  background-color: #e6e6e6;
+}
+
+.rightClickMenu #nomCase {
+  background-color: white;
+  margin: 0;
+}
+
+.rightClickMenu #flecheRightClickMenu {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-top: 20px solid #e6e6e6;
+  border-right: 110px solid transparent;
+  border-left: 110px solid transparent;
+  position: absolute;
+  top: 120px;
+  left: 0;
+}
+
+.rightClickMenu .textureRightClick {
+  overflow-y: scroll;
+  height: 100px;
+}
+
+.selectNumTexture {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.selectNumTexture .numTextureSelect {
+  width: 50px;
+  font-weight: bold;
+}
+
+#terrains {
+  width: 246px;
+  display: inline-block;
+  position: fixed;
+  right: 0;
+  top: 110px;
+  z-index: 100;
+  background-color: #535353;
+  /*     border-bottom: 2px solid #383838; */
+}
+
+#terrains .listeTerrains {
+  text-align: left;
+  height: 243px;
+  overflow-y: scroll;
+  background-color: #424242;
+  border-top: 20px solid #535353;
+}
+
+#terrains .listeTerrains #arrow {
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+#terrains .listeTerrains::-webkit-scrollbar {
+  height: 15px;
+}
+
+#terrains .listeTerrains::-webkit-scrollbar-track {
+  background: #484848;
+}
+
+#terrains .listeTerrains::-webkit-scrollbar-thumb {
+  background: #6f6f6f;
+  border: 3px solid #484848;
+  border-radius: 10px;
+}
+
+#terrains .elementTerrainSelectionne {
+  display: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: brown;
+  text-shadow: 1px 1px #000;
+  font-weight: bold;
+  margin: 50px 0 0;
+}
+
+#terrains .elementTextureSelectionne {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#terrains .textureAucune {
+  color: white;
+}
+
+#terrains .terrainNom {
+  font-size: 11px;
+  color: white;
+  border-top: 1px solid #535353;
+  padding: 8px 0 0;
+}
+
+#terrains .terrainNom:hover {
+  cursor: default;
+}
+
+#terrains .clicTerrain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#terrains #terrainSelectionne {
+  position: relative;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  margin-top: 10px;
+  color: #333333;
+  font-weight: normal;
+  border: none;
+  text-shadow: none;
+}
+
+#terrains .selectedTerrainImages {
+  background-color: #535353;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: scroll;
+}
+
+#terrains .selectedTerrainImages::-webkit-scrollbar {
+  height: 15px;
+}
+
+#terrains .selectedTerrainImages::-webkit-scrollbar-track {
+  background: #484848;
+}
+
+#terrains .selectedTerrainImages::-webkit-scrollbar-thumb {
+  background: #6f6f6f;
+  border: 3px solid #484848;
+  border-radius: 10px;
+}
+
+#terrains .selectedTerrainImages div {
+  margin: 0 15px;
+}
+
+#textures {
+  width: 246px;
+  position: fixed;
+  right: 0;
+  top: 420px;
+  z-index: 100;
+  background-color: #535353;
+}
+
+#textures .listeTexturesPalette {
+  background-color: #424242;
+  overflow-y: scroll;
+  height: 300px;
+  width: 246px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 20px;
+}
+
+#textures .listeTexturesPalette::-webkit-scrollbar {
+  height: 15px;
+}
+
+#textures .listeTexturesPalette::-webkit-scrollbar-track {
+  background: #484848;
+}
+
+#textures .listeTexturesPalette::-webkit-scrollbar-thumb {
+  background: #6f6f6f;
+  border: 3px solid #484848;
+  border-radius: 10px;
+}
+
+#textures .blocBtn {
+  background-color: #535353;
+}
+
+#textures .blocDeleteBtn {
+  padding: 30px 0 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#textures .deleteBtn, #textures .selectedBtn {
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 20px 10px 0;
+  display: inline;
+}
+
+#textures .textureImage {
+  width: 80px;
+  background-color: #5f5f5f;
+}
+
+#textures .textureImage img {
+  width: 80px;
+}
+
+#textures #textureSelectionnee {
+  display: inline;
+  width: 80px;
+  height: 40px;
+}
+
+#textures #textureSelectionnee div {
+  display: inline-block;
+}
+
+#textures .titrePalette {
+  text-align: center;
+  padding: 30px 0 0;
+  color: white;
+  font-size: 11px;
+}
+
+#blocEditionDeCartes {
+  background-color: #464646;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 250px;
+  height: 100%;
+  border-left: 4px solid #323232;
+}
+
+#blocEditionDeCartes .contenuEditionTerrains {
+  background-color: #535353;
+  height: 300px;
+  margin-top: 55px;
+  border-top: 15px solid #424242;
+  border-bottom: 2px solid #383838;
+}
+
+#blocEditionDeCartes .contenuEditionTerrains p {
+  color: white;
+  font-size: 11px;
+  margin-top: 100px;
+  padding: 0 10px;
+}
+
+#blocEditionDeCartes .contenuEditionTerrains .menuTerrains {
+  background-color: #424242;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-top: 2px solid #383838;
+}
+
+#blocEditionDeCartes .contenuEditionTerrains .menuTerrains button {
+  padding: 10px 10px;
+  font-size: 11px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+#blocEditionDeCartes .contenuEditionTerrains .menuTerrains #terrainsBtn {
+  background-color: #535353;
+}
+
+#blocEditionDeCartes .contenuEditionTextures {
+  background-color: #535353;
+  height: 300px;
+  border-top: 1px solid #424242;
+  border-bottom: 2px solid #383838;
+  position: absolute;
+  width: 250px;
+}
+
+#blocEditionDeCartes .contenuEditionTextures p {
+  color: white;
+  font-size: 11px;
+  margin-top: 100px;
+  padding: 0 10px;
+}
+
+#blocEditionDeCartes .contenuEditionTextures .menuTextures {
+  background-color: #424242;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-top: 2px solid #383838;
+}
+
+#blocEditionDeCartes .contenuEditionTextures .menuTextures button {
+  padding: 10px 10px;
+  font-size: 11px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+#blocEditionDeCartes .contenuEditionTextures .menuTextures #terrainsBtn {
+  background-color: #535353;
+}
+
+.sousBarre {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 25px;
+  background-color: #535353;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.sousBarre div {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+}
+
+.sousBarre div img {
+  width: 100%;
+  opacity: 0.5;
+}
+
+.barreDeTaches {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #535353;
+  height: 30px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  border-bottom: 2px solid #383838;
+  color: white;
+}
+
+.barreDeTaches .nomDeLaCarte {
+  width: 50%;
+  margin: 0 0 0 50%;
+  position: absolute;
+  bottom: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.barreDeTaches .nomDeLaCarte h3 {
+  font-size: 13px;
+  font-family: Times;
+  font-weight: normal;
+  color: white;
+  margin: 0 20px;
+}
+
+.barreDeTaches .nomDeLaCarte span {
+  color: white;
+  font-weight: bolder;
+}
+
+.barreDeTaches img {
+  width: 20px;
+  margin: 0 10px;
+}
+
+.barreDeTaches #saveCarte {
+  background: none;
+  font-weight: normal;
+  border: none;
+  color: white;
+}
+
+.barreDeTaches .menuBarreDeTaches {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 200px;
+  list-style: none;
+  margin-left: 20px;
+}
+
+.barreDeTaches .menuBarreDeTaches li a {
+  font-size: 13px;
+  color: white;
+  padding: 3px 5px;
+}
+
+.barreDeTaches .menuBarreDeTaches li a:hover {
+  background-color: #383838;
+  -webkit-transform: none;
+          transform: none;
+  text-decoration: none;
+}
+
+.barreDeTaches .menuBarreDeTaches li #gameplayBtn:hover {
+  background: none;
+}
+
+.barreDeTaches .menuBarreDeTaches .submenuFichier, .barreDeTaches .menuBarreDeTaches .submenuAide {
+  display: none;
+  background-color: grey;
+  position: absolute;
+  top: 100%;
+  padding: 0;
+  border: 2px solid #383838;
+  list-style: none;
+  width: 250px;
+}
+
+.barreDeTaches .menuBarreDeTaches .submenuFichier li, .barreDeTaches .menuBarreDeTaches .submenuAide li {
+  width: 100%;
+  text-align: left;
+  padding: 5px 5px;
+}
+
+.barreDeTaches .menuBarreDeTaches .submenuFichier li:hover, .barreDeTaches .menuBarreDeTaches .submenuAide li:hover {
+  background-color: darkgrey;
+}
+
+.barreDeTaches .menuBarreDeTaches .submenuFichier button, .barreDeTaches .menuBarreDeTaches .submenuAide button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+#aPropos {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#aPropos .blocAPropos {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #f6f6f6;
+  width: 100%;
+  position: relative;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  z-index: 2;
+  -webkit-box-shadow: 5px 5px 5px;
+          box-shadow: 5px 5px 5px;
+  padding: 30px;
+}
+
+#aPropos .blocAPropos div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#aPropos .blocAPropos img {
+  width: 50px;
+  margin: 0 10px 0 0;
+}
+
+#aPropos .blocAPropos h2 {
+  color: block;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+#aPropos .blocAPropos h3 {
+  color: block;
+  font-size: 15px;
+  text-align: center;
+}
+
+#aPropos .blocAPropos span {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 19px;
+}
+
+.barreOutils {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #535353;
+  height: 30px;
+  width: 100%;
+  position: fixed;
+  top: 30px;
+  left: 0;
+  z-index: 2;
+  border-bottom: 2px solid #383838;
+}
+
+.barreOutils .menuBarreOutils {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  padding: 0 0 0 10px;
+  list-style: none;
+}
+
+.barreOutils .menuBarreOutils .homeBtn {
+  padding: 0 12px;
+  border-left: 2px groove rgba(56, 56, 56, 0.2);
+  border-right: 2px groove rgba(56, 56, 56, 0.2);
+}
+
+.barreOutils .menuBarreOutils .homeBtn img {
+  width: 18px;
+}
+
+.barreOutils .menuBarreOutils .homeBtn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.barreOutils .menuBarreOutils .saveBtn {
+  padding: 0 12px 0 0;
+  margin-right: 12px;
+  border-right: 2px groove rgba(56, 56, 56, 0.2);
+}
+
+.barreOutils .menuBarreOutils .saveBtn img {
+  width: 15px;
+}
+
+.barreOutils .menuBarreOutils .saveBtn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.barreOutils .menuBarreOutils .openBtn {
+  padding: 0 12px 0 12px;
+}
+
+.barreOutils .menuBarreOutils .openBtn img {
+  width: 18px;
+}
+
+.barreOutils .menuBarreOutils .openBtn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.barreOutils .menuBarreOutils .coucheUneBtn, .barreOutils .menuBarreOutils .coucheDeuxBtn, .barreOutils .menuBarreOutils .coucheTroisBtn, .barreOutils .menuBarreOutils .coucheQuatreBtn, .barreOutils .menuBarreOutils .coucheCinqBtn {
+  padding: 0 12px 0 0;
+}
+
+.barreOutils .menuBarreOutils .coucheUneBtn img, .barreOutils .menuBarreOutils .coucheDeuxBtn img, .barreOutils .menuBarreOutils .coucheTroisBtn img, .barreOutils .menuBarreOutils .coucheQuatreBtn img, .barreOutils .menuBarreOutils .coucheCinqBtn img {
+  width: 18px;
+}
+
+.barreOutils .menuBarreOutils .coucheUneBtn:hover, .barreOutils .menuBarreOutils .coucheDeuxBtn:hover, .barreOutils .menuBarreOutils .coucheTroisBtn:hover, .barreOutils .menuBarreOutils .coucheQuatreBtn:hover, .barreOutils .menuBarreOutils .coucheCinqBtn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.barreOutils .menuBarreOutils .zoomAvant {
+  padding: 0 12px 0 12px;
+  border-left: 2px groove rgba(56, 56, 56, 0.2);
+}
+
+.barreOutils .menuBarreOutils .zoomAvant img {
+  width: 15px;
+}
+
+.barreOutils .menuBarreOutils .zoomAvant:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.barreOutils .menuBarreOutils .zoomArriere {
+  padding: 0 12px 0 0;
+}
+
+.barreOutils .menuBarreOutils .zoomArriere img {
+  width: 15px;
+}
+
+.barreOutils .menuBarreOutils .zoomArriere:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+/*# sourceMappingURL=editCartes.css.map */

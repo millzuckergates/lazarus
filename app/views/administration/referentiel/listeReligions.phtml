@@ -1,0 +1,35 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterReligion', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une religion.")); ?>
+    </div>
+<?php } ?>
+<?php
+$listeReligions = Religions::find();
+if (count($listeReligions) > 0) {
+    echo "<table id='referentielReligion' class='referentielAdministration'>";
+    echo "<tr>";
+    echo "<th style='width:20%'></th>";
+    echo "<th style='width:20%'>Nom</th>";
+    echo "<th style='width:15%'>Jouable</th>";
+    echo "<th style='width:45%'>Description</th>";
+    echo "</tr>";
+    $i = 0;
+    foreach ($listeReligions as $religion) {
+        $val = $i % 2;
+        echo "<tr class='ligneReligion" . $val . "' onclick='afficherDetailReligion(" . $religion->id . ");'>";
+        echo "<td>" . Phalcon\Tag::image([$religion->img, "class" => 'imgReligionReferentiel']) . "</td>";
+        echo "<td><span class='nomListeReferentiel'>" . $religion->nom . "</span></td>";
+        if ($religion->isDispoInscription) {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross']) . "</td>";
+        } else {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross']) . "</td>";
+        }
+        echo "<td><span class='descriptionReferentielAdministration'>" . str_replace("\n", "<br/>", $religion->resumeDescription()) . "</span></td>";
+        echo "</tr>";
+        $i++;
+    }
+    echo "</table>";
+} else {
+    echo "<span class='resultatVide'>Il n'y a aucune religion à afficher.</span>";
+}
+?>

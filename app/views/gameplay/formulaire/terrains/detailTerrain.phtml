@@ -1,0 +1,187 @@
+<?php
+echo $this->tag->hiddenField(["idTerrain", "value" => $terrain->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerTerrain', 'class' => 'bouton', 'title' => "Permet d'afficher le formulaire du terrain en modification."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'retourListeTerrain', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des terrains."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour le terrain -->
+<div id="divGlobalTerrain" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <span id="titreFormTerrain" class="titreReferentiel"><?php echo $terrain->nom; ?></span>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuTerrain" class="divContenuReferentiel">
+        <!-- Description -->
+        <div class="divDescriptionTerrainCreation">
+            <span id="descriptionTerrain"><?php echo str_replace("\n", "<br/>", $terrain->description); ?></span>
+        </div>
+
+        <div id="divInformationTerrainCreation" class="divInformationTerrain">
+            <!-- Genre -->
+            <div id="divGenreTerrain" class="divContenuInformationReferentiel">
+                <label for="genreTerrain">Genre </label>
+                <span id="genreTerrain"><?php echo $terrain->genre; ?></span>
+            </div>
+
+            <!-- Saison -->
+            <div id="divSaisonTerrain" class="divContenuInformationReferentiel">
+                <label for="saisonTerrain">Saison </label>
+                <span id="saisonTerrain"><?php echo $terrain->saison; ?></span>
+            </div>
+
+            <!-- Type d'accès -->
+            <div id="divTypeAccesTerrain" class="divContenuInformationReferentiel">
+                <label for="typeAccesTerrain">Type d'accès </label>
+                <span id="typeAccesTerrain"><?php echo $terrain->typeAcces; ?></span>
+            </div>
+
+            <!-- Compétence -->
+            <div id="divCompetenceTerrain" class="divContenuInformationReferentiel">
+                <label for="competenceTerrain">Compétence </label>
+                <?php if (!isset($terrain->competence) || $terrain->idCompetence == null) { ?>
+                    <span id="competenceTerrain">Aucune</span>
+                <?php } else { ?>
+                    <span id="competenceTerrain"><?php echo $terrain->competence->nom; ?></span>
+                <?php } ?>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurTerrain" class="divContenuInformationReferentiel">
+                <label for="couleurTerrain">Couleur </label>
+                <span id="couleurTerrain"><?php echo $terrain->couleur; ?></span>
+                <span id="carreCouleurTerrain" style="background-color:<?php echo $terrain->couleur; ?>"
+                      class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Mouvement de base -->
+            <div id="divMvtTerrain" class="divContenuInformationReferentiel">
+                <label for="mvtTerrain">Le modificateur de mouvement de base sur le terrain </label>
+                <span id="mvtTerrain"><?php echo $terrain->baseMvt; ?></span>
+            </div>
+
+            <!-- Modificateur de vision -->
+            <div id="divVisionTerrain" class="divContenuInformationReferentiel">
+                <label for="visionTerrain">Le modificateur de vision de base sur le terrain </label>
+                <span id="visionTerrain"><?php echo $terrain->baseVision; ?></span>
+            </div>
+
+            <!-- Z-index -->
+            <div id="divZIndexTerrain" class="divContenuInformationReferentiel">
+                <label for="zindexTerrain">Z-Index </label>
+                <span id="zindexTerrain"><?php echo $terrain->zIndex; ?></span>
+            </div>
+
+            <!-- Terrain bloque mouvement -->
+            <div id="divBloqueMvtTerrain" class="divContenuInformationReferentiel">
+                <?php
+                if ($terrain->bloqueMvt) {
+                    echo "<label for='isBloqueMvtTerrain'>Empêche le passage ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueMvtTerrain"]);
+                } else {
+                    echo "<label for='isBloqueMvtTerrain'>Empêche le passage ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueMvtTerrain"]);
+                }
+                ?>
+            </div>
+
+            <!-- Terrain bloque vue -->
+            <div id="divBloqueVueTerrain" class="divContenuInformationReferentiel">
+                <?php
+                if ($terrain->bloqueVue) {
+                    echo "<label for='isBloqueVueTerrain'>Bloque la vue ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueVueTerrain"]);
+                } else {
+                    echo "<label for='isBloqueVueTerrain'>Bloque la vue ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueVueTerrain"]);
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Div Gestion des images -->
+    <div id="divGeneralImageTerrain" class="divGeneralImageTerrain">
+        <div id="divGestionImageTerrain" class='divGestionImageTerrain'>
+            <div id="gestionImageTerrainJour" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de jour </span>
+                <div id="listeImageTerrainJour" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("jour", "consultation"); ?>
+                </div>
+            </div>
+            <div id="gestionImageTerrainJourBrouillard" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de jour dans le brouillard (grisé) </span>
+                <div id="listeImageTerrainJourBrouillard" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("jourBrouillard", "consultation"); ?>
+                </div>
+            </div>
+            <div id="gestionImageTerrainNuit" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de nuit</span>
+                <div id="listeImageTerrainNuit" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("nuit", "consultation"); ?>
+                </div>
+            </div>
+            <div id="gestionImageTerrainNuitBrouillard" class='gestionImageTerrain'>
+                <span class="texte">Les images correspondants aux terrains de nuit dans le brouillard (grisé)</span>
+                <div id="listeImageTerrainNuitBrouillard" class='listeImageTerrain'>
+                    <?php echo $terrain->genererListeImagesTerrains("nuitBrouillard", "consultation"); ?>
+                </div>
+            </div>
+        </div>
+
+        <div id="divTerrainRepartition" class='terrainRepartitionDetail'>
+            <label for="repartitionTerrain">Repartition </label>
+            <span id="repartitionTerrain">
+				<?php
+                if ($terrain->repartition == "" || $terrain->repartition == null || empty($terrain->repartition)) {
+                    echo "Non renseigné";
+                } else {
+                    echo $terrain->repartition;
+                }
+                ?>
+			</span>
+            <div class="aideForm">Probabilités (en pourcentage) d'apparition de chaque gif, separées par des
+                point-virgule. 50;49;0;1 fait apparaitre 1.png 50% du temps, 2.png 49% du temps, jamais 3.png et 1% du
+                temps 4.png
+            </div>
+        </div>
+    </div>
+
+    <!-- Div InformationTechnique -->
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueTerrain">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesTerrain'>";
+                    echo "<span class='libelleBoutonTechnique'>Effets </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteEffetsTerrains', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteEffetsTerrains', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+
+                    echo "<div class='divBoutonsTechniquesTerrain'>";
+                    echo "<span class='libelleBoutonTechnique'>Artisanat </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteArtisanatTerrain', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteArtisanatTerrain', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>
+	
+	

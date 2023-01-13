@@ -1,0 +1,44 @@
+<div class="popupTalent" id="popupCategorieTalent">
+    <div class="entetePopupTalent" id="entetePopupCategorieTalent">
+        <div class="divTitreTalent"><span class="titrePopup">Créer une nouvelle catégorie</span></div>
+    </div>
+
+    <div class="formPopupTalent" id="formPopupCategorie">
+        <!-- Nom de la catégorie -->
+        <div class="divDataPopupTalent">
+            <label for="nomCategorie">Nom </label>
+            <?php echo Phalcon\Tag::textField(array("nomCategorie", "class" => "formulaireField", "value" => "Nom de la catégorie")); ?>
+        </div>
+
+        <!-- Image de la catégorie -->
+        <div class="divDataPopupTalent" id="blocImageCategorie">
+            <div id="divImageCategoriePopupTalent">
+                <?php echo Phalcon\Tag::image(['public/img/site/illustrations/categoriestalent/defaut.png', "class" => 'imagePopupTalent', 'id' => 'imageCategorie']); ?>
+                <div id="listeImagePopupTalent">
+                    <?php echo CategoriesTalent::genererListeImagesVide($this->getDI()->get('config')->application->imgDir); ?>
+                </div>
+                <div id="divAjouterImagePopupTalent">
+                    <?php
+                    echo Phalcon\Tag::textField(array("newImageCategorieTalent", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                    echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageCategorieTalent', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionPopupTalent" id="divDescriptionPopupCategorieTalent">
+            <?php echo Phalcon\Tag::textArea(["descriptionCategorieTalent", "value" => "Entrez une description.", "class" => "texteDescriptionPopupTalent"]); ?>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionCategorieTalent">
+        <div id="boutonCreerPopupTalentCategorie" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerCategorieTalent', 'class' => 'bouton', 'title' => "Permet de créer une nouvelle catégorie.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentCategorie" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentCategorie', 'class' => 'bouton', 'title' => "Permet d'annuler la création de la catégorie.")); ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<?php
+echo $this->tag->hiddenField(["idReligion", "value" => $religion->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div id="divBoutonsReligionEdition" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierReligion', 'class' => 'bouton', 'title' => "Permet de valider les modifications pour la religion."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditerReligion', 'class' => 'bouton', 'title' => "Permet de retourner à la religion."));
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Liste religions", 'id' => 'retourListeReligion', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des religions."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la religion -->
+<div id="divReligion" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreReligionEdition", "class" => "formulaireField titreEdition", "value" => $religion->nom)); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuReligion" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImgReligionEdition">
+            <?php echo Phalcon\Tag::image([$religion->img, "class" => 'imgReligionEdition', 'id' => 'imageReligion']); ?>
+            <div id="listeImageReligion">
+                <?php echo $religion->genererListeImagesReligion(); ?>
+            </div>
+            <div id="divAjouterImageReligion">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageReligion", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageReligion', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionReligionEdition">
+            <?php echo Fonctions::rawTextArea("descriptionReligionEdition", str_replace("\n", "&#13;&#10;", $religion->description), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <!-- Detail  -->
+        <div id="divInformationRaceConsultation" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleReligionEdition" class="divArticleReferentiel">
+                <div id="autocompleteReligionWiki">
+                    <label for="s">Article Wiki </label>
+                    <?php
+                    if ($religion->article != null) {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field", "value" => $religion->article->titre));
+                    } else {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    }
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionReligionEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($religion->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionReligionEdition'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionReligionEdition' class='tickcrossFormulaireAdministration' checked />";
+                } else {
+                    echo "<label for='isDispoInscriptionReligionEdition'>Disponible à l'incsription ? </label><input type='checkbox' id='isDispoInscriptionReligionEdition' class='tickcrossFormulaireAdministration' />";
+                }
+                ?>
+            </div>
+
+            <!-- Nature de Magie -->
+            <div id="divNatureMagieReligionConsultation" class="divContenuInformationReferentiel">
+                <label for="natureMagieReligionConsultation">Type de magie </label>
+                <span id="natureMagieReligionConsultation"><?php echo $religion->genererSelectNatureMagie(); ?></span>
+            </div>
+
+            <!-- Divinites de la religion -->
+            <div id="divDiviniteReligionEdition">
+                <div id="divDivinitesPresentes">
+                    <?php echo $religion->genererListeDivinites("modification"); ?>
+                </div>
+                <div id="divDiviniteAbsente">
+                    <label for="diviniteDisponibleReligionEdition">Divinités disponibles </label>
+                    <span id="diviniteDisponibleReligionEdition"><?php echo $religion->genererSelectListeDiviniteDisponible(); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueReligion">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesReligion'>";
+                    echo "<span class='libelleBoutonTechnique'>Bonus Inscription</span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteBonusReligion', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteBonusReligion', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>

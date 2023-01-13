@@ -1,0 +1,51 @@
+<!-- En tete -->
+<div class='entetePageAdministration'>
+    <span class="titrePage">Gestion des images</span>
+</div>
+
+<!--Bloc Repertoire -->
+<div class="blocRepertoire">
+    <div class="tree">
+        <?php echo Files::mkmapImage(null, $this->getDI()->get('config')->application->imgDir); ?>
+    </div>
+    <div id="detailRepertoire">
+        <div id="inputRepertoire">
+            <?php
+            echo Phalcon\Tag::textField(array("repertoireEnCours", "class" => "inputRepertoire", "value" => ""));
+            echo $this->tag->hiddenField(["oldRep", "value" => ""]);
+            ?>
+        </div>
+        <div id="boutonGestionRepertoire">
+            <?php
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierRepertoireImage', 'class' => 'bouton', 'title' => "Permet de modifier un répertoire."));
+            echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterRepertoireImage', 'class' => 'bouton', 'title' => "Permet d'ajouter un répertoire."));
+            echo Phalcon\Tag::SubmitButton(array("Supprimer", 'id' => 'supprimerRepertoireImage', 'class' => 'bouton', 'title' => "Permet de supprimer un répertoire."));
+            ?>
+        </div>
+    </div>
+</div>
+
+<!--Bloc Image -->
+<div class="divBlocElementVisuel">
+    <div id="blocImage" class="blocElementVisuel">
+        <!--Liste des images -->
+        <div id="listeImages" class="listeElementVisuel">
+            <?php echo Files::chargerImagesByRepertoire(null, $this->getDI()->get('config')->application->imgDir); ?>
+        </div>
+    </div>
+
+    <!--Détail Image -->
+    <div id="detailImage" class="detailElementVisuel" style="display:none">
+        <?php echo Files::genererDetailImage(null, $this->getDI()->get('config')->application->imgDir); ?>
+    </div>
+
+    <!-- Bloc FTP -->
+    <div id="blocFTPGestionImage" class="ftpElementVisuel">
+        <input type="file" id="hiddenfile" style="display:none" name="file" onChange="getFileValue();"
+               accept="image/*"/>
+        <label for="selectedfile">Ajouter une image sur le serveur </label>
+        <input type="text" id="selectedfile" class="fileToUpload" value="Choisissez un fichier"/>
+        <input type="button" class="bouton" value="Parcourir" id="buttonBrowseFile" onclick="getFile();"/>
+        <input type="button" class="bouton" id="buttonUploadFile" value="Ajouter" onclick="uploadFileGestionImage();"/>
+    </div>
+</div>

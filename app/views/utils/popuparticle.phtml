@@ -1,0 +1,25 @@
+<!-- Pop-up Article -->
+<div id="article" style="overflow: auto;">
+    <!-- Image de l'article -->
+    <div id="enteteArticle">
+        <!-- Titre de l'article -->
+        <div id="titreDeLarticle">
+            <span class="titrePopup"><?php echo $article->titre; ?></span>
+        </div>
+        <div id="divImageArticle">
+            <?php if (!empty($article->img) && $article->img != null && $article->img != "") { ?>
+                <img class="imageArticle" src="<?php echo $article->img; ?>"/>
+            <?php } ?>
+        </div>
+    </div>
+    <!-- Texte du wiki -->
+    <div id="texteDuWiki">
+        <?php echo $article->formateTexteArticle($auth); ?>
+    </div>
+
+    <!--Bouton pour fermer la popup -->
+    <div id="divBoutonClose">
+        <input id="boutonClosePopupWiki" type="button" class="boutton" value="Fermer" onclick="closePopupWiki();"
+               title="Permet de fermer la pop-up de l'article"/>
+    </div>
+</div>

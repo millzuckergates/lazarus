@@ -1,0 +1,72 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterSort', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'un sort.")); ?>
+    </div>
+<?php } ?>
+<?php
+echo "<div id='listeSorts'>";
+$listeSorts = Sorts::find(['order' => 'idEcoleMagie ASC']);
+$idEcoleMagie = -1;
+$fin = false;
+if (count($listeSorts) > 0) {
+    $nomEcole = "";
+    $i = 0;
+    foreach ($listeSorts as $sort) {
+        if ($sort->idEcoleMagie != $idEcoleMagie) {
+            if ($fin) {
+                echo "</table></div></br>";
+            }
+            if (empty($sort->ecole) || $sort->ecole == null) {
+                $idEcoleMagie = "0";
+            } else {
+                $idEcoleMagie = $sort->ecole->id;
+            }
+            if ($idEcoleMagie == "0" || $idEcoleMagie == null) {
+                $nomEcole = "<span class='nomSortParEcole'>Sorts disponibles</span>";
+                $couleur = "ligne_" . $i % 2;
+            } else {
+                $ecole = Ecolesmagie::findFirst(['id = :id:', 'bind' => ['id' => $idEcoleMagie]]);
+                $nomEcole = "<span class='nomSortParEcole' onclick='afficherDetailEcole(" . $ecole->id . ");'>" . $ecole->nom . "</span>";
+                $couleur = "ligne_" . $i % 2;
+            }
+            echo "<div class='listeSortParEcole'>";
+            echo $nomEcole;
+            echo "<table class='tableSortParEcole referentielMagie'>";
+            echo "<tr>";
+            echo "<th style='width:20%'></th>";
+            echo "<th style='width:20%'>Nom</th>";
+            echo "<th style='width:10%'>Arcane</th>";
+            echo "<th style='width:10%'>Jouable</th>";
+            if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+                echo "<th style='width:35%'>Description</th>";
+                echo "<th style='width:5%'></th>";
+            } else {
+                echo "<th style='width:40%'>Description</th>";
+            }
+            echo "</tr>";
+            $fin = true;
+        }
+        echo "<tr class='ligneSort " . $couleur . "' onclick='afficherDetailSort(" . $sort->id . ");'>";
+        echo "<td>" . Phalcon\Tag::image([$sort->image, "class" => 'imgSortReferentiel']) . "</td>";
+        echo "<td><span class='nomListeReferentiel'>" . $sort->nom . "</span></td>";
+        echo "<td><span class='arcaneListeReferentiel'>" . $sort->arcane . "</span></td>";
+        if (!$sort->isBloque) {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross']) . "</td>";
+        } else {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross']) . "</td>";
+        }
+        echo "<td><span class='descriptionReferentielGameplay'>" . str_replace("\n", "<br/>", $sort->resumeDescription()) . "</span></td>";
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations']) && $idEcoleMagie != "0" && $idEcoleMagie != null) {
+            echo "<td><input type='button' class='buttonMoins' onclick='retirerSortFromListeSort(" . $sort->id . ");' title='Permet de retirer ce sort de l'école de magie'/></td>";
+        } else {
+            echo "<td></td>";
+        }
+        echo "</tr>";
+        $i++;
+    }
+    echo "</table></div>";
+} else {
+    echo "<span class='resultatVide'>Il n'y a aucun sort à afficher.</span>";
+}
+echo "</div>";
+?>

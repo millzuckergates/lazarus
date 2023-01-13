@@ -1,0 +1,144 @@
+<?php
+list($width, $height, $type, $attr) = getimagesize($this->getDI()->get('config')->application->imgDir . 'cartes/default.jpg');
+echo $this->tag->hiddenField(["largeurCarte", "value" => $width]);
+echo $this->tag->hiddenField(["hauteurCarte", "value" => $height]);
+echo $this->tag->hiddenField(["mode", "value" => "creation"]);
+?>
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerCarte', 'class' => 'bouton', 'title' => "Permet de créer la carte."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour liste", 'id' => 'retourListeCarte', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des cartes."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la carte -->
+<div id="divGlobalCarte" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("nomCarte", "class" => "formulaireField titreEdition", "value" => "Nom de la carte")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuCarte" class="divContenuReferentiel">
+
+        <!-- Image -->
+        <div id="divImageCarte" style="width:100%;">
+            <?php echo Phalcon\Tag::image(['public/img/cartes/default.jpg', "class" => 'imageCarte', 'id' => 'imageCarte']); ?>
+            <div id="listeImageCarte">
+                <?php echo Cartes::genererListeImageCarteVide($this->getDI()->get('config')->application->carteDir); ?>
+            </div>
+            <div id="divAjouterImageCarte">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageCarte", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageCarte', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionCarteCreation">
+            <?php echo Phalcon\Tag::textArea(["descriptionCarte", "value" => "Entrez une description pour la carte.", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <!-- Type de la carte -->
+        <div id="divInformationCarteCreation" class="divInformationCarte">
+            <!-- Saison -->
+            <div id="divSaisonCarte" class="divContenuInformationReferentiel">
+                <label for="saisonCarte">Saison </label>
+                <span id="saisonCarte"><?php echo Constantes::genererSelectSaison(null, 'selectSaisonCarte'); ?></span>
+            </div>
+
+            <!-- Type de Carte -->
+            <div id="divBlocCarteType" class="divContenuInformationReferentiel">
+                <div id="divTypeCarte">
+                    <label for="typeCarte">Type </label>
+                    <span id="typeCarte"><?php echo Cartes::genererSelectTypeCarte(null, 'selectTypeCarte'); ?></span>
+                </div>
+                <div id="divSpecificiteTypeCarte" style="display:none"></div>
+            </div>
+
+
+            <!-- Bloc Coordonnées -->
+            <div id="divBlocCarteCoordoonnees">
+                <div id="CoordoonneesRefCarteCreation">
+                    <label for="xRef">Coordoonnées de références : x =</label><input class="coordoonnee" id="xRef"
+                                                                                     value="0"
+                                                                                     onChange="formCalculCoordoonneeCarteX('xRef');"
+                                                                                     size=5/><label
+                            for="yRef">&nbsp;y=</label><input size=5 class="coordoonnee" id="yRef" value="0"
+                                                              onChange="formCalculCoordoonneeCarteY('yRef');"/>
+                </div>
+                <div id="formCarteCoordoonneesApercu">
+                    <table class="tableCoordoonneApercuCarte">
+                        <tr>
+                            <td colspan="3">
+                                <label for="yMax">y max=</label><input size=5 class="coordoonnee" id="yMax" value="0"
+                                                                       onChange="formCalculCoordoonneeCarteX('yMax');"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="coordoonneeX">
+                                <label for="xMin">x min=</label><input size=5 class="coordoonnee" id="xMin" value="0"
+                                                                       onChange="formCalculCoordoonneeCarteX('xMin');"/>
+                            </td>
+                            <td class="apercuCarte">
+                                <?php echo Phalcon\Tag::image(['public/img/cartes/default.jpg', "class" => 'apercuImageCarte', "id" => "champImageCarte"]); ?>
+                            </td>
+                            <td class="coordoonneeX">
+                                <label for="xMax">x max=</label><input size=5 class="coordoonnee" id="xMax" value="0"
+                                                                       onChange="formCalculCoordoonneeCarteY('xMax');"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <label for="yMin">y min=</label><input size=5 class="coordoonnee" id="yMin" value="0"
+                                                                       onChange="formCalculCoordoonneeCarteY('yMin');"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Chargement de la carte -->
+            <div id="divChargeCarte" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isChargeCarte'>Charger la carte dans une matrice à la création ? </label><input type='checkbox' id='isChargeCarte' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Infos PJ -->
+            <div id="divBlocCarteInfosPJCreation" class="divBlocCarteInfosPJ divContenuInformationReferentiel">
+                <div id="divCarteDecouverte">
+                    <?php
+                    echo "<label for='isDecouverteCarte'>La carte est elle dissimulée ? </label><input type='checkbox' id='isDecouverteCarte' class='tickcrossFormulaireGameplay' />";
+                    ?>
+                </div>
+                <!-- Image -->
+                <div id="divTitreCartePJ">
+                    <span class="titreCartePJ">Carte correspondante pour les joueurs</span>
+                </div>
+                <div id="divImageCartePJ">
+                    <?php echo Phalcon\Tag::image(['public/img/cartesPJ/default.jpg', "class" => 'imageCarte', 'id' => 'imageCarte']); ?>
+                    <div id="listeImageCarte">
+                        <?php echo Cartes::genererListeImageCartePJVide($this->getDI()->get('config')->application->carteDir); ?>
+                    </div>
+                    <div id="divAjouterImageCartePJ">
+                        <?php
+                        echo Phalcon\Tag::textField(array("newImageCartePJ", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                        echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageCartePJ', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

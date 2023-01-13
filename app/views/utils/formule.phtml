@@ -1,0 +1,97 @@
+<!-- Popup Formule -->
+<div id="formule" class="formule">
+    <?php
+    echo $this->tag->hiddenField(["idDuChamp", "value" => ""]);
+    ?>
+    <!-- Div titre -->
+    <div id="divTitreFormule">
+        <span class="titrePopup">Gestion des formules</span>
+    </div>
+
+    <!-- Div de la formule -->
+    <div id="enteteFormule">
+        <div id="formuleBlocGauche">
+            <div id="divChampFormule">
+                <label for="valeurFormule">Valeur </label>
+                <?php echo Phalcon\Tag::textField(array("valeurFormule", "class" => "formulaireField", "value" => "")); ?>
+            </div>
+            <!-- Div pour les opérations -->
+            <div id="divOperation">
+                <input type="button" class="bouton" onclick="modifierFormule('+')" value="+" style="width:30px;"/>
+                <input type="button" class="bouton" onclick="modifierFormule('-')" value="-" style="width:30px;"/>
+                <input type="button" class="bouton" onclick="modifierFormule('/')" value="/" style="width:30px;"/>
+                <input type="button" class="bouton" onclick="modifierFormule('*')" value="*" style="width:30px;"/>
+                <input type="button" class="bouton" onclick="modifierFormule('(')" value="(" style="width:30px;"/>
+                <input type="button" class="bouton" onclick="modifierFormule(')')" value=")" style="width:30px;"/>
+                <input type="button" class="bouton" onclick="modifierFormule('%')" value="%" style="width:30px;"/>
+            </div>
+        </div>
+        <div id="blocDroite">
+            <!-- Div calculette chiffréee -->
+            <div id="divCalculette">
+                <table id="calculette">
+                    <tr>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('1')" value="1"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('2')" value="2"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('3')" value="3"
+                                                  style="width:30px;"/></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('4')" value="4"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('5')" value="5"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('6')" value="6"
+                                                  style="width:30px;"/></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('7')" value="7"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('8')" value="8"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('9')" value="9"
+                                                  style="width:30px;"/></td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule('0')" value="0"
+                                                  style="width:30px;"/></td>
+                        <td align="center"><input type="button" class="bouton" onclick="modifierFormule(',')" value=","
+                                                  style="width:30px;"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Div pour les listes de constantes -->
+    <div id="divListeConstantes">
+        <div id="divSelectTypeConstante">
+            <label for="spanSelectListeTypeConstante" id="labelForSelectListeTypeConstante">Types </label>
+            <span id="spanSelectListeTypeConstante"><?php echo ConstantesJeu::genererListeTypesConstante('selectListeTypesConstante'); ?></span>
+        </div>
+        <div id="divSelectListeConstantes">
+            <label for="spanSelectListeConstantes" id="labelForSelectListeConstantes">Constantes </label>
+            <span id="spanSelectListeConstantes"><?php echo ConstantesJeu::genererListeConstantes('all', 'selectListeConstantes'); ?></span>
+        </div>
+        <div id="divDescriptionConstante" style="display:none;">
+            <textarea name="descriptionCst" id="descriptionCst"
+                      style="resize:none;width:270px;length:320px;display:none" rows="5"></textarea>
+        </div>
+        <div id="divBoutonAjouterConstante">
+            <?php
+            echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'modifierFormuleConstante', 'class' => 'bouton', 'title' => "Ajouter ce parametre à  la formule."));
+            ?>
+        </div>
+    </div>
+
+    <!-- Div pour les boutons -->
+    <div id="divListeBoutonFormule">
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Valider", 'id' => 'validerFormule', 'class' => 'bouton', 'title' => "Valider la formule."));
+        echo Phalcon\Tag::SubmitButton(array("Reset", 'id' => 'resetFormule', 'class' => 'bouton', 'title' => "Reset la formule."));
+        echo Phalcon\Tag::SubmitButton(array("Quitter", 'id' => 'fermerFormulaireFormule', 'class' => 'bouton', 'title' => "Fermer le formulaire."));
+        ?>
+    </div>
+</div>

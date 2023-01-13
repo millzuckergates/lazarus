@@ -1,0 +1,79 @@
+<?php
+$listeRoyaumes = Royaumes::find();
+$listeRaces = Races::find();
+$listeReligions = Religions::find();
+
+$this->tag->hiddenField(["start", "value" => ""]);
+$this->tag->hiddenField(["end", "value" => ""]);
+$this->tag->hiddenField(["texte", "value" => ""])
+?>
+
+<div id="baliseWiki" class="baliseWiki">
+    <div id="blocHautBaliseWiki" class="blocHautBaliseWiki"></div>
+    <div id="blocContenuBaliseWiki" class="blocContenuBaliseWiki">
+        <div id="baliseGenerale">
+            <?php
+            echo Phalcon\Tag::SubmitButton(array("Titre", 'id' => 'baliseTitre', 'class' => 'balise', 'title' => "Met une balise 'Titre'."));
+            echo Phalcon\Tag::SubmitButton(array("g", 'id' => 'baliseGras', 'class' => 'balise', 'title' => "Permet d'écrire en gras."));
+            echo Phalcon\Tag::SubmitButton(array("i", 'id' => 'baliseItalique', 'class' => 'balise', 'title' => "Permet d'écrire en italique."));
+            echo Phalcon\Tag::SubmitButton(array("s", 'id' => 'baliseSouligner', 'class' => 'balise', 'title' => "Permet de souligner."));
+            echo Phalcon\Tag::SubmitButton(array("Lien", 'id' => 'baliseLien', 'class' => 'balise', 'title' => "Permet de créer un lien."));
+            echo Phalcon\Tag::SubmitButton(array("Image", 'id' => 'baliseImage', 'class' => 'balise', 'title' => "Permet d'ajouter une image."));
+            echo Phalcon\Tag::SubmitButton(array("MJ", 'id' => 'baliseMJ', 'class' => 'balise', 'title' => "Permet d'ajouter une balise MJ."));
+            echo Phalcon\Tag::SubmitButton(array("DEV", 'id' => 'baliseDEV', 'class' => 'balise', 'title' => "Permet d'ajouter une balise DEV."));
+            echo Phalcon\Tag::SubmitButton(array("Lien wiki", 'id' => 'baliseLienWiki', 'class' => 'balise', 'title' => "Permet d'ajouter une balise vers un autre article du wiki."));
+            echo Phalcon\Tag::SubmitButton(array("Profil", 'id' => 'baliseProfil', 'class' => 'balise', 'title' => "Permet d'ajouter une balise vers un profil."));
+            echo Phalcon\Tag::SubmitButton(array("Citer", 'id' => 'baliseCiter', 'class' => 'balise', 'title' => "Permet d'ajouter une balise de citation."));
+            ?>
+        </div>
+        <div id="divBaliseTaille">
+            <?php echo Phalcon\Tag::SubmitButton(array("Taille", 'id' => 'baliseTaille', 'class' => 'balise', 'title' => "Changer la taille du texte.")); ?>
+            <select id="outils_taille">
+                <option value="6pt" style="font-size:6px;">Minuscule</option>
+                <option value="8pt" style="font-size:8px;">Petit</option>
+                <option value="10pt" style="font-size:10px;" selected>Normal</option>
+                <option value="12pt" style="font-size:12px;">Grand</option>
+                <option value="14pt" style="font-size:14px;">Tr&egrave;s grand</option>
+            </select>
+        </div>
+        <div id="divBaliseCouleur">
+            <?php echo Phalcon\Tag::SubmitButton(array("Couleur", 'id' => 'baliseCouleur', 'class' => 'balise', 'title' => "Changer la couleur du texte.")); ?>
+            <select id="outils_couleur">
+                <option value="red" style="font-weight:bold;color:red">Rouge</option>
+                <option value="blue" style="font-weight:bold;color:blue">Bleu</option>
+                <option value="yellow" style="font-weight:bold;color:yellow">Jaune</option>
+                <option value="green" style="font-weight:bold;color:green">Vert</option>
+                <option value="orange" style="font-weight:bold;color:orange">Orange</option>
+                <option value="black" style="font-weight:bold;color:black">Noir</option>
+                <option value="magenta" style="font-weight:bold;color:magenta">Magenta</option>
+                <option value="turquoise" style="font-weight:bold;color:turquoise">Turquoise</option>
+            </select>
+        </div>
+        <div id="divBaliseRoyaume">
+            <?php echo Phalcon\Tag::SubmitButton(array("Royaume", 'id' => 'baliseRoyaume', 'class' => 'balise', 'title' => "Limiter a un royaume.")); ?>
+            <select id="outils_royaume">
+                <?php foreach ($listeRoyaumes as $royaume) { ?>
+                    <option value="<?php echo $royaume->id; ?>"><?php echo $royaume->nom; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div id="divBaliseRace">
+            <?php echo Phalcon\Tag::SubmitButton(array("Race", 'id' => 'baliseRace', 'class' => 'balise', 'title' => "Limiter a une race.")); ?>
+            <select id="outils_race">
+                <?php foreach ($listeRaces as $race) { ?>
+                    <option value="<?php echo $race->id; ?>"><?php echo $race->nom; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div id="divBaliseReligion">
+            <?php echo Phalcon\Tag::SubmitButton(array("Religion", 'id' => 'baliseReligion', 'class' => 'balise', 'title' => "Limiter a une religion.")); ?>
+            <select id="outils_religion">
+                <?php foreach ($listeReligions as $religion) { ?>
+                    <option value="<?php echo $religion->id; ?>"><?php echo $religion->nom; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
+
+    <div id="blocBasBaliseWiki" class="blocBasBaliseWiki"></div>
+</div>

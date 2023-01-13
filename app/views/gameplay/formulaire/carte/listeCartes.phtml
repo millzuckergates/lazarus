@@ -1,0 +1,289 @@
+<?php
+echo $this->tag->hiddenField(["idCarte", "value" => ""]);
+?>
+
+<div id="divActionCartes">
+    <?php if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) { ?>
+        <div class="divBoutonAjouterReferentiel">
+            <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterCarte', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une carte.")); ?>
+        </div>
+    <?php } ?>
+
+    <!-- Bloc Recherche -->
+    <div id="blocRechercheCarte">
+        <div id="titreBlocRechercheCarte" class="titreBlocRecherche">
+            <span class="labelTitreBlocRecherche">Outil de recherche</span>
+        </div>
+
+        <div id="contenuBlocRechercheCarte" class="contenuBlocRecherche">
+            <div id="tableRechercheCarte">
+                <div id='searchByName' class="divSearch">
+                    <label for="searchNom">Nom </label>
+                    <?php echo Phalcon\Tag::textField(array("searchNom", "class" => "fieldSearch")); ?>
+                </div>
+                <div class="divSearch">
+                    <label for="searchSaison">Saison </label>
+                    <span id="searchSaison"><?php echo Constantes::genererSelectSaison(null, "selectSearchSaison") ?></span>
+                </div>
+                <div class="divSearch">
+                    <label for="searchType">Type </label>
+                    <span id="searchType"><?php echo Cartes::genererSelectTypeCarte(null, "selectSearchType") ?></span>
+                </div>
+            </div>
+            <div id="boutonsBlocRechercheCartes" class="boutonBlocRecherche">
+                <?php echo Phalcon\Tag::SubmitButton(array("Rechercher", 'id' => 'lancerRechercheSaisonCarte', 'class' => 'bouton', 'title' => "Recherche")); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+$listeSaisonToutes = Cartes::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_TOUTES]]);
+$listeSaisonHiver = Cartes::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_HIVER]]);
+$listeSaisonPrintemps = Cartes::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_PRINTEMPS]]);
+$listeSaisonEte = Cartes::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_ETE]]);
+$listeSaisonAutomne = Cartes::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_AUTOMNE]]);
+?>
+
+<div id="listesTablesCartes">
+    <div class='divListeCartes' id="divListeCartes">
+        <!-- Toutes les saisons -->
+        <div id='cartesSaisonToutes' class='divListeCarteSaison'>
+            <div class='enteteTableCarte'>
+                <span class='nomTypeCarte'> Cartes associées à toutes les saisons </span><span
+                        class='nombreTypeCarac'>(<?php echo count($listeSaisonToutes); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeCarteSaisonToutes', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeCarteSaisonToutes', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCartes' id='divTableCartesSaisonToutes' style="display:none">
+                <?php
+                if ($listeSaisonToutes != false && count($listeSaisonToutes) > 0) {
+                    echo "<table class='tableCarteSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='10%'>Type</th>";
+                    if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                        echo "<th width='38%'>Description</th><th width='12%'>Actions</th></tr>";
+                    } else {
+                        echo "<th width='50%'>Description</th></tr>";
+                    }
+                    $i = 0;
+                    foreach ($listeSaisonToutes as $carte) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "'>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'>" . Phalcon\Tag::image([$carte->image, "class" => 'iconeCarteImage']) . "</td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->nom . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->type . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->resumeDescription() . "</span></td>";
+                        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                            echo "<td>
+										<input type='button' class='buttonMoins' onclick='boxDeleteMap(" . $carte->id . ");'/>
+										<input type='button' class='buttonActualiser' onclick='editerMap(" . $carte->id . ");'/>
+									  </td>";
+                        }
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarte'>Il n'y a aucune carte à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Hiver -->
+        <div id='cartesSaisonHiver' class='divListeCarteSaison'>
+            <div class='enteteTableCarte'>
+                <span class='nomTypeCarte'> Cartes associées à la saison Hiver </span><span
+                        class='nombreTypeCarac'>(<?php echo count($listeSaisonHiver); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeCarteSaisonHiver', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeCarteSaisonHiver', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCartes' id='divTableCartesSaisonHiver' style="display:none">
+                <?php
+                if ($listeSaisonHiver != false && count($listeSaisonHiver) > 0) {
+                    echo "<table class='tableCarteSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='10%'>Type</th>";
+                    if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                        echo "<th width='38%'>Description</th><th width='12%'>Actions</th></tr>";
+                    } else {
+                        echo "<th width='50%'>Description</th></tr>";
+                    }
+                    $i = 0;
+                    foreach ($listeSaisonHiver as $carte) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "'>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'>" . Phalcon\Tag::image([$carte->image, "class" => 'iconeCarteImage']) . "</td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->nom . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->type . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->resumeDescription() . "</span></td>";
+                        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                            echo "<td>
+										<input type='button' class='buttonMoins' onclick='boxDeleteMap(" . $carte->id . ");'/>
+										<input type='button' class='buttonActualiser' onclick='editerMap(" . $carte->id . ");'/>
+									 </td>";
+                        }
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarte'>Il n'y a aucune carte à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Printemps -->
+        <div id='cartesSaisonPrintemps' class='divListeCarteSaison'>
+            <div class='enteteTableCarte'>
+                <span class='nomTypeCarte'> Cartes associées à la saison Printemps </span><span class='nombreTypeCarac'>(<?php echo count($listeSaisonPrintemps); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeCarteSaisonPrintemps', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeCarteSaisonPrintemps', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCartes' id='divTableCartesSaisonPrintemps' style="display:none">
+                <?php
+                if ($listeSaisonPrintemps != false && count($listeSaisonPrintemps) > 0) {
+                    echo "<table class='tableCarteSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='10%'>Type</th>";
+                    if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                        echo "<th width='38%'>Description</th><th width='12%'>Actions</th></tr>";
+                    } else {
+                        echo "<th width='50%'>Description</th></tr>";
+                    }
+                    $i = 0;
+                    foreach ($listeSaisonPrintemps as $carte) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "'>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'>" . Phalcon\Tag::image([$carte->image, "class" => 'iconeCarteImage']) . "</td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->nom . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->type . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->resumeDescription() . "</span></td>";
+                        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                            echo "<td>
+										<input type='button' class='buttonMoins' onclick='boxDeleteMap(" . $carte->id . ");'/>
+										<input type='button' class='buttonActualiser' onclick='editerMap(" . $carte->id . ");'/>
+								      </td>";
+                        }
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarte'>Il n'y a aucune carte à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Eté -->
+        <div id='cartesSaisonEte' class='divListeCarteSaison'>
+            <div class='enteteTableCarte'>
+                <span class='nomTypeCarte'> Cartes associées à la saison Eté </span><span
+                        class='nombreTypeCarac'>(<?php echo count($listeSaisonEte); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeCarteSaisonEte', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeCarteSaisonEte', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCartes' id='divTableCartesSaisonEte' style="display:none">
+                <?php
+                if ($listeSaisonEte != false && count($listeSaisonEte) > 0) {
+                    echo "<table class='tableCarteSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='10%'>Type</th>";
+                    if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                        echo "<th width='38%'>Description</th><th width='12%'>Actions</th></tr>";
+                    } else {
+                        echo "<th width='50%'>Description</th></tr>";
+                    }
+                    $i = 0;
+                    foreach ($listeSaisonEte as $carte) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "'>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'>" . Phalcon\Tag::image([$carte->image, "class" => 'iconeCarteImage']) . "</td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->nom . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->type . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->resumeDescription() . "</span></td>";
+                        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                            echo "<td>
+										<input type='button' class='buttonMoins' onclick='boxDeleteMap(" . $carte->id . ");'/>
+										<input type='button' class='buttonActualiser' onclick='editerMap(" . $carte->id . ");'/>
+									  </td>";
+                        }
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarte'>Il n'y a aucune carte à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Automne -->
+        <div id='cartesSaisonAutomne' class='divListeCarteSaison'>
+            <div class='enteteTableCarte'>
+                <span class='nomTypeCarte'> Cartes associées à la saison Automne </span><span
+                        class='nombreTypeCarac'>(<?php echo count($listeSaisonAutomne); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeCarteSaisonAutomne', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeCarteSaisonAutomne', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCartes' id='divTableCartesSaisonAutomne' style="display:none">
+                <?php
+                if ($listeSaisonAutomne != false && count($listeSaisonAutomne) > 0) {
+                    echo "<table class='tableCarteSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='10%'>Type</th>";
+                    if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                        echo "<th width='38%'>Description</th><th width='12%'>Actions</th></tr>";
+                    } else {
+                        echo "<th width='50%'>Description</th></tr>";
+                    }
+                    $i = 0;
+                    foreach ($listeSaisonAutomne as $carte) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "'>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'>" . Phalcon\Tag::image([$carte->image, "class" => 'iconeCarteImage']) . "</td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->nom . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->type . "</span></td>";
+                        echo "<td onclick='afficherDetailCarte(" . $carte->id . ");'><span class='libelleListeCarte'>" . $carte->resumeDescription() . "</span></td>";
+                        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_CARTES_MODIFIER, $auth['autorisations'])) {
+                            echo "<td>
+										<input type='button' class='buttonMoins' onclick='boxDeleteMap(" . $carte->id . ");'/>
+										<input type='button' class='buttonActualiser' onclick='editerMap(" . $carte->id . ");'/>
+									 </td>";
+                        }
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarte'>Il n'y a aucune carte à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

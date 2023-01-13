@@ -1,0 +1,79 @@
+<!-- Pop-up table ciblage -->
+<div id="tableCiblage">
+    <?php
+    echo $this->tag->hiddenField(["idTableCiblage", "value" => $tableCiblage->id]);
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $idType]);
+    ?>
+    <div id="enteteTableCiblage">
+        <div id="divTitreCiblage"><span class="titrePopup">Table de ciblage</span></div>
+        <div id="ciblagePour">
+			<span class="soustitre">
+				<?php echo $tableCiblage->genererTableCiblagePour($type, $idType); ?>
+			</span>
+        </div>
+    </div>
+
+    <div id="divCiblagePersonnage">
+        <label for="isPersonnageCiblable">Peut cibler les personnages ? </label>
+        <?php if ($tableCiblage->isCiblePersonnage == 0) { ?>
+            <input type="checkbox" id="isPersonnageCiblable" onclick="chargerBloc('personnages');"/>
+        <?php } else { ?>
+            <input type="checkbox" id="isPersonnageCiblable" checked onclick="chargerBloc('personnages');"/>
+        <?php } ?>
+    </div>
+
+    <div id="divCiblageCreature">
+        <label for="isCreatureCiblable">Peut cibler les créatures ? </label>
+        <?php $style = "display:none";
+        if ($tableCiblage->isCibleCreature == 0) {
+            ?>
+            <input type="checkbox" id="isCreatureCiblable" onclick="chargerBloc('creatures');"/>
+        <?php } else {
+            $style = "display:block"; ?>
+            <input type="checkbox" id="isCreatureCiblable" onclick="chargerBloc('creatures');" checked/>
+        <?php } ?>
+        <div id="divDetailCiblageCreature" style="<?php echo $style; ?>">
+            <div id="divFamilleCreature">
+                <label for="spanSelectFamilleCiblable">Famille </label>
+                <span id="spanSelectFamilleCiblable"> TODO </span>
+            </div>
+            <div id="divCreatures">
+                <label for="spanSelectCreatureCiblable">Créature </label>
+                <span id="spanSelectCreatureCiblable"> TODO </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCiblageBatiment">
+        <!--  TODO -->
+    </div>
+
+    <div id="divCiblageEnvironnement">
+        <label for="isEnvironnementCiblable">Peut cibler l'environnement ? </label>
+        <?php $style = "display:none";
+        if ($tableCiblage->isCibleEnvironnement == 0) {
+            ?>
+            <input type="checkbox" id="isEnvironnementCiblable" onclick="chargerBloc('environnement');"/>
+        <?php } else {
+            $style = "display:block"; ?>
+            <input type="checkbox" id="isEnvironnementCiblable" onclick="chargerBloc('environnement');" checked/>
+        <?php } ?>
+        <div id="divDetailEnvironnement" style="<?php echo $style; ?>">
+            <label for="spanSelectEnvironnementCiblable">Terrains </label>
+            <span id="spanSelectEnvironnementCiblable"><?php echo $tableCiblage->getListeTerrainCiblable(); ?></span>
+            <input type="button" class="buttonPlus"
+                   onclick="ajouterTerrainCiblable(<?php echo $tableCiblage->id; ?>);"/>
+            <label for="spanResumeEnvironnementCiblable">Résumé : </label>
+            <span id="spanResumeEnvironnementCiblable"><?php echo $tableCiblage->getResumeEnvironnement("modification", $auth); ?></span>
+        </div>
+    </div>
+
+    <div id="divBoutonAnnulerEditionTableCiblage">
+        <?php echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditionTableCiblage', 'class' => 'bouton', 'title' => "Permet de retourner à la consultation de la table de ciblage.")); ?>
+    </div>
+
+    <div id="divBoutonFermerTableCiblage">
+        <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerTableCiblage', 'class' => 'bouton', 'title' => "Permet de fermer la pop-up.")); ?>
+    </div>
+</div>

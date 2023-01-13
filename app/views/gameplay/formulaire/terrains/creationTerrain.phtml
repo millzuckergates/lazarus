@@ -1,0 +1,99 @@
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerTerrain', 'class' => 'bouton', 'title' => "Permet de créer le terrain."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour liste", 'id' => 'retourListeTerrain', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des terrains."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour le terrain -->
+<div id="divGlobtitleerrain" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormTerrain", "class" => "formulaireField titreEdition", "value" => "Nom")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuTerrain" class="divContenuReferentielTerrain">
+        <!-- Description -->
+        <div class="divDescriptionTerrainCreation" style="width:100%">
+            <?php echo Phalcon\Tag::textArea(["descriptionTerrain", "value" => "Entrez une description pour le terrain.", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <div id="divInformationTerrainCreation" class="divInformationTerrain">
+
+            <!-- Genre -->
+            <div id="divGenreTerrain" class="divContenuInformationReferentiel">
+                <label for="genreTerrain">Genre </label>
+                <span id="genreTerrain"><?php echo Constantes::genererSelectGenre(null, "selectGenreTerrain"); ?></span>
+            </div>
+
+            <!-- Saison -->
+            <div id="divSaisonTerrain" class="divContenuInformationReferentiel">
+                <label for="saisonTerrain">Saison </label>
+                <span id="saisonTerrain"><?php echo Constantes::genererSelectSaison(null, 'selectSaisonTerrain'); ?></span>
+            </div>
+
+            <!-- Type d'accès -->
+            <div id="divTypeAccesTerrain" class="divContenuInformationReferentiel">
+                <label for="typeAccesTerrain">Type d'accès </label>
+                <span id="typeAccesTerrain"><?php echo Constantes::genererSelectAcces(null, 'selectTypeAccesTerrain'); ?></span>
+            </div>
+
+            <!-- Compétence -->
+            <div id="divCompetenceTerrain" class="divContenuInformationReferentiel">
+                <label for="competenceTerrain">Compétence </label>
+                <span id="competenceTerrain"><?php echo Terrains::getSelectListCompetenceTerrainsVide(); ?></span>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurTerrain" class="divContenuInformationReferentiel">
+                <label for="couleurTerrain">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurTerrain", "class" => "formulaireField", "value" => "", "size" => 7)); ?>
+                <span id="carreCouleurTerrain" style="background-color:white" class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Mouvement de base -->
+            <div id="divMvtTerrain" class="divContenuInformationReferentiel">
+                <label for="mvtTerrain">Le modificateur de mouvement de base sur le terrain </label>
+                <?php echo Phalcon\Tag::textField(array("mvtTerrain", "class" => "formulaireField", "value" => "", "size" => 3)); ?>
+            </div>
+
+            <!-- Modificateur de vision -->
+            <div id="divVisionTerrain" class="divContenuInformationReferentiel">
+                <label for="visionTerrain">Le modificateur de vision de base sur le terrain </label>
+                <?php echo Phalcon\Tag::textField(array("visionTerrain", "class" => "formulaireField", "value" => "", "size" => 3)); ?>
+            </div>
+
+            <!-- Z-index -->
+            <div id="divZIndexTerrain" class="divContenuInformationReferentiel">
+                <label for="zindexTerrain">Z-Index </label>
+                <?php echo Phalcon\Tag::textField(array("zindexTerrain", "class" => "formulaireField", "value" => "", "size" => 2)); ?>
+            </div>
+
+            <!-- Terrain bloque mouvement -->
+            <div id="divBloqueMvtTerrain" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isBloqueMvtTerrain'>Empêche le passage ? </label><input type='checkbox' id='isBloqueMvtTerrain' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Terrain bloque vue -->
+            <div id="divBloqueVueTerrain" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isBloqueVueTerrain'>Bloque la vue ? </label><input type='checkbox' id='isBloqueVueTerrain' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+	
+	

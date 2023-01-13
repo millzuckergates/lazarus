@@ -1,0 +1,51 @@
+<?php
+echo $this->tag->hiddenField(["idFamille", "value" => $famille->id]);
+?>
+<div class="popupTalent" id="popupArbreTalent">
+    <div class="entetePopupTalent" id="entetePopupArbreTalent">
+        <div class="divTitreTalent"><span class="titrePopup">Créer un nouvel Arbre</span></div>
+    </div>
+
+    <div id="blocFormulaire">
+        <div class="formPopupTalent" id="formPopupArbre">
+            <!-- Nom de l'arbre -->
+            <div class="divDataPopupTalent">
+                <label for="nomArbre">Nom </label>
+                <?php echo Phalcon\Tag::textField(array("nomArbre", "class" => "formulaireField", "value" => "Nom de l'Arbre")); ?>
+            </div>
+
+            <!-- Famille associée -->
+            <div class="divDataPopupTalent" id="blocSelectFamilleArbre">
+                <label for="familleArbre">Famille </label>
+                <span id="familleArbre"><?php echo $famille->nom; ?></span>
+            </div>
+
+            <!-- Description -->
+            <div class="divDescriptionPopupTalent" id="divDescriptionPopupArbreTalent">
+                <?php echo Phalcon\Tag::textArea(["descriptionArbreTalent", "value" => "Entrez une description.", "class" => "texteDescriptionPopupTalent"]); ?>
+            </div>
+        </div>
+
+        <div id="divImageArbrePopupTalent">
+            <?php echo Phalcon\Tag::image(['public/img/site/illustrations/talents/arbres/default.jpg', "class" => 'imagePopupTalent', 'id' => 'imageArbre']); ?>
+            <div id="listeImagePopupTalent">
+                <?php echo ArbresTalent::genererListeImagesVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterImagePopupTalent">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageArbreTalent", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageArbreTalent', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="boutonsActionPopupTalent" id="boutonsActionArbreTalent">
+        <div id="boutonCreerPopupTalentArbre" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerArbreTalent', 'class' => 'bouton', 'title' => "Permet de créer un nouvel arbre.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentArbre" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentArbre', 'class' => 'bouton', 'title' => "Permet d'annuler la création d l'arbre.")); ?>
+        </div>
+    </div>
+</div>

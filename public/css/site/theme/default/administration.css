@@ -1,0 +1,937 @@
+@charset "UTF-8";
+/* Onglets */
+#ongletsAdministration {
+  float: left;
+  display: grid;
+  width: 8%;
+}
+
+.ongletAdministration {
+  background-color: rgba(236, 165, 46, 0.6);
+  float: left;
+  width: 101%;
+  height: 50px;
+  text-align: center;
+}
+
+.ongletAdministrationSelect {
+  background-color: rgba(223, 182, 112, 0.61);
+  float: left;
+  width: 101%;
+  height: 50px;
+  text-align: center;
+  border-right: none;
+}
+
+.ongletAdministration :hover {
+  cursor: pointer;
+  color: #2b589b;
+  background-color: rgba(195, 135, 34, 0.6);
+  float: left;
+  width: 101%;
+}
+
+.labelOngletAdministration {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Morpheus;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  padding-top: 20px;
+}
+
+/* General */
+#blocAdministration {
+  background-color: rgba(223, 182, 112, 0.61);
+  min-height: 450px;
+  width: 100%;
+  display: inline-block;
+}
+
+.titrePage {
+  display: block;
+  font-size: 30px;
+  font-family: Times;
+  font-weight: bold;
+  color: brown;
+  text-shadow: 1px 1px #000;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.entetePageAdministration {
+  float: left;
+  margin-left: 210px;
+  width: 100%;
+}
+
+/* Index  */
+#texteIndex {
+  text-align: left;
+  margin-left: 75px;
+  float: left;
+  width: 75%;
+  display: inline-block;
+}
+
+/* Gestion des droits */
+#listeDroits {
+  text-align: left;
+  display: block;
+  margin-left: 30px;
+  margin-bottom: 25px;
+}
+
+#listeAutorisationsDroit {
+  text-align: left;
+  margin-left: 30px;
+}
+
+.titreAutorisation {
+  font-family: "Metamorphous";
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0px;
+}
+
+.libelleAutorisation {
+  font-style: italic;
+}
+
+#listeProfils {
+  margin-left: 8px;
+  margin-right: 15px;
+}
+
+/* Gestion des logs */
+#divAccesLog {
+  text-align: left;
+}
+
+#contenuLog {
+  text-align: left;
+}
+
+#divBlocRechercheLogs {
+  float: left;
+}
+
+#divResultatLogs {
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 62%;
+}
+
+.boutonAccesLog {
+  font-size: 12px;
+  color: #F1F1F1;
+  font-weight: bold;
+  background-color: #3d6191;
+  border-radius: 5px;
+  margin: 1px;
+  width: 90px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.boutonAccesLogSelect {
+  font-size: 12px;
+  color: #F1F1F1;
+  font-weight: bold;
+  background-color: #bf2121;
+  border-radius: 5px;
+  margin: 1px;
+  width: 90px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#divAccesLog {
+  float: left;
+  margin-left: 100px;
+  width: 100%;
+}
+
+#divBlocRechercheLogs {
+  background-color: #edce8e;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin-top: 12px;
+  margin-left: 1%;
+  float: left;
+  margin-bottom: 30px;
+  display: grid;
+  width: 17%;
+  min-height: 70px;
+}
+
+#LogsBlocRecherche {
+  position: relative;
+  margin-left: 2px;
+  margin-top: 5px;
+  padding-left: 5px;
+  display: inline-block;
+}
+
+.labelTitreBlocRecherche {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Morpheus;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+#selectLogType {
+  display: inline;
+  width: 60%;
+  font-size: 12px;
+  height: 20px;
+  vertical-align: right;
+  float: right;
+  margin-right: 40px;
+}
+
+#logAuteur {
+  display: inline;
+  width: 60%;
+  font-size: 12px;
+  height: 20px;
+  vertical-align: right;
+  float: right;
+  margin-right: 40px;
+}
+
+#logCible {
+  display: inline;
+  width: 60%;
+  font-size: 12px;
+  height: 20px;
+  vertical-align: right;
+  float: right;
+  margin-right: 40px;
+}
+
+#logsType {
+  margin-top: 10px;
+}
+
+#logsAuteur {
+  margin-top: 10px;
+}
+
+#logsCible {
+  margin-top: 10px;
+}
+
+#logsFiltre {
+  float: right;
+  margin-right: 40px;
+}
+
+#exporterLogs {
+  float: right;
+  margin-right: 40px;
+}
+
+#divEnregistrementPageLog {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.rechercheInput {
+  margin-left: 8px;
+  width: 30px;
+}
+
+#tableLogs {
+  min-width: 100%;
+  text-align: center;
+  border: 3px solid black;
+}
+
+th {
+  text-align: center;
+}
+
+.tabAction {
+  text-align: left;
+  margin-left: 5px;
+}
+
+.ligne_0 {
+  height: 30px;
+  background-color: #D4AF64;
+}
+
+.ligne_1 {
+  height: 30px;
+  background-color: #ECC577;
+}
+
+.ligneRace0 {
+  height: 30px;
+  background-color: #D4AF64;
+}
+
+.ligneRace1 {
+  height: 30px;
+  background-color: #ECC577;
+}
+
+#enteteTabLogDate {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#resultatRechercheLog {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+#gestionPage {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.pageEnCours {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+.lienPage {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+.fichierLog {
+  cursor: pointer;
+}
+
+/* Gestion des référentiels */
+/* Global et Royaume */
+.titreReferentiel {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: Morpheus;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  padding-top: 20px;
+}
+
+.tickcross {
+  width: 25px;
+  height: 25px;
+}
+
+.boutonsActionReferentiel {
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 12%;
+  margin-right: 15px;
+}
+
+.boutonReferentiel {
+  font-size: 12px;
+  color: #F1F1F1;
+  font-weight: bold;
+  background-color: #3d6191;
+  border-radius: 5px;
+  margin: 1px;
+  width: 90px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.boutonReferentielSelect {
+  font-size: 12px;
+  color: #F1F1F1;
+  font-weight: bold;
+  background-color: #bf2121;
+  border-radius: 5px;
+  margin: 1px;
+  width: 90px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#divAccesReferentiel {
+  float: left;
+  margin-left: 100px;
+  width: 100%;
+  text-align: left;
+}
+
+#divListeResume {
+  width: 75%;
+  display: inline-flex;
+  float: left;
+  margin-top: 20px;
+}
+
+.divBoutonAjouterReferentiel {
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 12%;
+  margin-right: 15px;
+}
+
+.referentielAdministration tr:hover td {
+  background-color: rgba(116, 226, 255, 0.6);
+}
+
+.nomListeReferentiel {
+  font-size: x-large;
+}
+
+.referentielAdministration {
+  margin-left: 25px;
+  min-width: 100%;
+  text-align: center;
+  border: 3px solid black;
+}
+
+.descriptionReferentielAdministration {
+  font-size: 14px;
+  text-align: left;
+  font-style: italic;
+  float: left;
+}
+
+.divDetailReferentiel {
+  width: 75%;
+  display: inline-flex;
+  float: left;
+  margin-top: 20px;
+}
+
+#divEtendardRoyaumeConsultation {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+#divDescriptionRoyaumeConsultation {
+  text-align: left;
+  margin-top: 25px;
+}
+
+.divArticleReferentiel {
+  float: right;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.divContenuInformationReferentiel {
+  text-align: left;
+  float: left;
+  margin-top: 10px;
+}
+
+.carreCouleur {
+  height: 25px;
+  width: 25px;
+  display: inline-table;
+  margin-left: 15px;
+}
+
+.divInformationReferentiel {
+  display: inline-grid;
+  width: 100%;
+}
+
+.couleurCarre {
+  margin-left: 5px;
+  margin-right: 5px;
+  max-width: 70px;
+}
+
+.tickcrossFormulaireAdministration {
+  margin-left: 15px;
+}
+
+.contenuAutorisationReferentiel {
+  display: inline-flex;
+  margin-left: 8px;
+}
+
+.divAutorisationReferentiel {
+  float: left;
+  text-align: left;
+  margin-top: 40px;
+  display: inline-block;
+  width: 100%;
+}
+
+.divElementJouable {
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-flex;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.titreEdition {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.divEnteteReferentiel {
+  text-align: center;
+}
+
+.texteDescriptionReferentiel {
+  width: 100%;
+  text-align: left;
+  float: left;
+  min-height: 450px;
+  resize: none;
+}
+
+.divReferentiel {
+  width: 75%;
+}
+
+.divContenuAutoriseReferentiel {
+  margin-top: 17px;
+}
+
+#s {
+  margin-left: 8px;
+  display: inline;
+}
+
+#suggestions {
+  float: right;
+  position: absolute;
+  text-align: left;
+}
+
+#autocompleteRoyaumeWiki {
+  float: right;
+  display: flex;
+}
+
+#autocompleteRaceWiki {
+  float: right;
+  display: flex;
+}
+
+#autocompleteReligionWiki {
+  float: right;
+  display: flex;
+}
+
+#autocompleteDieuWiki {
+  float: right;
+  display: flex;
+}
+
+#divDescriptionRaceConsultation {
+  text-align: left;
+  margin-top: 25px;
+}
+
+#divDescriptionReligionConsultation {
+  text-align: left;
+  margin-top: 25px;
+}
+
+#divDescriptionDieuConsultation {
+  text-align: left;
+  margin-top: 25px;
+}
+
+#divDescriptionRaceConsultation {
+  text-align: left;
+}
+
+#divDescriptionReligionConsultation {
+  text-align: left;
+}
+
+#divDescriptionDieuConsultation {
+  text-align: left;
+}
+
+#divContraintesPhysiques {
+  text-align: left;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#divImageRaceConsultation {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+#divImageReligionConsultation {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+#divImageDieuConsultation {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.imgDieuConsultation {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.imgDieuEdition {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.physiqueElement {
+  margin-left: 5px;
+}
+
+#listeYeuxCreation {
+  margin-bottom: 15px;
+  display: flow-root;
+}
+
+.inputFormCreation {
+  width: 40px;
+}
+
+.elementPhysiqueRace {
+  margin-top: 8px;
+}
+
+#listeCheveuxCreation {
+  margin-bottom: 15px;
+  display: flow-root;
+}
+
+.etendardRoyaumeReferentiel {
+  max-width: 130px;
+}
+
+.iconeRaceImage {
+  max-width: 80px;
+}
+
+.imgDieuReferentiel {
+  max-width: 100px;
+}
+
+.imgReligionReferentiel {
+  max-width: 100px;
+}
+
+.ligneReligion0 {
+  height: 30px;
+  background-color: #D4AF64;
+}
+
+.ligneReligion1 {
+  height: 30px;
+  background-color: #ECC577;
+}
+
+#divDiviniteReligionConsultation {
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.dieuReligion {
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.dieuReligion:hover {
+  opacity: 0.9;
+  -webkit-transform: scale3d(1.1, 1.1, 1);
+  transform: scale3d(1.1, 1.1, 1);
+  transition: opacity 1s, transform 1s, -webkit-transform 1s;
+}
+
+.iconeMiniatureDieu {
+  width: 120px;
+  height: 120px;
+}
+
+.dieuReligionInfo {
+  display: inline-flex;
+}
+
+.nomDiviniteReligion {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#divDiviniteReligionEdition {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#divDiviniteAbsente {
+  display: inline-block;
+  float: left;
+  margin-top: 15px;
+}
+
+#diviniteDisponibleReligionEdition {
+  display: inline-flex;
+}
+
+#ajouterDiviniteReligion {
+  margin-left: 8px;
+}
+
+#listeDiviniteReferentielAdministration {
+  width: 85%;
+}
+
+.religionListeDiviniteParReligion {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Morpheus;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  padding-top: 20px;
+  padding-bottom: 45px;
+}
+
+#divRaceDieuEdition {
+  margin-top: 20px;
+}
+
+/** Statistiques **/
+#texteStatistiques {
+  text-align: left;
+  margin-left: 75px;
+  float: left;
+  width: 75%;
+  display: inline-block;
+}
+
+/** Profil de test **/
+#selectionsProfilTest {
+  text-align: left;
+  margin-left: 75px;
+  float: left;
+  width: 75%;
+  display: inline-block;
+}
+
+#profilTestProfil {
+  margin-left: 43px;
+}
+
+#profilTestRoyaume {
+  margin-left: 20px;
+}
+
+#profilTestRace {
+  margin-left: 44px;
+}
+
+#profilTestReligion {
+  margin-left: 28px;
+}
+
+.divProfilTest {
+  margin-top: 15px;
+}
+
+/** Gestion des gifs et des images **/
+.blocRepertoire {
+  float: left;
+  text-align: left;
+  margin-left: 25px;
+  width: 15%;
+}
+
+.listeRepertoire {
+  list-style-type: none;
+  display: inline-grid;
+  padding: 0;
+}
+
+.tree {
+  background-color: #e5d2aa;
+  border-radius: 10px;
+  border: 3px solid black;
+  text-align: left;
+  max-width: 300px;
+  overflow: auto;
+  height: 400px;
+}
+
+.repertoire {
+  display: inline-block;
+  padding: 0;
+}
+
+#detailRepertoire {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.divBlocElementVisuel {
+  width: 80%;
+  float: left;
+  text-align: left;
+  margin-left: 25px;
+  display: inline-grid;
+}
+
+.miniatureElementVisuel {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.blocImage {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+.imageDuBloc {
+  padding-top: 5px;
+}
+
+.detailElementVisuel {
+  display: inline-flex;
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+  width: 50%;
+  margin-top: 50px;
+}
+
+#imageSelectImg {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  max-width: 250px;
+  max-height: 250px;
+}
+
+.donneesElementVisuel {
+  width: 100%;
+}
+
+#imageEnCours {
+  width: 80%;
+}
+
+.ftpElementVisuel {
+  margin-top: 40px;
+  display: flex;
+}
+
+#selectedfile {
+  margin-left: 8px;
+}
+
+#buttonBrowseFile {
+  margin-left: 8px;
+}
+
+.blocGif {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+#gifEnCours {
+  width: 80%;
+}
+
+#gifSelectImg {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  max-width: 250px;
+  max-height: 250px;
+}
+
+/* Questionnaires */
+.soustitreQuestionnaire {
+  text-align: left;
+  float: left;
+  margin-left: 25px;
+  font-size: 14px;
+  font-style: italic;
+  font-family: Morpheus;
+}
+
+.blocTableQuestionnaire {
+  display: grid;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+#tableauQuestionsActives {
+  margin-left: 15px;
+}
+
+#tableauQuestionsInactives {
+  margin-left: 15px;
+}
+
+.listeQuestionnaire {
+  min-width: 80%;
+  text-align: center;
+  border: 3px solid black;
+}
+
+.tableauChoix {
+  text-align: left;
+}
+
+.boutonTableauQuestionnaire {
+  display: inline-flex;
+  margin-top: 15px;
+}
+
+#nbQuestionsInactives {
+  margin-bottom: 15px;
+  margin-top: 30px;
+}
+
+#divBoutonAjouterQuestion {
+  float: left;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}

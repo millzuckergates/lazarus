@@ -1,0 +1,119 @@
+<div id="pageArticle">
+    <div id="divPageArticle">
+        <?php
+        if ($article->idHierarchie == 0) {
+            $titrePere = "";
+        } else {
+            $pere = Articles::findFirst($article->idHierarchie);
+            $titrePere = $pere->titre;
+        }
+        echo $this->tag->hiddenField(["idArticle", "value" => $article->id]);
+        ?>
+
+        <!--liste des etiquettes -->
+        <div id="divMotClef">
+            <span class="labelMotClef">Mots clef :</span>
+            <div id="listeMotClef"><?php echo $article->genererMotClef($auth); ?></div>
+        </div>
+
+        <div id="divArticle">
+            <!-- Fil d'Arianne -->
+            <div id="filArianne">
+                <div id="filArianneComplet"><?php echo $article->genererFilArianne(); ?></div>
+                <div id="autocompletePere">
+                    <?php echo Phalcon\Tag::textField(array("s", "class" => "field")); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'ajouterPereArticle', 'class' => 'buttonPlus', 'title' => "Permet d'ajouter un père à l'article.")); ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+            <!-- Article -->
+            <div id="articleEnCours">
+                <!-- Image de l'article -->
+                <div id="enteteArticle">
+                    <div id="divImageArticleEdition">
+                        <?php
+                        echo Phalcon\Tag::image([$article->img, "id" => "imageArticle", "class" => "imageArticle"]); ?>
+                        <div id="gestionImageWiki">
+                            <?php
+                            echo Phalcon\Tag::textField(array("img", "class" => "addImage", "value" => $article->img));
+                            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'changerImageWiki', 'class' => 'buttonActualiser', 'title' => "Permet de modifier l'image."));
+                            ?>
+                        </div>
+                        <!-- Boutons d'édition -->
+                        <div id="boutonsEnregistrerAnnuler">
+                            <?php
+                            if ($article->checkDroitEditer($auth)) {
+                                echo Phalcon\Tag::SubmitButton(array("Enregistrer", 'id' => 'enregistrerWiki', 'class' => 'bouton', 'title' => "Permet d'enregistrer les modifications."));
+                            }
+                            if ($article->status == Articles::STATUS_PROPOSITION) {
+                                echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerPropositionWiki', 'class' => 'bouton', 'title' => "Annuler votre proposition d'article."));
+                            }
+                            echo Phalcon\Tag::linkTo(["wiki/article?id=" . $article->id, "Retour article", "class" => "retourArticlew"]);
+                            ?>
+                        </div>
+
+                        <!-- Restrictions sur l'artice -->
+                        <div id="restrictionsPourLarticle">
+                            <?php if (Autorisations::hasAutorisation(Autorisations::GESTION_WIKI, $auth['autorisations'])) { ?>
+                                <span class='titreBlocSecondaire'>Restrictions </span>
+                                <div id="listeRestrictions">
+                                    <?php
+                                    echo $article->formateRestriction("formulaire", $auth['perso']);
+                                    ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+
+                        <div id="divListeContributeur">
+                            <?php if ($article->checkDroitEditer($auth)) { ?>
+                                <div id="listeContributeurEdition">
+                                    <span class='titreBlocSecondaire'>Contributeurs</span>
+                                    <div id="listeContributeurs"> <?php echo $article->getContributeurs("formulaire"); ?></div>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <div id="auteur">
+                            <?php if (Autorisations::hasAutorisation(Autorisations::GESTION_WIKI, $auth['autorisations'])) { ?>
+                                <label class="labelWiki" for="profilAuteurEdition">Auteur &nbsp;&nbsp;</label><span
+                                        id="spanProfil"><span class="profil" id="profilAuteurEdition"
+                                                              onclick="profilPerso('<?php echo $article->idAuteur; ?>.')"><?php echo Personnages::findFirst($article->idAuteur)->nom; ?></span></span>
+                                <div id="boutonModifierEdition">
+                                    <input type="button" class="bouton" value="Changer auteur" id="boutonChangerAuteur"
+                                           onclick="boxChangerAuteur();"/>
+                                </div>
+                            <?php } else { ?>
+                                <label class="labelWiki" for="profilAuteurEdition">Auteur :</label>
+                                <span class="texteWiki"
+                                      id="profilAuteurEdition"><?php echo Personnages::findFirst($article->idAuteur)->nom; ?></span>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <!-- Titre de l'article -->
+                <div id="titreDeLarticleEdition">
+                    <?php echo Phalcon\Tag::textField(array("titreEdition", "class" => "formulaireFied", "value" => $article->titre)); ?>
+                </div>
+
+                <!-- Texte du wiki -->
+                <div id="texteDuWikiEdition">
+                    <!-- Div Balise -->
+                    <div id="balises"><?php $this->partial('utils/balises'); ?></div>
+                    <div id="divTexteDuWiki"><?php echo Fonctions::rawTextArea("contenuArticle", $article->formateTexteArticle($auth, true));?></div>
+                    <!-- Liste des fils -->
+                    <div id="listeDesFilsEdition">
+                        <?php
+                        echo $article->getListeFilsEdition($auth);
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Div pour le résultat de la recherche -->
+    <div id="resultatRecherche" style="display:none;">
+
+    </div>
+</div>

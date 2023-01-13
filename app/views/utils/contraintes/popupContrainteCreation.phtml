@@ -1,0 +1,33 @@
+<div id="contenuContrainte">
+    <?php
+    echo $this->tag->hiddenField(["nbParametre", "value" => ""]);
+    ?>
+
+    <div id="enteteContrainte">
+        <div id="divTitreContrainte"><span class="titrePopup">Ajouter une nouvelle contrainte</span></div>
+    </div>
+
+    <div id="divSelectContrainte">
+        <div id="divSelectTypeContrainte" class='selectListeContrainte'>
+            <label for="spanSelectTypeContrainte">Type de contrainte </label>
+            <span id="spanSelectTypeContrainte"><?php echo Contraintes::getSelectType(); ?></span>
+        </div>
+
+        <div id="divSelectContrainte" class='selectListeContrainte'>
+            <label for="spanSelectContrainte">Contrainte </label>
+            <span id="spanSelectContrainte"><?php echo Contraintes::getSelectContrainte(); ?></span>
+        </div>
+    </div>
+
+    <div id="detailContrainte" class="detailElement" style="display:none">
+
+    </div>
+
+    <div id="boutonAjouterPopupContrainte" class="boutonActionPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Valider", 'id' => 'validerContrainte', 'class' => 'bouton validerContrainte', 'title' => "Ajoute la contrainte à l'élément.")); ?>
+    </div>
+
+    <div id="boutonFermerPopupContrainte" class="boutonFermerPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerAjoutContrainte', 'class' => 'bouton annulerAjoutContrainte', 'title' => "Annule l'ajout de la contrainte.")); ?>
+    </div>
+</div>

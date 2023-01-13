@@ -1,0 +1,33 @@
+<div id="contenuEffet">
+    <?php
+    echo $this->tag->hiddenField(["nbParametre", "value" => ""]);
+    ?>
+
+    <div id="enteteEffet">
+        <div id="divTitreEffet"><span class="titrePopup">Ajouter un nouvel effet</span></div>
+    </div>
+
+    <div id="divSelectEffet">
+        <div id="divSelectTypeEffet" class='selectListeEffet'>
+            <label for="spanSelectTypeEffet">Type de l'effet </label>
+            <span id="spanSelectTypeEffet"><?php echo Effets::getSelectType(); ?></span>
+        </div>
+
+        <div id="divSelectEffet" class='selectListeEffet'>
+            <label for="spanSelectEffet">Eeffet </label>
+            <span id="spanSelectEffet"><?php echo Effets::getSelectEffet(); ?></span>
+        </div>
+    </div>
+
+    <div id="detailEffet" class="detailElement" style="display:none">
+
+    </div>
+
+    <div id="boutonAjouterPopupEffet" class="boutonActionPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Valider", 'id' => 'validerEffet', 'class' => 'bouton', 'title' => "Ajoute l'effet à l'élément.")); ?>
+    </div>
+
+    <div id="boutonFermerPopupEffet" class="boutonFermerPopupElement">
+        <?php echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerAjoutEffet', 'class' => 'bouton', 'title' => "Annule l'ajout de l'effet.")); ?>
+    </div>
+</div>

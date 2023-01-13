@@ -1,0 +1,116 @@
+<!-- Div pour les boutons -->
+<div id="divBoutonsVilleCreation" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerVille', 'class' => 'bouton', 'title' => "Créer la ville."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'retourListeVille', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des Villes."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la ville -->
+<div id="divVille" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("nomVille", "class" => "formulaireField titreEdition", "value" => "Nom de la Ville")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuVille" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageVille">
+            <?php echo Phalcon\Tag::image(['public/img/site/illustrations/villes/defaut.jpg', "class" => 'imageVille', 'id' => 'imageVille']); ?>
+            <div id="listeImageVille">
+                <?php echo Villes::genererListeImageVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterImageVille">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageVille", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageVille', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionVille">
+            <?php echo Phalcon\Tag::textArea(["descriptionVille", "value" => "Entrez une description.", "class" => "texteDescriptionVilleReferentiel"]); ?>
+        </div>
+
+        <!-- Detail  -->
+        <div id="divInformationVille" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleVille" class="divArticleReferentiel">
+                <div id="autocompleteVilleWiki">
+                    <label for="s">Article du wiki </label>
+                    <?php
+                    echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Id Royaume Origine -->
+            <div id="divRoyaumeOrigineVille" class="divContenuInformationReferentiel">
+                <label for="royaumeOrigineVille">Royaume d'origine </label>
+                <span id="royaumeOrigineVille"><?php echo Villes::getSelectRoyaumeVide('royaumeOrigine'); ?></span>
+                <div class='divAide' id='divAideRoyaumeOrigineVille'
+                     onMouseOver='afficherAide("Il s&#39;agit du royaume auquel la ville était rattachée à l&#39;origine.","divAideRoyaumeOrigineVille");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <!-- Id Royaume Actuel -->
+            <div id="divRoyaumeActuelVille" class="divContenuInformationReferentiel">
+                <label for="royaumeActuelVille">Royaume actuel </label>
+                <span id="royaumeActuelVille"><?php echo Villes::getSelectRoyaumeVide('royaumeActuel'); ?></span>
+                <div class='divAide' id='divAideRoyaumeActuelVille'
+                     onMouseOver='afficherAide("Il s&#39;agit du royaume auquel la ville est rattachée.","divAideRoyaumeActuelVille");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <!-- Message d'accueil -->
+            <div id="divRoyaumeActuelVilleConsultation" class="divContenuInformationReferentiel">
+                <label for="messageAccueilVille">Message d'accueil </label>
+                <?php echo Phalcon\Tag::textArea(["messageAccueilVille", "value" => "Entrez un message d'accueil.", "class" => "texteDescriptionMessageReferentiel"]); ?>
+                <div class='divAide' id='divAideMessageAccueilVille'
+                     onMouseOver='afficherAide("Le message d&#39;accueil s&#39;affiche lorsque le joueur entre en ville.","divAideMessageAccueilVille");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <!-- Disponible en choix de naissance -->
+            <div id="divIsNaissanceVille" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isNaissanceVille'>Disponible en choix de naissance ? </label><input type='checkbox' id='isNaissanceVille' class='tickcrossFormulaireAdministration' checked />";
+                ?>
+            </div>
+
+            <!-- Position sur la carte -->
+            <div id="divPositionCarteVille" class="divContenuInformationReferentiel">
+                <!-- Xmin/Xmax -->
+                <div id="divPositionXVille" class="divContenuInformationReferentiel">
+                    <label for="positionXMinVille">Abscisse entre </label>
+                    <input type='text' size=5 id="positionXMinVille" class='positionVille' value='0'>
+                    <span id="separateurET"> et </span>
+                    <input type='text' size=5 id="positionXMaxVille" class='positionVille' value='0'>
+                </div>
+
+                <!-- Ymin/Ymax -->
+                <div id="divPositionYVille" class="divContenuInformationReferentiel">
+                    <label for="positionYMinVille">Ordonnée entre </label>
+                    <input type='text' size=5 id="positionYMinVille" class='positionVille' value='0'>
+                    <span id="separateurET"> et </span>
+                    <input type='text' size=5 id="positionYMaxVille" class='positionVille' value='0'>
+                </div>
+
+                <div class='divAide' id='divAideDispositionVille'
+                     onMouseOver='afficherAide("Si votre ville se trouve sur la carte principale, alors il faut renseigner les coordonnées. Sinon, laissez 0 pour chaque coordonnées puis rendez-vous dans l&#39;onglet Carte de la partie Gameplay et associez la carte correspondante à cette ville.","divAideDispositionVille");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+        </div>
+    </div>
+</div>

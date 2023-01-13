@@ -1,0 +1,169 @@
+/** Style Message Box **/
+#msgBox {
+    position: fixed;
+    display: none;
+    left: 50%;
+    top: 50%;
+    z-index: 8000;
+    padding: 20px;
+    width: 560px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #202020;
+    border: 3px outset brown;
+    background: wheat;
+    height: 200px;
+}
+
+#msgBox_titre {
+    padding: 2px 0px;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.boutton {
+    background: chocolate;
+    color: white;
+    position: absolute;
+    margin-left: 350px;
+    margin-top: -50px;
+}
+
+#msgBox_infoMsgRestant {
+    text-align: center;
+    display: none;
+}
+
+#msgBox .contenu {
+    margin: 0px;
+    width: 408px;
+    height: 103px;
+    position: relative;
+}
+
+#msgBox .imageMsgBox {
+    text-align: center;
+    width: 100px;
+    margin-top: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+#msgBox .expression {
+    margin-top: 30px;
+    display: inline-block;
+}
+
+#msgBoxMsg {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 320px;
+    font-size: 9pt;
+    overflow: auto;
+    text-align: justify;
+    background: antiquewhite;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 0px 10px 0px 10px;
+
+}
+
+#msgBoxSaisie {
+    position: absolute;
+    right: 5px;
+    left: 90px;
+    top: 60px;
+    display: none;
+    height: 45px;
+    width: 80%;
+    border: black solid 1px;
+    font-family: arial;
+    font-size: 9pt;
+    padding-left: 2px;
+    background-color: snow;
+    color: black;
+    resize: none;
+}
+
+#msgBoxListe {
+    position: absolute;
+    top: 60px;
+    display: none;
+    width: 100px;
+    color: black;
+    margin-top: 5px;
+    left: 90px;
+    height: 23px;
+}
+
+#msgBox .boutons {
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    bottom: 1px;
+    right: 10px;
+    top: 15px;
+}
+
+#msgBox .bouton {
+    width: 100px;
+    display: none;
+}
+
+#msgBox .bas {
+    position: relative;
+}
+
+#grayBack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1999;
+    opacity: 0.5;
+}
+
+/** Message Avertissement **/
+.fixedBasDroite {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    background-color: whitesmoke;
+    z-index: 9999;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#avertessimentProfilTest {
+    font-family: Times;
+    font-weight: bold;
+}
+
+#buttonDecoProfilTest {
+    font-size: 12px;
+    color: whitesmoke;
+    font-weight: bold;
+    background-color: rgb(165, 42, 42);
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#buttonDecoProfilTest:hover {
+    color: whitesmoke;
+    background-color: rgb(196, 163, 85);
+    cursor: pointer;
+}
+
+.imagePiom {
+    min-height: 90px;
+    border: 0;
+    float: right;
+}

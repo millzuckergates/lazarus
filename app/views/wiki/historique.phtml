@@ -1,0 +1,42 @@
+<?php
+$historiques = $article->historiques;
+echo '<span class="titrePopup">Historique : ' . $article->titre . '</span><br/><br/>';
+if (!empty($historiques)) {
+    echo "<table class='historiqueWiki'>";
+    echo "<tr>
+				<th class='entete' width='15%'>Modification</th>
+				<th class='entete' width='15%'>Perso</th>
+				<th class='entete' width='15%'>Date</th>
+				<th class='entete' width='30%'>Commentaire</th>
+				<th class='entete' width='25%'>Contenu précédent</th>
+			</tr>";
+
+    $i = 0;
+    foreach ($historiques as $historique) {
+        $auteur = Personnages::findFirst(["id = :id:", "bind" => ["id" => $historique->idAuteur]]);
+        $numeroLigne = $i % 2;
+        echo "<tr class='ligne_" . $numeroLigne . "'>";
+        echo "<td>" . $historique->action . "</td>";
+        echo "<td>" . $auteur->nom . "</td>";
+        echo "<td>" . strftime('%d/%m/%Y %H:%M:%S', $historique->dateModification) . "</td>";
+        echo "<td>" . $historique->commentaire . "</td>";
+        if (strlen($historique->ancienContenu) > 30) {
+            ?>
+            <td><a href="#" onclick="lireSuite('<?php echo $historique->id; ?>');" class="lireLaSuite"
+                   id="lireLaSuite_<?php echo $historique->id; ?>">Lire la suite...</a>
+                <div id="texte_<?php echo $historique->id; ?>"
+                     style="display:none"><?php echo $historique->ancienContenu; ?></div>
+            </td>
+        <?php } else {
+            echo "<td>" . $historique->ancienContenu . "</td>";
+        }
+        echo "</tr>";
+        $i++;
+    }
+    echo "</table>";
+} else {
+    echo "<span class='texteResultatErreur'>Il n'y pas d'historique pour cet article.</span>";
+}
+echo "<br/><br/>";
+echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerHistoriqueArticle', 'class' => 'bouton', 'title' => "Permet de fermer la popup de l'historique."));
+?>

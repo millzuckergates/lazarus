@@ -1,0 +1,1054 @@
+/* Onglets */
+#ongletsGameplay {
+    float: left;
+    display: grid;
+    width: 10%;
+}
+
+.ongletGameplay {
+    background-color: rgba(236, 165, 46, 0.6);
+    float: left;
+    width: 101%;
+    height: 50px;
+    text-align: center;
+}
+
+.ongletGameplaySelect {
+    background-color: rgba(223, 182, 112, 0.61);
+    float: left;
+    width: 101%;
+    height: 50px;
+    text-align: center;
+    border-right: none;
+}
+
+.ongletGameplay :hover {
+    cursor: pointer;
+    color: rgb(43, 88, 155);
+    background-color: rgba(195, 135, 34, 0.6);
+    float: left;
+    width: 101%;
+}
+
+.labelOngletGameplay {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    padding-top: 20px;
+}
+
+/* General */
+#blocGameplay {
+    background-color: rgba(223, 182, 112, 0.61);
+    min-height: 450px;
+    width: 100%;
+    display: inline-block;
+}
+
+.titrePage {
+    display: block;
+    font-size: 30px;
+    font-family: Times;
+    font-weight: bold;
+    color: brown;
+    text-shadow: 1px 1px #000;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.entetePageGameplay {
+    float: left;
+    margin-left: 210px;
+    width: 100%;
+}
+
+/* Index  */
+#texteIndex {
+    text-align: left;
+    margin-left: 75px;
+    float: left;
+    width: 75%;
+    display: inline-block;
+}
+
+th {
+    text-align: center;
+}
+
+.ligne_0 {
+    height: 30px;
+    background-color: #D4AF64;
+}
+
+.ligne_1 {
+    height: 30px;
+    background-color: #ECC577;
+}
+
+
+/* Magie */
+#divAccesGestionMagie {
+    float: left;
+    margin-left: 100px;
+    width: 100%;
+    text-align: left;
+}
+
+.boutonGestionMagie {
+    font-size: 12px;
+    color: #F1F1F1;
+    font-weight: bold;
+    background-color: #3d6191;
+    border-radius: 5px;
+    margin: 1px;
+    width: 110px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.boutonGestionMagieSelect {
+    font-size: 12px;
+    color: #F1F1F1;
+    font-weight: bold;
+    background-color: #bf2121;
+    border-radius: 5px;
+    margin: 1px;
+    width: 110px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#divListeResume {
+    width: 75%;
+    display: inline-flex;
+    float: left;
+    margin-top: 20px;
+}
+
+.divBoutonAjouterReferentiel {
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 12%;
+    margin-right: 15px;
+}
+
+.referentielMagie tr:hover td {
+    background-color: rgba(116, 226, 255, 0.6);
+}
+
+.referentielMagie {
+    margin-left: 25px;
+    min-width: 100%;
+    text-align: center;
+    border: 3px solid black;
+}
+
+.tickcross {
+    width: 25px;
+    height: 25px;
+}
+
+.boutonsActionReferentiel {
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 12%;
+    margin-right: 15px;
+}
+
+.divDetailReferentiel {
+    width: 85%;
+    display: inline-flex;
+    float: left;
+    margin-top: 20px;
+}
+
+.divEnteteReferentiel {
+    text-align: center;
+}
+
+.titreReferentiel {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    padding-top: 20px;
+}
+
+.divReferentiel {
+    width: 75%;
+}
+
+.imageMiniatureListe {
+    max-width: 110px;
+}
+
+#divImageNatureMagie {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.imageMagieConsultation {
+    max-width: 220px;
+}
+
+.divDescriptionMagieConsultation {
+    text-align: left;
+    margin-top: 25px;
+}
+
+.divInformationMagie {
+    display: inline-grid;
+    width: 100%;
+}
+
+.divArticleReferentiel {
+    float: right;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.divContenuInformationReferentiel {
+    text-align: left;
+    float: left;
+    margin-top: 5px;
+}
+
+.carreCouleur {
+    height: 25px;
+    width: 25px;
+    display: inline-table;
+    margin-left: 15px;
+}
+
+.divInformationReferentiel {
+    display: inline-grid;
+    width: 100%;
+}
+
+.couleurCarre {
+    margin-left: 5px;
+    margin-right: 5px;
+    max-width: 70px;
+}
+
+.tickcrossFormulaire {
+    margin-left: 15px;
+}
+
+.listeElementAssocieMagie {
+    margin-top: 30px;
+    text-align: -moz-center;
+    text-align: -webkit-center;
+}
+
+#divAjoutEcoleMagie {
+    margin-top: 10px;
+}
+
+#selectEcoleMagie {
+    display: inline-flex;
+    margin-top: 15px;
+}
+
+#divSelectEcoleMagie {
+    margin-left: 10px;
+    display: flex;
+}
+
+#selectEcoleDisponible {
+    width: 100px;
+}
+
+#ajouterEcoleNatureMagie {
+    margin-left: 10px;
+}
+
+.titreEdition {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.texteDescriptionReferentiel {
+    width: 100%;
+    text-align: left;
+    float: left;
+    min-height: 450px;
+    resize: none;
+}
+
+#imageNatureMagie {
+    max-width: 200px;
+}
+
+#couleurNatureMagieEdition {
+    margin-left: 40px;
+}
+
+#selectTypeNatureMagie {
+    margin-left: 58px;
+}
+
+#selectFichierNatureMagie {
+    margin-left: 12px;
+}
+
+#isBloqueNatureMagieEdition {
+    margin-left: 44px;
+}
+
+#isDispoInscriptionNatureMagieEdition {
+    margin-left: 10px;
+}
+
+#listeImage {
+    margin-top: 5px;
+}
+
+#couleurNatureMagieCreation {
+    margin-left: 40px;
+}
+
+#isBloqueNatureMagieCreation {
+    margin-left: 44px;
+}
+
+#isDispoInscriptionNatureMagieCreation {
+    margin-left: 10px;
+}
+
+#s {
+    margin-left: 8px;
+    display: inline;
+}
+
+#suggestions {
+    float: right;
+    position: absolute;
+    text-align: left;
+}
+
+#autocompleteTypeMagieWiki {
+    float: right;
+    display: flex;
+}
+
+.resultatVide {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#imageEcoleMagie {
+    max-width: 200px;
+}
+
+#couleurEcoleMagieCreation {
+    margin-left: 90px;
+}
+
+#selectTypeNatureMagieEcole {
+    margin-left: 53px;
+}
+
+#selectScriptEcole {
+    margin-left: 63px;
+}
+
+#selectCompetenceAssocieeEcole {
+    margin-left: 7px;
+}
+
+#isDispoInscriptionEcoleMagieCreation {
+    margin-left: 10px;
+}
+
+#isBloqueEcoleMagieCreation {
+    margin-left: 44px;
+}
+
+#autocompleteEcoleMagieWiki {
+    float: right;
+    display: flex;
+}
+
+.descriptionReferentielListe {
+    text-align: left;
+    float: left;
+    font-style: italic;
+}
+
+.descriptionReferentielGameplay {
+    text-align: left;
+    float: left;
+    font-style: italic;
+}
+
+.nomEcoleParTypeMagie {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    padding-top: 20px;
+    padding-bottom: 45px;
+}
+
+.referentielGameplay tr:hover td {
+    background-color: rgba(116, 226, 255, 0.6);
+}
+
+.nomListeReferentiel {
+    font-size: x-large;
+}
+
+#couleurEcoleMagieEdition {
+    margin-left: 90px;
+}
+
+#isDispoInscriptionEcoleMagieEdition {
+    margin-left: 10px;
+}
+
+#isBloqueEcoleMagieEdition {
+    margin-left: 44px;
+}
+
+#divAjoutSort {
+    margin-top: 20px;
+}
+
+.ecoleNatureMagieInfo {
+    display: inline-flex;
+}
+
+.nomEcoleNatureMagie {
+    margin-right: 8px;
+}
+
+.ecoleNatureMagie {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.iconeMiniatureEcole {
+    width: 120px;
+    height: 120px;
+}
+
+.ecoleNatureMagie:hover {
+    opacity: .9;
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+    transition: opacity 1s, transform 1s, -webkit-transform 1s;
+}
+
+#divImageEcoleMagie {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.texteMessageRPReferentiel {
+    margin-top: 15px;
+    width: 100%;
+    text-align: left;
+    float: left;
+    min-height: 250px;
+    resize: none;
+}
+
+#autocompleteSortWiki {
+    float: right;
+    display: flex;
+}
+
+#selectEcoleSort {
+    margin-left: 20px;
+}
+
+#arcaneSortCreation {
+    margin-left: 65px;
+}
+
+#manaSort {
+    margin-left: 75px;
+}
+
+.boutonFormule {
+    font-size: 12px;
+    color: #F1F1F1;
+    font-weight: bold;
+    background-color: #3d6191;
+    border-radius: 5px;
+    margin: 1px;
+    width: 120px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+}
+
+#porteeSort {
+    margin-left: 68px;
+}
+
+#paSort {
+    margin-left: 45px;
+}
+
+#dureeSort {
+    margin-left: 30px;
+}
+
+#dureeMaxSort {
+    margin-left: 15px;
+}
+
+#cumulQuantiteSort {
+    margin-left: 15px;
+}
+
+#isBloqueSortCreation {
+    margin-left: 15px;
+}
+
+#isEnseignableSortSortCreation {
+    margin-left: 12px;
+}
+
+#isEsquivableSortSortCreation {
+    margin-left: 20px;
+}
+
+#isRetranscriptibleSortSortCreation {
+    margin-left: 10px;
+}
+
+#blocParticulierNatureMagie {
+    margin-top: 20px;
+}
+
+.imageMagie {
+    max-width: 200px;
+}
+
+#listeSorts {
+    width: 100%;
+}
+
+.nomSortParEcole {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    padding-top: 20px;
+    padding-bottom: 45px;
+}
+
+#divImageSort {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+#divImageSortCreation {
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.divEventLanceurMagieConsultation {
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.divEventGlobalMagieConsultation {
+    margin-top: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.divMessageRPMagieConsultation {
+    margin-top: 80px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#sortEcole {
+    margin-left: 20px;
+}
+
+#arcaneSort {
+    margin-left: 65px;
+}
+
+#divInformationTechniqueSort {
+    z-index: 1;
+    float: right;
+    text-align: end;
+}
+
+
+#divInformationTechniqueSort {
+    display: grid;
+}
+
+#divFormSort {
+    width: 65%;
+}
+
+#messageRPSortEdition {
+    margin-top: 20px;
+    min-height: 250px;
+}
+
+#arcaneSortEdition {
+    margin-left: 64px;
+}
+
+#informationTechniqueFamille {
+    border-radius: 10px;
+    border: 1px solid black;
+    background: #dba35a;
+    width: 600px;
+    margin-left: 10px;
+}
+
+#informationTechniqueArbre {
+    border-radius: 10px;
+    border: 1px solid black;
+    background: #dba35a;
+    width: 600px;
+    margin-left: 10px;
+}
+
+#isBloqueSortEdition {
+    margin-left: 15px;
+}
+
+#isEnseignableSortSortEdition {
+    margin-left: 12px;
+}
+
+#isEsquivableSortSortEdition {
+    margin-left: 20px;
+}
+
+#isRetranscriptibleSortSortEdition {
+    margin-left: 10px;
+}
+
+
+/* Caractéristiques */
+.enteteTableCarac {
+    display: flex;
+    margin-left: 25px;
+    margin-bottom: 10px;
+}
+
+.buttonRight {
+    margin-left: 20px;
+}
+
+.nombreTypeCarac {
+    margin-left: 6px;
+    font-style: italic;
+}
+
+.divCaracType {
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.tableCarac {
+    margin-left: 25px;
+    min-width: 100%;
+    text-align: center;
+    border: 3px solid black;
+}
+
+.nomTypeCarac {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+}
+
+.resultatVideCarac {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#listesTablesCaracs {
+    width: 100%;
+}
+
+.imgCaracReferentiel {
+    max-width: 130px;
+}
+
+.tableCarac tr:hover td {
+    background-color: rgba(116, 226, 255, 0.6);
+}
+
+.descriptionReferentiel {
+    text-align: left;
+}
+
+#divImageCarac {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.imageCaracConsultation {
+    max-width: 220px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.divDescriptionCaracConsultation {
+    text-align: left;
+    margin-top: 25px;
+}
+
+.divInformationCarac {
+    display: inline-grid;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#genreCarac {
+    margin-left: 70px;
+}
+
+#trigrammeCarac {
+    margin-left: 42px;
+}
+
+#typeCarac {
+    margin-left: 78px;
+}
+
+#valMinCarac {
+    margin-left: 12px;
+}
+
+#valMaxCarac {
+    margin-left: 9px;
+}
+
+.imageCentreeEdition {
+    text-align: center;
+    width: 100%;
+}
+
+#isModifiableCarac {
+    margin-left: 15px;
+}
+
+#imageCarac {
+    max-width: 150px;
+}
+
+/* Terrains */
+#blocRechercheTerrain {
+    background-color: #ddb76c;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 12px;
+    float: left;
+    margin-bottom: 30px;
+    margin-left: 10px;
+}
+
+.titreBlocRecherche {
+    margin-left: 5px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.labelTitreBlocRecherche {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Morpheus;
+    letter-spacing: 1px;
+    vertical-align: middle;
+}
+
+.contenuBlocRecherche {
+    position: relative;
+    margin-left: 2px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.fieldSearch {
+    display: inline;
+    width: 65%;
+    font-size: 12px;
+    height: 20px;
+    vertical-align: right;
+    float: right;
+}
+
+#tableRechercheTerrain {
+    width: 95%;
+    margin-top: 10px;
+}
+
+.divSearch {
+    margin-top: 5px;
+}
+
+#selectSearchSaison {
+    width: 65%;
+    height: 20px;
+    font-size: 12px;
+    display: inline;
+    vertical-align: right;
+    float: right;
+}
+
+#lancerRechercheWiki {
+    float: right;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    display: inline;
+}
+
+#divActionTerrains, #divActionTextures {
+    width: 22%;
+}
+
+.enteteTableTerrain, .enteteTableTexture {
+    display: flex;
+}
+
+.divListeTerrainSaison {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.nomTypeTerrain, .nomTypeTexture {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Metamorphous;
+    letter-spacing: 1px;
+}
+
+#listesTablesTerrains, #listesTablesTextures {
+    margin-left: 10px;
+    width: 80%;
+}
+
+.resultatVideTerrain, .resultatVideTexture {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+#descriptionTerrain {
+    min-height: 250px;
+}
+
+.divInformationTerrain {
+    display: inline-grid;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+#genreTerrain {
+    margin-left: 70px;
+}
+
+#saisonTerrain {
+    margin-left: 65px;
+}
+
+#typeAccesTerrain {
+    margin-left: 30px;
+}
+
+#competenceTerrain {
+    margin-left: 32px;
+}
+
+#couleurTerrain {
+    margin-left: 60px;
+}
+
+#mvtTerrain {
+    margin-left: 10px;
+}
+
+#visionTerrain {
+    margin-left: 44px;
+}
+
+#zindexTerrain {
+    margin-left: 60px;
+}
+
+#isBloqueMvtTerrain {
+    margin-left: 15px;
+}
+
+#isBloqueVueTerrain {
+    margin-left: 58px;
+}
+
+.divDescriptionTerrainCreation {
+    margin-top: 30px;
+    width: 70%;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.divDescriptionTerrain {
+    margin-top: 30px;
+    width: 70%;
+    margin-left: 20px;
+}
+
+.divGeneralImageTerrain {
+    margin-top: 30px;
+}
+
+.gestionImageTerrain {
+    margin-top: 10px;
+    display: grid;
+}
+
+.texte {
+    font-size: 12px;
+    font-family: Metamorphous;
+    text-align: left;
+}
+
+.listeImageTerrain {
+    background-color: #ccae66;
+    border-radius: 10px;
+    border: 1px solid black;
+    min-height: 40px;
+    text-align: left;
+    display: flex;
+}
+
+.msgNoImage {
+    vertical-align: -moz-middle-with-baseline;
+    vertical-align: -webkit-middle-with-baseline;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.terrainRepartition {
+    margin-top: 70px;
+    text-align: left;
+}
+
+.terrainRepartitionDetail {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#repartitionTerrain {
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.divContenuReferentielTerrain {
+    text-align: -moz-center;
+    text-align: center;
+    text-align: -webkit-center;
+}
+
+.chargementImageTerrain {
+    margin-top: 20px;
+    display: inline-flex;
+    text-align: left;
+    float: left;
+    width: 100%;
+}
+
+#divAjouterImageTerrain {
+    margin-left: 15px;
+}
+
+#selectTypeJournee {
+    height: 30px;
+}
+
+#chargerNewImageTerrain {
+    margin-left: 10px;
+}
+
+.blocImageTerrains {
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    max-width: 160px;
+    text-align: center;
+}
+
+.nombreTypeTerrain {
+    margin-left: 6px;
+    font-style: italic;
+}
+
+.tableTerrainSaison tr:hover td, .tableTexture tr:hover td {
+    background-color: rgba(116, 226, 255, 0.6);
+}
+
+.tableTexture {
+    width: 100%;
+}
+
+.imgTextureReferentiel {
+    width: 128px;
+    height: 64px;
+}
+
+#divListeEffet {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.divListeEffetAction {
+    margin-top: 15px;
+}
+
+.introListeEffetAction {
+    font-size: 12px;
+    font-family: Metamorphous;
+    margin-bottom: 4px;
+    font-style: italic;
+}
+
+.eventReferentiel {
+    width: 100%;
+    margin-top: 20px;
+    resize: none;
+}

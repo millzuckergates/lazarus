@@ -1,0 +1,39 @@
+<div id="creationNews">
+    <div class="entetePopup" id="entetePopupNews">
+        <?php echo Phalcon\Tag::textField(array("titreNews", "class" => "formulaireField titrePopupEdition", "value" => "Entrez un titre")); ?>
+    </div>
+
+    <div class="formPopupNews" id="formPopupNews">
+        <!-- Type de la news -->
+        <div class='divDataPopup'>
+            <label for="selectTypeNews">Type de la news </label>
+            <span id="selectTypeNews"><?php echo News::genererSelectType(); ?></span>
+        </div>
+
+        <!-- Si News RP, bloc destinataire -->
+        <div class='divDataPopup' id='blocDestinataireNews' style='display:none'>
+            <label for="selectTypeDestinataire">Destinataires </label>
+            <span id="selectTypeDestinataire"><?php echo News::genererSelectDestinataire(); ?></span>
+            <span id="selectIdDestinataire" style="display:none"></span>
+        </div>
+
+        <!-- Nom Auteur -->
+        <div class='divDataPopup'>
+            <label for="nomAuteur">Auteur </label>
+            <?php echo Phalcon\Tag::textField(array("nomAuteur", "class" => "formulaireField", "value" => $auth['perso']->nom)); ?>
+        </div>
+
+        <!-- Bloc Texte -->
+        <div class="divDataPopup" id="blocTexteNews">
+            <!-- Balises -->
+            <div id="balises"><?php $this->partial('utils/balises'); ?></div>
+            <!-- Texte -->
+            <div id="divTexteNews"><?php echo Phalcon\Tag::textArea(["texteNews", "value" => "Entrez votre texte"]); ?></div>
+        </div>
+
+        <!-- Boutons -->
+        <div id="boutonCreerNews" class="boutonActionPopup">
+            <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'creerNews', 'class' => 'bouton', 'title' => "Permet de créer une nouvelle actualité.")); ?>
+        </div>
+    </div>
+</div>	

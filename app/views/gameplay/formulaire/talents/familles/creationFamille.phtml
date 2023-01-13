@@ -1,0 +1,37 @@
+<?php
+echo $this->tag->hiddenField(["idCategorie", "value" => $categorie->id]);
+?>
+<div class="popupTalent" id="popupFamilleTalent">
+    <div class="entetePopupTalent" id="entetePopupFamilleTalent">
+        <div class="divTitreTalent"><span class="titrePopup">Créer une nouvelle famille</span></div>
+    </div>
+
+    <div class="formPopupTalent" id="formPopupFamille">
+        <!-- Nom de la famille -->
+        <div class="divDataPopupTalent">
+            <label for="nomFamille">Nom </label>
+            <?php echo Phalcon\Tag::textField(array("nomFamille", "class" => "formulaireField", "value" => "Nom de la famille")); ?>
+        </div>
+
+        <!-- Catégorie associée -->
+        <div class="divDataPopupTalent" id="blocSelectCategorieFamille">
+            <label for="categorieFamille">Catégorie </label>
+            <span id="categorieFamille"><?php echo $categorie->nom; ?></span>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionPopupTalent" id="divDescriptionPopupFamilleTalent">
+            <?php echo Phalcon\Tag::textArea(["descriptionFamilleTalent", "value" => "Entrez une description.", "class" => "texteDescriptionPopupTalent"]); ?>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionFamilleTalent">
+        <div id="boutonCreerPopupTalentFamille" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerFamilleTalent', 'class' => 'bouton', 'title' => "Permet de créer une nouvelle famille.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentFamille" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentFamille', 'class' => 'bouton', 'title' => "Permet d'annuler la création de la famille.")); ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterTypeMagie', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'un type de magie.")); ?>
+    </div>
+<?php } ?>
+<?php
+$listeTypeMagie = Naturesmagie::find();
+if (count($listeTypeMagie) > 0) {
+    echo "<table class='referentielMagie'>";
+    echo "<tr>";
+    echo "<th style='width:20%'></th>";
+    echo "<th style='width:20%'>Nom</th>";
+    echo "<th style='width:15%'>Type</th>";
+    echo "<th style='width:15%'>Jouable</th>";
+    echo "<th style='width:30%'>Description</th>";
+    echo "</tr>";
+    $i = 0;
+    foreach ($listeTypeMagie as $natureMagie) {
+        echo "<tr class='ligneNatureMagie' onclick='afficherDetailNatureMagie(" . $natureMagie->id . ");' style='background-color:" . $natureMagie->couleur . "'>";
+        echo "<td>" . Phalcon\Tag::image([$natureMagie->image, "class" => 'imageMiniatureListe']) . "</td>";
+        echo "<td><span class='nomListeReferentiel'>" . $natureMagie->nom . "</span></td>";
+        echo "<td><span class='typeMagieReferentiel'>" . $natureMagie->typeNatureMagie . "</span></td>";
+        if ($natureMagie->isDispoInscription) {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross']) . "</td>";
+        } else {
+            echo "<td>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross']) . "</td>";
+        }
+        echo "<td><span class='descriptionReferentielListe'>" . str_replace("\n", "<br/><br/>", $natureMagie->resumeDescription()) . "</span></td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+    echo "<span class='resultatVide'>Il n'y a aucun type de magie à afficher.</span>";
+}
+?>

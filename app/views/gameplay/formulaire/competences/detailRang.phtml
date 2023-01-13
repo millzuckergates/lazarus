@@ -1,0 +1,41 @@
+<?php
+echo $this->tag->hiddenField(["idRangCompetence", "value" => $rang->id]);
+?>
+<div class="contenuPopupRangCompetence" id="contenuPopupRangCompetence">
+    <div class="entetePopupRangCompetence" id="entetePopupCompetence">
+        <div class="divTitreRangCompetence"><span class="titrePopup"><?php echo $rang->nom; ?></span></div>
+    </div>
+
+    <div class="formPopupRangCompetence" id="formPopupRangCompetence">
+        <!-- Description -->
+        <div class="divDataPopupRangCompetence">
+            <span id="descriptionRangCompetence"><?php echo str_replace("\n", "<br/>", $rang->description); ?></span>
+        </div>
+
+        <!-- Nombre de point à atteindre -->
+        <div class="divDataPopupRangCompetence">
+            <label for="pointRangCompetence">Nombre de points attribuables </label>
+            <span id="pointRangCompetence"><?php echo $rang->pointAAtteindre; ?></span>
+            <div class='divAide' id='divAidePointRangCompetence'
+                 onMouseOver='afficherAide("Correspond au nombre de PA à dépenser pour atteindre ce rang par défaut. Cette donnée pourra être customisée pour chacune des compétences.","divAidePointRangCompetence");'
+                 onMouseOut='cacherAide();'></div>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupRangCompetence" id="boutonsActionRangCompetence">
+        <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_COMPETENCE_MODIFIER, $auth['autorisations'])) { ?>
+            <div id="boutonEditerPopupRangCompetencee" class="boutonActionPopupRangCompetence">
+                <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerRangCompetence', 'class' => 'bouton', 'title' => "Permet d'accéder à l'écran de modification du rang.")); ?>
+            </div>
+
+            <div id="boutonSupprimerPopupRangCompetencee" class="boutonActionPopupRangCompetence">
+                <?php echo Phalcon\Tag::SubmitButton(array("Supprimer", 'id' => 'supprimerRangCompetence', 'class' => 'boutonrouge', 'title' => "Permet de supprimer le rang. Attention, cela va impacter énormement le jeu.")); ?>
+            </div>
+        <?php } ?>
+
+
+        <div id="boutonFermerPopupRangCompetence" class="boutonFermerPopupRangCompetence">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupRangCompetence', 'class' => 'bouton', 'title' => "Permet de fermer la fenêtre.")); ?>
+        </div>
+    </div>
+</div>

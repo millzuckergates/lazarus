@@ -1,0 +1,59 @@
+<?php
+echo $this->tag->hiddenField(["idCategorieTalent", "value" => $categorie->id]);
+?>
+<div class="popupTalent" id="popupCategorieTalent">
+    <div class="entetePopupTalent" id="entetePopupCategorieTalent">
+        <?php echo Phalcon\Tag::textField(array("nomCategorie", "class" => "formulaireField titrePopupTalent", "value" => $categorie->nom)); ?>
+    </div>
+
+    <div class="formPopupTalent" id="formPopupCategorie">
+        <!-- Image de la catégorie -->
+        <div class="divDataPopupTalent" id="blocImageCategorie">
+            <div id="divImageCategoriePopupTalent">
+                <?php echo Phalcon\Tag::image([$categorie->image, "class" => 'imagePopupTalent', 'id' => 'imageCategorie']); ?>
+                <div id="listeImagePopupTalent">
+                    <?php echo $categorie->genererListeImages(); ?>
+                </div>
+                <div id="divAjouterImagePopupTalent">
+                    <?php
+                    echo Phalcon\Tag::textField(array("newImageCategorieTalent", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                    echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageCategorieTalent', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionPopupTalent" id="divDescriptionPopupCategorieTalent">
+            <?php echo Fonctions::rawTextArea("descriptionCategorieTalent", str_replace("\n", "&#13;&#10;", $categorie->description), "texteDescriptionPopupTalent"); ?>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionCategorieTalent">
+        <div id="boutonEditerPopupTalentCategorie" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierCategorieTalent', 'class' => 'bouton', 'title' => "Permet d'éditer la catégorie catégorie.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentCategorie" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalentCategorie', 'class' => 'bouton', 'title' => "Permet d'annuler la modification de la catégorie.")); ?>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueCategorie">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsContraintesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Contraintes </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContraintesCategorie', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContraintesCategorie', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<div id="pageArticle">
+    <div id="divPageArticle">
+        <!--liste des etiquettes -->
+        <div id="divMotClef">
+            <?php if ((isset($auth) && Autorisations::hasAutorisation(Autorisations::GESTION_WIKI, $auth['autorisations'])) || $article->status == Articles::STATUS_IN_PROGESS) {
+                echo '<div id="divAdminMotClef"><span class="labelMotClef">Mots clef </span>';
+                echo '<input type="button" id="boutonMotClefPlus" class="buttonPlus" onclick="boxAjouterMotClef();"/></div>';
+            } ?>
+            <div id="listeMotClef"><?php echo $article->genererMotClef($auth); ?></div>
+        </div>
+        <!-- Information de l'article -->
+        <?php if (isset($auth) && Autorisations::hasAutorisation(Autorisations::CONSULTATION_WIKI, $auth['autorisations'])) {
+            $auteur = Personnages::findFirst(['id=' . $article->idAuteur]);
+            ?>
+            <div id="informationsArticle">
+                <span class="labelWiki">Auteur : <span class="profil"
+                                                       onclick="profilPerso('<?php echo $article->idAuteur ?>')"><?php echo $auteur->nom; ?></span></span>
+                <br/>
+                <span class="labelWiki">Date : <?php echo date('d/m/Y', $article->dateModification); ?></span>
+                <br/>
+                <span class="labelWiki">Contributeurs : <span
+                            id="listeContributeurs"><?php echo $article->getContributeurs("consultation"); ?></span></span>
+            </div>
+        <?php } ?>
+        <br/>
+        <div id="divArticle">
+            <?php
+            echo $this->tag->hiddenField(["idArticle", "value" => $article->id]);
+            ?>
+
+            <!-- fil d'arriane -->
+            <div id="filArianne">
+                <?php echo $article->genererFilArianne(); ?>
+            </div>
+
+            <!-- Article -->
+            <div id="articleEnCours">
+                <!-- Image de l'article -->
+                <div id="enteteArticle">
+                    <!-- Titre de l'article -->
+                    <div id="titreDeLarticle">
+                        <span class="titreArticle"><?php echo $article->titre; ?></span>
+                    </div>
+                    <div id="divImageArticle">
+                        <?php if (!empty($article->img) && $article->img != null && $article->img != "") {
+                            echo Phalcon\Tag::image([$article->img, "class" => 'imageArticle']);
+                        } ?>
+                    </div>
+                </div>
+
+                <div id="boutonsArticle">
+                    <?php
+                    if ($article->status == Articles::STATUS_VALIDATED) {
+                        echo Phalcon\Tag::SubmitButton(array("Demander Révision", 'id' => 'demanderRevisionArticleWiki', 'class' => 'bouton', 'title' => "Demander une révision de l'article."));
+                    }
+                    if ($article->checkDroitEditer($auth) && $article->status == Articles::STATUS_IN_PROGESS) {
+                        echo Phalcon\Tag::SubmitButton(array("Demander Valider", 'id' => 'demanderValiderArticleWiki', 'class' => 'bouton', 'title' => "Demander une validation de l'article."));
+                    }
+                    if ($article->checkDroitEditer($auth)) {
+                        echo $this->tag->form(["wiki/editerArticle?idArticle=" . $article->id, "autocomplete" => "off", "class" => "form-horizontal"]);
+                        echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerArticleWiki', 'class' => 'bouton', 'title' => "Permet d'accéder à l'édition de l'article."));
+                        echo $this->tag->endForm();
+                    }
+                    if ($article->checkDroitValider($auth)) {
+                        echo $this->tag->form(["wiki/validerArticle?idArticle=" . $article->id, "autocomplete" => "off", "class" => "form-horizontal"]);
+                        echo Phalcon\Tag::SubmitButton(array("Valider", 'id' => 'validerArticleWiki', 'class' => 'bouton', 'title' => "Permet de valider un article."));
+                        echo $this->tag->endForm();
+                    }
+                    if ($article->checkDroitReviser($auth)) {
+                        echo Phalcon\Tag::SubmitButton(array("Réviser", 'id' => 'reviserArticleWiki', 'class' => 'bouton', 'title' => "Permet de passer un article en révision."));
+                    }
+                    if ($article->checkDroitRestaurer($auth)) {
+                        echo Phalcon\Tag::SubmitButton(array("Restaurer", 'id' => 'restaurerArticleWiki', 'class' => 'bouton', 'title' => "Permet de restaurer un article."));
+                    }
+                    if ($article->checkDroitAnnulerReviser($auth)) {
+                        echo Phalcon\Tag::SubmitButton(array("Annuler révision", 'id' => 'annulerRevisionArticleWiki', 'class' => 'bouton', 'title' => "Permet d'annuler la révision d'un article."));
+                    }
+                    if ($article->checkDroitArchiver($auth)) {
+                        echo Phalcon\Tag::SubmitButton(array("Archiver", 'id' => 'archiverArticleWiki', 'class' => 'bouton', 'title' => "Permet d'archiver un article."));
+                    }
+                    if ($article->checkDroitSupprimer($auth)) {
+                        echo Phalcon\Tag::SubmitButton(array("Supprimer", 'id' => 'supprimerArticleWiki', 'class' => 'bouton', 'title' => "Permet de supprimer un article."));
+                    }
+                    ?>
+                    <!-- Restrictions sur l'artice -->
+                    <?php if (count($article->listeRestrictions) > 0) { ?>
+                        <div id="restrictionsPourLarticle">
+                            <?php if (Autorisations::hasAutorisation(Autorisations::CONSULTATION_WIKI, $auth['autorisations'])) {
+                                echo "<span class='titreBlocSecondaire'>Restrictions </span>";
+                                echo "<div id='listeRestrictions'>";
+                                echo $article->formateRestriction("consultation", $auth['perso']);
+                                echo "</div>";
+                            } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <!-- Texte du wiki -->
+                <div id="texteDuWiki">
+                    <?php echo $article->formateTexteArticle($auth); ?>
+                </div>
+
+                <!-- Liste des fils -->
+                <div id="listeDesFils">
+                    <?php
+                    $listeFils = Articles::getListeFils($article->id);
+                    if (!empty($listeFils)) {
+                        foreach ($listeFils as $fils) {
+                            echo $fils->afficherArticleIndex($auth, "fils");
+                        }
+                    } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Div pour le résultat de la recherche -->
+    <div id="resultatRecherche" style="display:none;">
+
+    </div>
+</div>

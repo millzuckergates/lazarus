@@ -1,0 +1,121 @@
+<!-- Pop-up Questionnaire -->
+<div id="detailQuestionnairePopup">
+    <?php if ($mode == "modification") {
+        echo $this->tag->hiddenField(["idQuestionnaire", "value" => $questionnaire->id]);
+        ?>
+        <div id="titrePopup">
+            <span class="titrePopup">Questionnaire</span><br/>
+            <span class="detailTitrePopup"><?php echo Questionnaires::genererDetailTitre($type, $idType); ?></span>
+        </div>
+
+        <div id="divChampQuestionnaire">
+            <div id="divChampQuestionnaireQuestion">
+                <label for="champQuestion">Question </label>
+                <textarea rows="5" cols="1" class="ideoTextArea"
+                          id="champQuestion"><?php echo $questionnaire->question; ?></textarea>
+            </div>
+            <div id="divChampQuestionnaireChoixA" class="divChoixQuestionnaire">
+                <label for="champChoixA">Choix A </label>
+                <input type="text" id="champChoixA" value="<?php echo $questionnaire->choixA; ?>"
+                       class="choixQuestionnaire"/>
+            </div>
+            <div id="divChampQuestionnaireChoixB" class="divChoixQuestionnaire">
+                <label for="champChoixB">Choix B </label>
+                <input type="text" id="champChoixB" value="<?php echo $questionnaire->choixB; ?>"
+                       class="choixQuestionnaire"/>
+            </div>
+            <div id="divChampQuestionnaireChoixC" class="divChoixQuestionnaire">
+                <label for="champChoixC">Choix C </label>
+                <input type="text" id="champChoixC" value="<?php echo $questionnaire->choixC; ?>"
+                       class="choixQuestionnaire"/>
+            </div>
+            <div id="divChampQuestionnaireReponse" class="divChoixQuestionnaire">
+                <label for="champReponse">Réponse </label>
+                <span id="champReponse"><?php echo Questionnaires::genererListeReponse("selectQuestionnaireReponse", "updateReponse();", $questionnaire->reponse); ?></span>
+            </div>
+        </div>
+
+        <div id="divAideQuestionnaire">
+            <div id="autocompleteQuestionnaireWiki">
+                <label for="s">Article Wiki </label>
+                <?php if ($questionnaire->idArticle != null) { ?>
+                    <input type="text" value="<?php echo $questionnaire->article->titre; ?>" name="s" id="s"
+                           class="field" onkeyup="chargeSuggestionArticleQuestionnaire();"/>
+                <?php } else { ?>
+                    <input type="text" value="" name="s" id="s" class="field"
+                           onkeyup="chargeSuggestionArticleQuestionnaire();"/>
+                <?php } ?>
+                <div id="suggestions"></div>
+            </div>
+            <div id="divChampQuestionnaireParagraphe">
+                <label for="questionnaireParagraphe">Paragraphe </label>
+                <span id="questionnaireParagraphe"><?php echo Questionnaires::genererListeParagraphe("selectQuestionnaireParagraphe", $questionnaire->idArticle, $questionnaire->paragraphe); ?></span>
+            </div>
+        </div>
+        <!--Bouton pour action -->
+        <div id="divBoutonAction">
+            <input type="button" class="bouton" value="Modifier" onclick="modifierQuestionnaire();"
+                   title="Permet de valider les modifications du questionnaire"/>
+        </div>
+        <!--Bouton pour fermer la popup -->
+        <div id="divBoutonClose">
+            <input type="button" class="bouton" value="Fermer" onclick="closePopupQuestionnaire();"
+                   title="Permet de fermer la pop-up de l'article"/>
+        </div>
+    <?php } else {
+        if ($mode == "creation") { ?>
+            <div id="titrePopup">
+                <span class="titrePopup">Questionnaire</span><br/>
+                <span class="detailTitrePopup"><?php echo Questionnaires::genererDetailTitre($type, $idType); ?></span>
+            </div>
+
+            <div id="divChampQuestionnaire">
+                <div id="divChampQuestionnaireQuestion">
+                    <label for="champQuestion">Question </label>
+                    <textarea rows="5" cols="1" class="ideoTextArea" id="champQuestion">Entrez une question</textarea>
+                </div>
+                <div id="divChampQuestionnaireChoixA" class="divChoixQuestionnaire">
+                    <label for="champChoixA">Choix A </label>
+                    <input type="text" id="champChoixA" value="" class="choixQuestionnaire"/>
+                </div>
+                <div id="divChampQuestionnaireChoixB" class="divChoixQuestionnaire">
+                    <label for="champChoixB">Choix B </label>
+                    <input type="text" id="champChoixB" value="" class="choixQuestionnaire"/>
+                </div>
+                <div id="divChampQuestionnaireChoixC" class="divChoixQuestionnaire">
+                    <label for="champChoixC">Choix C </label>
+                    <input type="text" id="champChoixC" value="" class="choixQuestionnaire"/>
+                </div>
+                <div id="divChampQuestionnaireReponse" class="divChoixQuestionnaire">
+                    <label for="champReponse">Réponse </label>
+                    <span id="champReponse"><?php echo Questionnaires::genererListeReponse("selectQuestionnaireReponse", "updateReponse();", null); ?></span>
+                </div>
+            </div>
+
+            <div id="divAideQuestionnaire">
+                <div id="autocompleteQuestionnaireWiki">
+                    <label for="s">Article Wiki </label>
+                    <input type="text" value="" name="s" id="s" class="field"
+                           onkeyup="chargeSuggestionArticleQuestionnaire();"/>
+                    <div id="suggestions"></div>
+                </div>
+                <div id="divChampQuestionnaireParagraphe">
+                    <label for="questionnaireParagraphe">Paragraphe </label>
+                    <span id="questionnaireParagraphe"><?php echo Questionnaires::genererListeParagraphe("selectQuestionnaireParagraphe", null, null); ?></span>
+                </div>
+            </div>
+            <div id="boutonsQuestionnaire">
+                <!--Bouton pour action -->
+                <div id="divBoutonAction">
+                    <input type="button" class="bouton" value="Ajouter" onclick="ajouterQuestionnaire();"
+                           title="Permet d'ajouter le questionnaire"/>
+                </div>
+                <!--Bouton pour fermer la popup -->
+                <div id="divBoutonClose">
+                    <input type="button" class="bouton" value="Fermer" onclick="closePopupQuestionnaire();"
+                           title="Permet de fermer la pop-up de l'article"/>
+                </div>
+            </div>
+        <?php }
+    } ?>
+</div>

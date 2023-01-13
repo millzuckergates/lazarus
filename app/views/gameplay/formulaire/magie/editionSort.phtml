@@ -1,0 +1,274 @@
+<?php
+echo $this->tag->hiddenField(["idSort", "value" => $sort->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierSort', 'class' => 'bouton', 'title' => "Modifie le sort."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditerSort', 'class' => 'bouton', 'title' => "Permet de retourner au sort."));
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Liste école", 'id' => 'retourListeSort', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des sorts."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour l'école de magie -->
+<div id="divFormSort" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormSort", "class" => "formulaireField titreEdition", "value" => $sort->nom)); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuSort" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageSortMagie">
+            <?php echo Phalcon\Tag::image([$sort->image, "class" => 'imageMagie', 'id' => 'imageSortMagie']); ?>
+            <div id="listeImageTypeMagie">
+                <?php echo $sort->genererListeImageSort(); ?>
+            </div>
+            <div id="divAjouterImageEcoleMagie">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageSort", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageSort', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionSortEdition">
+            <?php echo Fonctions::rawTextArea("descriptionSortEdition", str_replace("\n", "&#13;&#10;", $sort->description), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <!-- Message RP -->
+        <div class="divMessageRPMagieEdition">
+            <?php echo Fonctions::rawTextArea("messageRPSortEdition", str_replace("\n", "&#13;&#10;", $sort->messageRP), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <!-- Event Lanceur -->
+        <div class="divEventLanceurMagieEdition">
+            <?php echo Fonctions::rawTextArea("eventLanceur", str_replace("\n", "&#13;&#10;", $sort->eventLanceur), "eventReferentiel"); ?>
+        </div>
+
+        <!-- Event Global -->
+        <div class="divEventGlobalMagieEdition">
+            <?php echo Fonctions::rawTextArea("eventGlobal", str_replace("\n", "&#13;&#10;", $sort->eventGlobal), "eventReferentiel"); ?>
+        </div>
+
+        <div id="divInformationSortEdition" class="divInformationMagie">
+            <!-- Article du wiki lié -->
+            <div id="divArticleSortEdition" class="divArticleReferentiel">
+                <div id="autocompleteSortWiki">
+                    <label for="s">Article du wiki </label>
+                    <?php
+                    if ($sort->article != null) {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field", "value" => $sort->article->titre));
+                    } else {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    }
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Ecole de magie -->
+            <div id="divEcoleMagieSort" class="divContenuInformationReferentiel">
+                <label for="ecoleMagieSort">Ecole de magie </label>
+                <span id="ecoleMagieSort"><?php echo $sort->getSelectEcoleMagie(); ?></span>
+            </div>
+
+            <!-- Arcane -->
+            <div id="divArcaneSortEdition" class="divContenuInformationReferentiel">
+                <label for="arcaneSortEdition">Arcane </label>
+                <?php echo Phalcon\Tag::textField(array("arcaneSortEdition", "class" => "formulaireField", "value" => $sort->arcane, "size" => 5)); ?>
+            </div>
+
+            <!-- Formule Mana -->
+            <div id="divManaSortEdition" class="divContenuInformationReferentiel">
+                <label for="manaSort">Mana </label>
+                <span id="manaSort"><?php echo $sort->mana; ?></span>
+                <input type="button" value="Changer formule" class="boutonFormule"
+                       onclick="afficherFormulaireFormule('manaSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Formule de la portée -->
+            <div id="divPorteeSortEdition" class="divContenuInformationReferentiel">
+                <label for="porteeSort">Portée </label>
+                <span id="porteeSort"><?php echo $sort->portee; ?></span>
+                <input type="button" value="Changer formule" class="boutonFormule"
+                       onclick="afficherFormulaireFormule('porteeSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Formule du coût en PA-->
+            <div id="divPaSortEdition" class="divContenuInformationReferentiel">
+                <label for="paSort">Coût en PA </label>
+                <span id="paSort"><?php echo $sort->coutPA; ?></span>
+                <input type="button" value="Changer formule" class="boutonFormule"
+                       onclick="afficherFormulaireFormule('paSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Durée du sort -->
+            <div id="divDureeSortEdition" class="divContenuInformationReferentiel">
+                <label for="dureeSort">Durée du sort </label>
+                <?php if (($sort->duree != null && !empty($sort->duree)) || $sort->duree == 0) { ?>
+                    <span id="dureeSort"><?php echo $sort->duree; ?></span>
+                <?php } else { ?>
+                    <span id="dureeSort">Instantané</span>
+                <?php } ?>
+                <input type="button" value="Changer formule" class="boutonFormule"
+                       onclick="afficherFormulaireFormule('dureeSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Durée maximum du sort -->
+            <div id="divDureeMaxSortEdition" class="divContenuInformationReferentiel">
+                <label for="dureeMaxSort">Durée maximum du sort </label>
+                <?php if (($sort->cumulDuree != null && !empty($sort->cumulDuree)) || $sort->cumulDuree == 0) { ?>
+                    <span id="dureeMaxSort"><?php echo $sort->cumulDuree; ?></span>
+                <?php } else { ?>
+                    <span id="dureeMaxSort">Non concerné</span>
+                <?php } ?>
+                <input type="button" value="Changer formule" class="boutonFormule"
+                       onclick="afficherFormulaireFormule('dureeMaxSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Nombre d'occurence maximum du sort -->
+            <div id="divCumulQuantiteSortEdition" class="divContenuInformationReferentiel">
+                <label for="cumulQuantiteSort">Nombre d'occurence maximum du sort </label>
+                <?php if (($sort->cumulQuantite != null && !empty($sort->cumulQuantite)) || $sort->cumulQuantite == 0) { ?>
+                    <span id="cumulQuantiteSort"><?php echo $sort->cumulQuantite; ?></span>
+                <?php } else { ?>
+                    <span id="cumulQuantiteSort">Non cumulable</span>
+                <?php } ?>
+                <input type="button" value="Changer formule" class="boutonFormule"
+                       onclick="afficherFormulaireFormule('cumulQuantiteSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule"/>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div id="divBloqueSortEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($sort->isBloque) {
+                    echo "<label for='isBloqueSortEdition'>Utilisation bloquée ? </label><input type='checkbox' id='isBloqueSortEdition' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isBloqueSortEdition'>Utilisation bloquée ? </label><input type='checkbox' id='isBloqueSortEdition' class='tickcrossFormulaireGameplay' />";
+                }
+                ?>
+            </div>
+
+            <!-- Disponible à l'enseignement -->
+            <div id="divEnseignableSortEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($sort->enseignable) {
+                    echo "<label for='isEnseignableSortSortEdition'>Peut être enseigné ? </label><input type='checkbox' id='isEnseignableSortSortEdition' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isEnseignableSortSortEdition'>Peut être enseigné ? </label><input type='checkbox' id='isEnseignableSortSortEdition' class='tickcrossFormulaireGameplay' />";
+                }
+                ?>
+            </div>
+
+            <!-- Le sort est il esquivable -->
+            <div id="divEsquivableSortEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($sort->esquivable) {
+                    echo "<label for='isEsquivableSortSortEdition'>Peut être esquivé ? </label><input type='checkbox' id='isEsquivableSortSortEdition' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isEsquivableSortSortEdition'>Peut être esquivé ? </label><input type='checkbox' id='isEsquivableSortSortEdition' class='tickcrossFormulaireGameplay' />";
+                }
+                ?>
+            </div>
+
+            <!-- Le sort est il esquivable -->
+            <div id="divRetranscriptibleSortEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($sort->esquivable) {
+                    echo "<label for='isRetranscriptibleSortSortEdition'>Peut être écrit sur un parchemin ? </label><input type='checkbox' id='isRetranscriptibleSortSortEdition' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isRetranscriptibleSortSortEdition'>Peut être écrit sur un parchemin ? </label><input type='checkbox' id='isRetranscriptibleSortSortEdition' class='tickcrossFormulaireGameplay' />";
+                }
+                ?>
+            </div>
+
+            <!-- Le sort est il soumis au JS -->
+            <div id="divJSSort" class="divContenuInformationReferentiel">
+                <?php
+                if ($sort->isJS) {
+                    echo "<label for='isJSSort'>Soumis au Jet de Sauvegarde ? </label><input type='checkbox' id='isJSSort' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isJSSort'>Soumis au Jet de Sauvegarde ? </label><input type='checkbox' id='isJSSort' class='tickcrossFormulaireGameplay'/>";
+                }
+                ?>
+            </div>
+
+            <!-- Le sort est il soumis à une résistance vitale -->
+            <div id="divJSEVSort" class="divContenuInformationReferentiel">
+                <?php
+                if ($sort->isJSEV) {
+                    echo "<label for='isJSEVSort'>Soumis à la Résistance Vitale ? </label><input type='checkbox' id='isJSEVSort' class='tickcrossFormulaireGameplay' checked/>";
+                } else {
+                    echo "<label for='isJSEVSort'>Soumis à la Résistance Vitale ? </label><input type='checkbox' id='isJSEVSort' class='tickcrossFormulaireGameplay'/>";
+                }
+                ?>
+                <div class='divAide' id='divAideJSEV'
+                     onMouseOver='afficherAide("Détermine si le sort peut être contré en fonction du % de vie qu&#39;à la cible.","divAideJSEV");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <!-- Table de ciblage -->
+            <div id="divTableCiblageSort" class="divContenuInformationReferentiel">
+                <?php
+                echo Phalcon\Tag::SubmitButton(array("Table de Ciblage", 'id' => 'accesTableCiblage', 'class' => 'bouton', 'title' => "Permet d'afficher la table de ciblage du sort."));
+                ?>
+            </div>
+
+            <div id="blocParticulierNatureMagie">
+                <?php echo $sort->genererDivParticulariteNatureMagie("edition"); ?>
+            </div>
+        </div>
+
+        <div id="blocInformationsTechniques">
+            <!-- Bloc droit avec les différents blocs d'informations -->
+            <div id="divInformationTechniqueSort">
+                <div>
+                    <div id="divBoutonsInformationsTechniques">
+                        <?php
+                        echo "<div class='divBoutonsTechniquesSort'>";
+                        echo "<span class='libelleBoutonTechnique'>Effets </span>";
+                        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteEffetsSorts', 'class' => 'buttonShowDroit'));
+                        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteEffetsSorts', 'class' => 'buttonHideGauche'));
+                        echo "</div>";
+
+                        echo "<div class='divBoutonsTechniquesSort'>";
+                        echo "<span class='libelleBoutonTechnique'>Contraintes </span>";
+                        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContraintesSorts', 'class' => 'buttonShowDroit'));
+                        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContraintesSorts', 'class' => 'buttonHideGauche'));
+                        echo "</div>";
+
+                        echo "<div class='divBoutonsTechniquesSort'>";
+                        echo "<span class='libelleBoutonTechnique'>Evolutions </span>";
+                        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteEvolutionsSorts', 'class' => 'buttonShowDroit'));
+                        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteEvolutionsSorts', 'class' => 'buttonHideGauche'));
+                        echo "</div>";
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div id="informationTechnique" style="display:none"></div>
+        </div>
+    </div>
+</div>

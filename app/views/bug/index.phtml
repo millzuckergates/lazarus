@@ -1,0 +1,39 @@
+<div class="bugFormulaire">
+    <h2>Création de Bug</h2>
+
+<?php
+
+use Phalcon\Forms\Element\File;
+use Phalcon\Forms\Element\Hidden;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\TextArea;
+use Phalcon\Forms\Form;
+
+$form = new Form();
+$form
+  ->add((new Text("titre", ["maxlength"   => 100, "size" => 100, "required" => true]))->setLabel("Titre"))
+  ->add((new TextArea("description", ["cols" => 200, "rows" => 10, "required" => true]))->setLabel("Description du bug"))
+  ->add((new File("image", ["accept" => "image/png, image/jpeg"]))->setLabel("Image explicitant le bug (si besoin)"))
+  ->add((new Hidden("token", ["required" => true]))->setDefault($this->view->token))
+  ->setAction("/bug/creerIssue");
+
+if ($this->session->has("retour-bug")) {
+    echo "<div class='resultatCreationIssue'>Création de bug " . ($this->session->get("retour-bug") === 0 ? "réussie" : "échouée") . "</div>";
+    $this->session->remove("retour-bug");
+}
+?>
+
+    <form method="post" action="<?php echo $form->getAction(); ?>" enctype="multipart/form-data">
+        <?php
+        foreach ($form as $element) {
+        ?>
+            <div class="champ">
+                <?php if (!is_a($element, Hidden::class)) {echo $element->label();} ?>
+                <?php echo $element; ?>
+            </div>
+        <?php
+        }
+        ?>
+        <input type="submit" name="creer" value="Créer"/>
+    </form>
+</div>

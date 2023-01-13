@@ -1,0 +1,113 @@
+<?php
+echo $this->tag->hiddenField(["idNatureMagie", "value" => $natureMagie->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerTypeMagie', 'class' => 'bouton', 'title' => "Permet d'afficher le formulaire du type de magie en modification."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'retourListeTypesMagie', 'class' => 'bouton', 'title' => "Permet de retourner vers la liste des types de magie."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la nature de magie -->
+<div id="divTitreFormNatureMagie" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <span id="titreFormNatureMagie" class="titreReferentiel"><?php echo $natureMagie->nom; ?></span>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuNatureMagie" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageNatureMagie">
+            <?php echo Phalcon\Tag::image([$natureMagie->image, "class" => 'imageMagieConsultation']); ?>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionMagieConsultation">
+            <span id="descriptionNatureMagieConsultation"><?php echo str_replace("\n", "<br/>", $natureMagie->description); ?></span>
+        </div>
+
+        <div id="divInformationNatureMagieConsultation" class="divInformationMagie">
+            <!-- Article du wiki lié -->
+            <div id="divArticleNatureMagieConsultation" class="divArticleReferentiel">
+                <label for="articleRoyaumeConsultation">Article du wiki </label>
+                <?php if ($natureMagie->article != null && $natureMagie->article) { ?>
+                    <a href="#" id="articleNatureMagieConsultation"
+                       onclick="openPopUpWiki(<?php echo $natureMagie->idArticle; ?>)"><?php echo $natureMagie->article->titre; ?></a>
+                <?php } else { ?>
+                    <span class="texte" id="articleNatureMagieConsultation">Aucun</span>
+                <?php } ?>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurNatureMagieConsultation" class="divContenuInformationReferentiel">
+                <label for="couleurNatureMagieConsultation">Couleur </label>
+                <span id="couleurNatureMagieConsultation"
+                      class="couleurCarre"><?php echo $natureMagie->couleur; ?></span>
+                <div id="carreCouleurNatureMagie" style="background-color:<?php echo $natureMagie->couleur; ?>"
+                     class='carreCouleur'></div>
+            </div>
+
+            <!-- Type de magie -->
+            <div id="divTypeNatureMagie" class="divContenuInformationReferentiel">
+                <label for="typeNatureMagie">Type </label>
+                <span id="typeNatureMagie"><?php echo $natureMagie->typeNatureMagie; ?></span>
+            </div>
+
+            <!-- Fichier Technique pour la nature de magie -->
+            <div id="divScriptNatureMagie" class="divContenuInformationReferentiel">
+                <label for="scriptNatureMagie">Script utilisé </label>
+                <span id="scriptNatureMagie"><?php echo $natureMagie->fichier; ?></span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionNatureMagieConsultation" class="divContenuInformationReferentiel">
+                <?php
+                if ($natureMagie->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionNatureMagieConsultation'>Disponible à l'inscription ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isDispoInscriptionNatureMagieConsultation"]);
+                } else {
+                    echo "<label for='isDispoInscriptionNatureMagieConsultation'>Disponible à l'inscription ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isDispoInscriptionNatureMagieConsultation"]);
+                }
+                ?>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div id="divBloqueNatureMagieConsultation" class="divContenuInformationReferentiel">
+                <?php
+                if ($natureMagie->bloque) {
+                    echo "<label for='isBloqueNatureMagieConsultation'>Utilisation bloquée ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueNatureMagieConsultation"]);
+                } else {
+                    echo "<label for='isBloqueNatureMagieConsultation'>Utilisation bloquée ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isBloqueNatureMagieConsultation"]);
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Div pour les écoles -->
+        <div class="listeElementAssocieMagie">
+            <div id="listeEcolesMagieAssociee">
+                <?php echo $natureMagie->genererListeEcolesMagie($auth); ?>
+            </div>
+
+            <div id="divAjoutEcoleMagie">
+                <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) { ?>
+                    <div id="selectEcoleMagie">
+                        <label for="divSelectEcoleMagie">Ajoutez une école de magie </label>
+                        <div id="divSelectEcoleMagie"
+                             class="contenuAjoutReferentiel"><?php echo $natureMagie->genererSelectListeEcolesAutorisees(); ?></div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>

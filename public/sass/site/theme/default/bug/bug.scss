@@ -1,0 +1,19 @@
+.bugFormulaire {
+  .resultatCreationIssue {
+    margin: 20px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .champ {
+    margin: 15px;
+    label {
+      display: block;
+      font-size: 15px;
+    }
+    input, textarea {
+      display: inline-block;
+    }
+  }
+}
+

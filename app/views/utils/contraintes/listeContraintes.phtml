@@ -1,0 +1,26 @@
+<div id="contenuListeContrainte">
+    <?php
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $element->id]);
+    ?>
+
+    <div id="enteteListeContrainte">
+        <div id="divTitreListeContrainte"><span class="titrePopup">Gestion des contraintes</span></div>
+    </div>
+
+    <div id="descriptionGenerale">
+        <?php echo $element->genererDescriptionGeneraleContrainte(); ?>
+    </div>
+
+    <div id="contraintes">
+        <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_TALENT_MODIFIER, $auth['autorisations'])) {
+            echo '<div id="boutonAjouterContrainte">';
+            echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterContrainte', 'class' => 'bouton ajouterContrainte', 'title' => "Permet d'ouvrir le formulaire de création d'une contrainte."));
+            echo '</div>';
+        } ?>
+
+        <div id="listeContrainte">
+            <?php echo $element->genererListeContrainte($auth); ?>
+        </div>
+    </div>
+</div>

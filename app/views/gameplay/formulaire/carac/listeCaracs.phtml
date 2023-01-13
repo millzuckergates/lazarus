@@ -1,0 +1,85 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_CREATION_CARAC, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterCarac', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une caractéristique.")); ?>
+    </div>
+<?php } ?>
+
+<?php
+$listeCaracPrimaire = Caracteristiques::find(['type = :type:', 'bind' => ['type' => Caracteristiques::CARAC_PRIMAIRE], 'order' => 'nom']);
+$listeCaracSecondaire = Caracteristiques::find(['type = :type:', 'bind' => ['type' => Caracteristiques::CARAC_SECONDAIRE], 'order' => 'nom']);
+?>
+
+<div id="listesTablesCaracs">
+    <div class='divListeCarac'>
+        <div id='caracPrimaires' class='divCaracType'>
+            <div class='enteteTableCarac'>
+                <span class='nomTypeCarac'> Caractéristiques Primaires </span><span
+                        class='nombreTypeCarac'>(<?php echo count($listeCaracPrimaire); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showCaracPrimaire', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideCaracPrimaire', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCarac' id='divTableCaracPrimaire'>
+                <?php
+                if ($listeCaracPrimaire != false && count($listeCaracPrimaire) > 0) {
+                    echo "<table class='tableCarac'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeCaracPrimaire as $carac) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailCarac(" . $carac->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$carac->image, "class" => 'imgCaracReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $carac->nom . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $carac->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarac'>Il n'y a aucune caractéristique à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+        <div id='caracSecondaires' class='divCaracType'>
+            <div class='enteteTableCarac'>
+                <span class='nomTypeCarac'> Caractéristiques Secondaires </span><span
+                        class='nombreTypeCarac'>(<?php echo count($listeCaracSecondaire); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showCaracSecondaire', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideCaracSecondaire', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableCarac' id='divTableCaracSecondaire'>
+                <?php
+                if ($listeCaracSecondaire != false && count($listeCaracSecondaire) > 0) {
+                    echo "<table class='tableCarac'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeCaracSecondaire as $carac) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailCarac(" . $carac->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$carac->image, "class" => 'imgCaracReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $carac->nom . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $carac->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideCarac'>Il n'y a aucune caractéristique à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

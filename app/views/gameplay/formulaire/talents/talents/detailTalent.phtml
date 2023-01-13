@@ -1,0 +1,113 @@
+<?php
+echo $this->tag->hiddenField(["idTalent", "value" => $talent->id]);
+?>
+<div class="popupTalentTalent" id="popupTalentTalent">
+    <div class="entetePopupTalent" id="entetePopupTalentTalent">
+        <div class="divTitreTalent"><span class="titrePopup"><?php echo $talent->nom; ?></span></div>
+    </div>
+
+    <!-- Données du formulaire -->
+    <div class="formPopupTalent" id="formPopupTalent">
+
+        <!-- Les images, à afficher à gauche -->
+        <div id="divBlocImageFormTalent" class="blocImageFormTalent">
+            <div id="divImageTalentGris" class="divImageTalentCouleur">
+                <div class="imgTalentMiniature imgTalentGrise" id="imgTalentGris"
+                     style="opacity:1;background-image: url('<?php echo $talent->image; ?>');">
+                    <div class="buttonnumber" id="numberTalentGris" style="color: rgb(46, 255, 0);">
+                        0/<?php echo $talent->niveau_max; ?></div>
+                    <?php echo Phalcon\Tag::image([$talent->image, "class" => 'talenticon talentgris', 'id' => 'imageTalentGris']); ?>
+                </div>
+            </div>
+
+            <div id="divImageTalentVert" class="divImageTalentCouleur">
+                <div class="imgTalentMiniature" id="imgTalentVert"
+                     style="opacity:1;background-image: url('<?php echo $talent->image; ?>');">
+                    <div class="buttonnumber" id="numberTalentVert"
+                         style="color: rgb(46, 255, 0);"><?php echo $talent->niveau_max; ?>
+                        /<?php echo $talent->niveau_max; ?></div>
+                    <?php echo Phalcon\Tag::image([$talent->image, "class" => 'talenticon talentvert', 'id' => 'imageTalentVert']); ?>
+                </div>
+            </div>
+
+            <div id="divImageTalentJaune" class="divImageTalentCouleur">
+                <div class="imgTalentMiniature" id="imgTalentJaune"
+                     style="opacity:1;background-image: url('<?php echo $talent->image; ?>');">
+                    <div class="buttonnumber" id="numberTalentJaune" style="color: rgb(255, 209, 0);">
+                        1/<?php echo $talent->niveau_max; ?></div>
+                    <?php echo Phalcon\Tag::image([$talent->image, "class" => 'talenticon talentjaune', 'id' => 'imageTalentJaune']); ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- les données du formulaire -->
+        <div id="divBlocFormulaireTalent">
+            <!-- Description -->
+            <div class="divDescriptionPopupTalent" id="divDescriptionPopupTalentTalent">
+                <span id="descriptionTalentTalent"><?php echo str_replace("\n", "<br/>", $talent->description); ?></span>
+            </div>
+
+            <!-- Niveau Max du talent -->
+            <div class="divDataPopupTalent">
+                <label for="maxTalent">Nombre de points attribuables </label>
+                <span id="maxTalent"><?php echo $talent->niveau_max; ?></span>
+            </div>
+
+            <!-- Arbre associé -->
+            <div class="divDataPopupTalent" id="blocSelectArbreTalent">
+                <label for="selectArbreTalent">Arbre </label>
+                <span id="selectArbreTalent"><?php echo $talent->arbre->nom; ?></span>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div class="divDataPopupTalent">
+                <?php
+                if ($talent->isActif) {
+                    echo "<label for='isActifTalent'>Talent actif ? </label>" . Phalcon\Tag::image(["public/img/site/utils/tickVert.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isActifTalent"]);
+                } else {
+                    echo "<label for='isActifTalent'>Talent actif ? </label>" . Phalcon\Tag::image(["public/img/site/utils/redcross.gif", "class" => 'tickcross tickcrossFormulaire', "id" => "isActifTalent"]);
+                }
+                ?>
+            </div>
+
+            <!-- Gestion de la généalogie -->
+            <div class="genealogieTalent">
+                <?php echo $talent->genererGenealogie(); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="boutonsActionPopupTalent" id="boutonsActionTalentTalent">
+        <div id="boutonEditerPopupTalentTalent" class="boutonActionPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerTalent', 'class' => 'bouton', 'title' => "Permet d'accéder à l'écran de modification du talent.")); ?>
+        </div>
+
+        <div id="boutonFermerPopupTalentTalent" class="boutonFermerPopupTalent">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerPopupTalent', 'class' => 'bouton', 'title' => "Permet de fermer la popup.")); ?>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniquesTalents">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueTalent">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Effets </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteEffetTalent', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteEffetTalent', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+
+                    echo "<div class='divBoutonsTechniquesTalent'>";
+                    echo "<span class='libelleBoutonTechnique'>Contraintes </span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteContraintesTalent', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteContraintesTalent', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>

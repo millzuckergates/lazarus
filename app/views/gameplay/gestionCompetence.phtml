@@ -1,0 +1,42 @@
+<?php
+$listeTypeCompetence = Competences::getListeTypeCompetence();
+?>
+<!-- En tete -->
+<div class='entetePageGameplay'>
+    <span class="titrePage">Gestion des Compétences</span>
+</div>
+
+<div id="divGeneralCompetences">
+    <div id="divSpecificiteCompetence" style="display:none"></div>
+    <!-- Bloc Gauche -->
+    <div id="divBlocGaucheCompetences">
+        <div id="divListeRangCompetence">
+            <?php echo RangsCompetence::genererListeRang($auth); ?>
+        </div>
+    </div>
+
+    <div id="blocGeneralCompetence">
+        <!-- Bloc Titre Compétence -->
+        <div id="divBlocTitreCompetence">
+            <div id='divTitreCompetence'>
+                <span id='titreCompetence'>Liste des compétences</span>
+            </div>
+            <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_COMPETENCE_MODIFIER, $auth['autorisations'])) { ?>
+                <div class="divBoutonAjouterCompetence">
+                    <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterCompetence', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une compétence.")); ?>
+                </div>
+            <?php } ?>
+        </div>
+
+        <!-- Blocs Compétences -->
+        <div id="divBlocListeCompetence">
+            <?php
+            foreach ($listeTypeCompetence as $typeCompetence) {
+                echo "<div class='blocCompetences' id='blocCompetences_" . $typeCompetence . "' >";
+                echo Competences::genererBlocCompetence($typeCompetence);
+                echo "</div>";
+            }
+            ?>
+        </div>
+    </div>
+</div>

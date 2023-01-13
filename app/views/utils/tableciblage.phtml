@@ -1,0 +1,73 @@
+<!-- Pop-up table ciblage -->
+<div id="tableCiblage">
+    <?php
+    echo $this->tag->hiddenField(["idTableCiblage", "value" => $tableCiblage->id]);
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $idType]);
+    ?>
+    <div id="enteteTableCiblage">
+        <div id="divTitreCiblage"><span class="titrePopup">Table de ciblage</span></div>
+        <div id="ciblagePour">
+			<span class="soustitre">
+				<?php echo $tableCiblage->genererTableCiblagePour($type, $idType); ?>
+			</span>
+        </div>
+    </div>
+
+    <div id="divCiblagePersonnage">
+        <label for="isPersonnageCiblable">Peut cibler les personnages ? </label>
+        <?php if ($tableCiblage->isCiblePersonnage == 0) { ?>
+            <span id="isPersonnageCiblable" class="texte">Non</span>
+        <?php } else { ?>
+            <span id="isPersonnageCiblable" class="texte">Oui</span>
+        <?php } ?>
+    </div>
+
+    <div id="divCiblageCreature">
+        <label for="isCreatureCiblable">Peut cibler les créatures ? </label>
+        <?php if ($tableCiblage->isCibleCreature == 0) { ?>
+            <span id="isCreatureCiblable" class="texte">Non</span>
+        <?php } else { ?>
+            <span id="isCreatureCiblable" class="texte">Oui</span>
+            <div id="divDetailCiblageCreature">
+                <div id="divFamilleCreature">
+                    <label for="spanSelectFamilleCiblable">Famille </label>
+                    <span id="spanSelectFamilleCiblable"> TODO </span>
+                </div>
+                <div id="divCreatures">
+                    <label for="spanSelectCreatureCiblable">Créature </label>
+                    <span id="spanSelectCreatureCiblable"> TODO </span>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+
+    <div id="divCiblageBatiment">
+        <!-- TODO -->
+    </div>
+
+    <div id="divCiblageEnvironnement">
+        <label for="isEnvironnementCiblable">Peut cibler l'environnement ? </label>
+        <?php if ($tableCiblage->isCibleEnvironnement == 0) { ?>
+            <span id="isEnvironnementCiblable" class="texte">Non</span>
+        <?php } else { ?>
+            <span id="isEnvironnementCiblable" class="texte">Oui</span>
+            <div id="divDetailEnvironnement">
+                <label for="spanSelectEnvironnementCiblable">Terrains </label>
+                <span id="spanResumeEnvironnementCiblable"><?php echo $tableCiblage->getResumeEnvironnement("consultation", $auth); ?></span>
+            </div>
+        <?php } ?>
+    </div>
+
+    <?php
+    if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+        echo '<div id="divBoutonModifierTableCiblage">';
+        echo Phalcon\Tag::SubmitButton(array("Editer", 'id' => 'editerTableCiblage', 'class' => 'bouton', 'title' => "Permet d'ouvrir le formulaire en modification de la table de ciblage."));
+        echo '</div>';
+    }
+    ?>
+
+    <div id="divBoutonFermerTableCiblage">
+        <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerTableCiblage', 'class' => 'bouton', 'title' => "Permet de fermer la pop-up.")); ?>
+    </div>
+</div>

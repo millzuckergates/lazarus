@@ -1,0 +1,30 @@
+<!-- Popup Formulaire Talent -->
+<div id='popupTalent' style='display:none'></div>
+<div id='popupFamille' style='display:none'></div>
+<div id='popupArbre' style='display:none'></div>
+<div id='popupCategorie' style='display:none'></div>
+
+<!-- En tete -->
+<div class='entetePageGameplay'>
+    <span class="titrePage">Gestion des Talents</span>
+</div>
+
+<div class='divCategoriesTalent'>
+    <?php
+    if ($categorie != null) {
+        echo $categorie->genererListeCategorie($auth);
+    } else {
+        echo "<span id='categorieAsbsente'>Il n'y a aucune catégorie à afficher.</span>";
+        echo Phalcon\Tag::SubmitButton(array("", 'id' => 'boutonAjouterNouvelleCategorie', 'class' => 'buttonPlus', 'title' => "Permet d'accéder au formulaire de création d'une catégorie."));
+    }
+    ?>
+</div>
+
+<!-- Div pour la liste résumé -->
+<div id="divGeneralTalent">
+    <?php
+    if ($categorie != null) {
+        echo $this->partial('gameplay/formulaire/talents/generalTalent');
+    }
+    ?>
+</div>

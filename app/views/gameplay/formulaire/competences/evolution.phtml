@@ -1,0 +1,54 @@
+<div id="contenuEvolutionCompetence">
+    <?php
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $element->id]);
+    ?>
+
+    <div id="enteteListeEvolutionCompetence">
+        <div id="divTitreListeEvolutionCompetence"><span class="titrePopup">Evolution de la compétence</span></div>
+    </div>
+
+    <div id="blocInformationEvolutionCompetence">
+        <!-- Bloc Pour les rangs -->
+        <div id="blocRang">
+            <div class='enteteBlocEvolution' id='enteteBlocRangEvolution'>
+                <span class='titreBlocEvolution'>Rangs</span>
+                <div class='divAide' id='divAideBlocRangEvolutionCompetence'
+                     onMouseOver='afficherAide("Ce tableau présente l&#39;évolution des différents rangs pour la compétence. La valeur indiquée à côté de chaque rang correspond au nombre de point qu&#39;il faut obtenir pour le débloquer.","divAideBlocRangEvolutionCompetence");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <div id='divTableListeRangEvolutionCompetence' class='divTableListeEvolutionCompetence'>
+                <?php echo $element->genererTableRang($auth); ?>
+            </div>
+
+            <div id='divRangBloqueEvolution'>
+                <label for="selectRangBloque">L'évolution de la compétences est par défaut bloquée au rang de </label>
+                <span id="selectRangBloque"><?php echo $element->getListeRangBloque($auth); ?></span>
+            </div>
+        </div>
+
+        <!-- Bloc pour les Caractéristiques -->
+        <div id="blocCaracteristiques">
+            <div class='enteteBlocEvolution' id='enteteBlocCaracteristiqueEvolution'>
+                <span class='titreBlocEvolution'>Caractéristiques</span>
+                <div class='divAide' id='divAideBlocCaracteristiqueEvolutionCompetence'
+                     onMouseOver='afficherAide("Ce tableau présente les différents impacts que la compétence a sur les caractéristiques.\n\n La somme de tous les paramètres des caractéristiques doit toujours être égalem à zéro. La case à cocher permet d&#39;identifier une caractéristique comme étant un influenceur de la compétence. Ainsi, elle permettra d&#39;en pondérer l&#39;évolution.\n\n Si la caractéristique force est un influenceur, alors avoir une forte chance fera progresser le joueur plus rapidement, et une faible, plus lentement.","divAideBlocCaracteristiqueEvolutionCompetence");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <div id='divTableListeCaracteristiqueEvolutionCompetence' class='divTableListeEvolutionCompetence'>
+                <?php echo $element->genererTableCaracteristique($auth); ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="boutonsActionPopupRangCompetence" id="boutonsActionRangCompetence">
+        <?php if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_COMPETENCE_MODIFIER, $auth['autorisations'])) { ?>
+            <div id="boutonModifierEvolutionCompetence">
+                <?php echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierEvolutionCompetence', 'class' => 'bouton', 'title' => "Permet de modifier l'évolution de la compétence.")); ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>

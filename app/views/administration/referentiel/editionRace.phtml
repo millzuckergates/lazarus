@@ -1,0 +1,147 @@
+<?php
+echo $this->tag->hiddenField(["idRace", "value" => $race->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div id="divBoutonsRaceEdition" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierRace', 'class' => 'bouton', 'title' => "Permet de valider les modifications pour la race."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditerRace', 'class' => 'bouton', 'title' => "Permet de retourner à la race."));
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Liste races", 'id' => 'retourListeRace', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des races."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la race -->
+<div id="divRace" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreRaceEdition", "class" => "formulaireField titreEdition", "value" => $race->nom)); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuRace" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageRaceEdition">
+            <?php echo Phalcon\Tag::image([$race->image, "class" => 'imageRaceEdition', "id" => "imageRace"]); ?>
+            <div id="listeImageRace">
+                <?php echo $race->genererListeImagesRace(); ?>
+            </div>
+            <div id="divAjouterImageRace">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageRace", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageRace', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionRaceEdition">
+            <?php echo Fonctions::rawTextArea("descriptionRaceEdition", str_replace("\n", "&#13;&#10;", $race->description), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <!-- Detail  -->
+        <div id="divInformationRaceEdition" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleRaceEdition" class="divArticleReferentiel">
+                <div id="autocompleteRaceWiki">
+                    <label for="s">Article Wiki </label>
+                    <?php
+                    if ($race->article != null) {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field", "value" => $race->article->titre));
+                    } else {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    } ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionRaceEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($race->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionRaceEdition'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionRaceEdition' class='tickcrossFormulaireAdministration' checked />";
+                } else {
+                    echo "<label for='isDispoInscriptionRaceEdition'>Disponible à l'incsription ? </label><input type='checkbox' id='isDispoInscriptionRaceEdition' class='tickcrossFormulaireAdministration' />";
+                }
+                ?>
+            </div>
+
+            <!-- Contraintes physiques liés à la race -->
+            <div id="divContraintesPhysiques" class="divContenuInformationReferentiel">
+                <div id="divRaceTailleEdition" class="elementPhysiqueRace">
+                    <label for="raceTailleMinEdition">Taille (cm) entre </label>
+                    <?php echo Phalcon\Tag::textField(array("raceTailleMinEdition", "class" => "inputFormEdition", "value" => $race->tailleMin)); ?>
+                    <label for="raceTailleMaxEdition"> et </label>
+                    <?php echo Phalcon\Tag::textField(array("raceTailleMaxEdition", "class" => "inputFormEdition", "value" => $race->tailleMax)); ?>
+                </div>
+                <div id="divRacePoidsEdition" class="elementPhysiqueRace">
+                    <label for="racePoidsMinEdition">Poids (kg) entre </label>
+                    <?php echo Phalcon\Tag::textField(array("racePoidsMinEdition", "class" => "inputFormEdition", "value" => $race->poidsMin)); ?>
+                    <label for="racePoidsMaxEdition"> et </label>
+                    <?php echo Phalcon\Tag::textField(array("racePoidsMaxEdition", "class" => "inputFormEdition", "value" => $race->poidsMax)); ?>
+                </div>
+                <div id="divRaceAgeEdition" class="elementPhysiqueRace">
+                    <label for="raceAgeMinEdition">Âge (cycles) entre </label>
+                    <?php echo Phalcon\Tag::textField(array("raceAgeMinEdition", "class" => "inputFormEdition", "value" => $race->ageMin)); ?>
+                    <label for="raceAgeMaxEdition"> et </label>
+                    <?php echo Phalcon\Tag::textField(array("raceAgeMaxEdition", "class" => "inputFormEdition", "value" => $race->ageMax)); ?>
+                </div>
+                <div id="divRaceYeuxEdition" class="elementPhysiqueRace">
+                    <label for="listeYeuxEdition">Couleur des yeux autorisés </label>
+                    <span id="listeYeuxEdition"><?php echo $race->genererListeCouleurYeux(); ?></span>
+                </div>
+                <div id="divRaceCheveuxEdition" class="elementPhysiqueRace">
+                    <label for="listeCheveuxEdition">Couleur des cheveux autorisés </label>
+                    <span id="listeCheveuxEdition"><?php echo $race->genererListeCouleurCheveux(); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- div Autorisations -->
+    <div id="divAutorisationsRace" class="divAutorisationReferentiel">
+        <!-- Religion -->
+        <div id="divAutorisationRaceReligionEdition" class="divContenuAutoriseReferentiel">
+            <div id="resumeReligionsAutoriseesEdition">
+                <label for="religionAutoriseeRaceEdition">Religions jouables pour cette race</label>
+                <span id="religionAutoriseeRaceEdition"
+                      class="contenuAutorisationReferentiel"><?php echo $race->genererReligionsAutorisees("modification"); ?></span>
+            </div>
+            <div id="selectReligionsAutoriseesRace" class="divContenuAutoriseReferentiel">
+                <label for="divSelectReligionsAutoriseesRace">Ajoutez une religion </label>
+                <div id="divSelectReligionsAutoriseesRace"
+                     class="contenuAutorisationReferentiel"><?php echo $race->genererSelectListeReligionsAutorisees(); ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blocInformationsTechniques">
+        <!-- Bloc droit avec les différents blocs d'informations -->
+        <div id="divInformationTechniqueRace">
+            <div>
+                <div id="divBoutonsInformationsTechniques">
+                    <?php
+                    echo "<div class='divBoutonsTechniquesReligion'>";
+                    echo "<span class='libelleBoutonTechnique'>Bonus Inscription</span>";
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showlisteBonusRace', 'class' => 'buttonShowDroit'));
+                    echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hidelisteBonusRace', 'class' => 'buttonHideGauche'));
+                    echo "</div>";
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div id="informationTechnique" style="display:none"></div>
+    </div>
+</div>

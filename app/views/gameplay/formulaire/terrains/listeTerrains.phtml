@@ -1,0 +1,218 @@
+<div id="divActionTerrains">
+    <?php if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations'])) { ?>
+        <div class="divBoutonAjouterReferentiel">
+            <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterTerrain', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'un terrain.")); ?>
+        </div>
+    <?php } ?>
+    <!-- Bloc Recherche -->
+    <div id="blocRechercheTerrain">
+        <div id="titreBlocRechercheTerrain" class="titreBlocRecherche">
+            <span class="labelTitreBlocRecherche">Outil de recherche</span>
+        </div>
+
+        <div id="contenuBlocRechercheTerrain" class="contenuBlocRecherche">
+            <div id="tableRechercheTerrain">
+                <div id='searchByName' class="divSearch">
+                    <label for="searchNom">Nom </label>
+                    <?php echo Phalcon\Tag::textField(array("searchNom", "class" => "fieldSearch")); ?>
+                </div>
+                <div class="divSearch">
+                    <label for="searchSaison">Saison </label>
+                    <span id="searchSaison"><?php echo Constantes::genererSelectSaison(null, "selectSearchSaison") ?></span>
+                </div>
+            </div>
+            <br/>
+            <div id="boutonsBlocRechercheTerrains" class="boutonBlocRecherche">
+                <?php echo Phalcon\Tag::SubmitButton(array("Rechercher", 'id' => 'lancerRechercheSaison', 'class' => 'bouton', 'title' => "Recherche")); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+$listeSaisonToutes = Terrains::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_TOUTES]]);
+$listeSaisonHiver = Terrains::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_HIVER]]);
+$listeSaisonPrintemps = Terrains::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_PRINTEMPS]]);
+$listeSaisonEte = Terrains::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_ETE]]);
+$listeSaisonAutomne = Terrains::find(['saison = :saison:', 'bind' => ['saison' => Constantes::SAISON_AUTOMNE]]);
+?>
+
+<div id="listesTablesTerrains">
+    <div class='divListeTerrains'>
+        <div id='terrainsSaisonToutes' class='divListeTerrainSaison'>
+            <div class='enteteTableTerrain'>
+                <span class='nomTypeTerrain'> Terrains associés à toutes les saisons </span><span
+                        class='nombreTypeTerrain'>(<?php echo count($listeSaisonToutes); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeTerrainSaisonToutes', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeTerrainSaisonToutes', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableTerrains' id='divTableTerrainsSaisonToutes' style="display:none">
+                <?php
+                if ($listeSaisonToutes != false && count($listeSaisonToutes) > 0) {
+                    echo "<table class='tableTerrainSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeSaisonToutes as $terrain) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailTerrain(" . $terrain->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$terrain->getRandomImageTerrain(), "class" => 'imgTerrainReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $terrain->getNom() . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $terrain->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideTerrain'>Il n'y a aucun terrain à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+        <div id='terrainsSaisonHiver' class='divListeTerrainSaison'>
+            <div class='enteteTableTerrain'>
+                <span class='nomTypeTerrain'> Terrains associés à la saison Hiver </span><span
+                        class='nombreTypeTerrain'>(<?php echo count($listeSaisonHiver); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeTerrainSaisonHiver', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeTerrainSaisonHiver', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableTerrains' id='divTableTerrainsSaisonHiver' style="display:none">
+                <?php
+                if ($listeSaisonHiver != false && count($listeSaisonHiver) > 0) {
+                    echo "<table class='tableTerrainSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeSaisonHiver as $terrain) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailTerrain(" . $terrain->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$terrain->getRandomImageTerrain(), "class" => 'imgTerrainReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $terrain->getNom() . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $terrain->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideTerrain'>Il n'y a aucun terrain à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+        <div id='terrainsSaisonPrintemps' class='divListeTerrainSaison'>
+            <div class='enteteTableTerrain'>
+                <span class='nomTypeTerrain'> Terrains associés à la saison Printemps </span><span
+                        class='nombreTypeTerrain'>(<?php echo count($listeSaisonPrintemps); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeTerrainSaisonPrintemps', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeTerrainSaisonPrintemps', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableTerrains' id='divTableTerrainsSaisonPrintemps' style="display:none">
+                <?php
+                if ($listeSaisonPrintemps != false && count($listeSaisonPrintemps) > 0) {
+                    echo "<table class='tableTerrainSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeSaisonPrintemps as $terrain) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailTerrain(" . $terrain->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$terrain->getRandomImageTerrain(), "class" => 'imgTerrainReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $terrain->getNom() . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $terrain->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideTerrain'>Il n'y a aucun terrain à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+        <div id='terrainsSaisonEte' class='divListeTerrainSaison'>
+            <div class='enteteTableTerrain'>
+                <span class='nomTypeTerrain'> Terrains associés à la saison Eté </span><span
+                        class='nombreTypeTerrain'>(<?php echo count($listeSaisonEte); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeTerrainSaisonEte', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeTerrainSaisonEte', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableTerrains' id='divTableTerrainsSaisonEte' style="display:none">
+                <?php
+                if ($listeSaisonEte != false && count($listeSaisonEte) > 0) {
+                    echo "<table class='tableTerrainSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeSaisonEte as $terrain) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailTerrain(" . $terrain->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$terrain->getRandomImageTerrain(), "class" => 'imgTerrainReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $terrain->getNom() . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $terrain->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideTerrain'>Il n'y a aucun terrain à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+        <div id='terrainsSaisonAutomne' class='divListeTerrainSaison'>
+            <div class='enteteTableTerrain'>
+                <span class='nomTypeTerrain'> Terrains associés à la saison Automne </span><span
+                        class='nombreTypeTerrain'>(<?php echo count($listeSaisonAutomne); ?>)</span>
+                <div class="buttonRight">
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'showListeTerrainSaisonAutomne', 'class' => 'buttonShow')); ?>
+                    <?php echo Phalcon\Tag::SubmitButton(array("", 'id' => 'hideListeTerrainSaisonAutomne', 'class' => 'buttonHide')); ?>
+                </div>
+            </div>
+            <div class='divTableTerrains' id='divTableTerrainsSaisonAutomne' style="display:none">
+                <?php
+                if ($listeSaisonAutomne != false && count($listeSaisonAutomne) > 0) {
+                    echo "<table class='tableTerrainSaison'>";
+                    echo "<tr>
+								<th width='20%'></th>
+								<th width='20%'>Nom</th>
+								<th width='60%'>Description</th>
+							  </tr>";
+                    $i = 0;
+                    foreach ($listeSaisonAutomne as $terrain) {
+                        $ligne = "ligne_" . $i % 2;
+                        echo "<tr class='" . $ligne . "' onclick='afficherDetailTerrain(" . $terrain->id . ");'>";
+                        echo "<td>" . Phalcon\Tag::image([$terrain->getRandomImageTerrain(), "class" => 'imgTerrainReferentiel']) . "</td>";
+                        echo "<td><span class='nomListeReferentiel'>" . $terrain->getNom() . "</span></td>";
+                        echo "<td class='descriptionReferentiel'><span>" . str_replace("\n", "<br/>", $terrain->resumeDescription()) . "</span></td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<span class='resultatVideTerrain'>Il n'y a aucun terrain à afficher.</span>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

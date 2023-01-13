@@ -1,0 +1,39 @@
+<!-- En tete -->
+<div class='entetePageAdministration'>
+    <span class="titrePage">Gestion des gifs</span>
+</div>
+
+<!--Bloc Repertoire -->
+<div class="blocRepertoire">
+    <div class="tree">
+        <?php
+        echo Files::mkmapGif(null, $this->getDI()->get('config')->application->gifDir);
+        echo $this->tag->hiddenField(["repertoireEnCours", "value" => ""]);
+        ?>
+    </div>
+</div>
+
+<!--Bloc Gifs -->
+<div class="divBlocElementVisuel">
+    <div id="blocGif" class="blocElementVisuel">
+        <!--Liste des gifs -->
+        <div id="listeGifs" class="listeElementVisuel">
+            <?php echo Files::chargerGifsByRepertoire(null, $this->getDI()->get('config')->application->gifDir); ?>
+        </div>
+    </div>
+
+    <!--Détail Gif -->
+    <div id="detailGif" class="detailElementVisuel" style="display:none">
+        <?php echo Files::genererDetailGif(null, $this->getDI()->get('config')->application->gifDir); ?>
+    </div>
+
+    <!-- Bloc FTP -->
+    <div id="blocFTPGestionGif" class="ftpElementVisuel">
+        <input type="file" id="hiddenfile" style="display:none" name="file" onChange="getFileValue();"
+               accept="image/*"/>
+        <label for="selectedfile">Ajouter un gif sur le serveur </label>
+        <input type="text" id="selectedfile" class="fileToUpload" value="Choisissez un fichier"/>
+        <input type="button" class="bouton" value="Parcourir" id="buttonBrowseFile" onclick="getFile();"/>
+        <input type="button" class="bouton" id="buttonUploadFile" value="Ajouter" onclick="uploadFileGestionGif();"/>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<?php
+echo $this->tag->hiddenField(["idNews", "value" => $news->id]);
+?>
+<div id="creationNews">
+    <div class="entetePopup" id="entetePopupNews">
+        <?php echo Phalcon\Tag::textField(array("titreNews", "class" => "formulaireField titrePopupEdition", "value" => $news->titre)); ?>
+    </div>
+
+    <div class="formPopupNews" id="formPopupNews">
+        <!-- Type de la news -->
+        <div class='divDataPopup'>
+            <label for="selectTypeNews">Type de la news </label>
+            <span id="selectTypeNews"><?php echo $news->genererSelectType(); ?></span>
+        </div>
+
+        <!-- Si News RP, bloc destinataire -->
+        <?php
+        if ($news->type != News::TYPE_RP) {
+            $style = "display:none;";
+        } else {
+            $style = "display:inline-flex;";
+        }
+        ?>
+        <div class='divDataPopup' id='blocDestinataireNews' style='<?php echo $style; ?>'>
+            <label for="selectTypeDestinataire">Destinataires </label>
+            <span id="selectTypeDestinataire"><?php echo $news->genererSelectDestinataireData(); ?></span>
+            <span id="selectIdDestinataire"
+                  style='<?php echo $style; ?>'><?php echo $news->genererSelectIdDestinataireData(); ?></span>
+        </div>
+
+        <!-- Nom Auteur -->
+        <div class='divDataPopup'>
+            <label for="nomAuteur">Auteur </label>
+            <?php echo Phalcon\Tag::textField(array("nomAuteur", "class" => "formulaireField", "value" => $news->nomAuteur)); ?>
+        </div>
+
+        <!-- Bloc Texte -->
+        <div class="divDataPopup" id="blocTexteNews">
+            <!-- Balises -->
+            <div id="balises"><?php $this->partial('utils/balises'); ?></div>
+            <!-- Texte -->
+            <div id="divTexteNews"><?php echo Fonctions::rawTextArea("texteNews", str_replace("\n", "&#13;&#10;", $news->texte)); ?></div>
+        </div>
+
+        <!-- Boutons -->
+        <div id="boutonCreerNews" class="boutonActionPopup">
+            <?php echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierNews', 'class' => 'bouton', 'title' => "Permet de modifier une actualité.")); ?>
+        </div>
+        <div id="boutonFermerNews" class="boutonActionPopup">
+            <?php echo Phalcon\Tag::SubmitButton(array("Fermer", 'id' => 'fermerNews', 'class' => 'bouton', 'title' => "Permet de fermer la fenêtre.")); ?>
+        </div>
+    </div>
+</div>		

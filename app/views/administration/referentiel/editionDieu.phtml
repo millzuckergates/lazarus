@@ -1,0 +1,107 @@
+<?php
+echo $this->tag->hiddenField(["idDieu", "value" => $dieu->id]);
+?>
+
+<!-- Div pour les boutons -->
+<div id="divBoutonsDieuEdition" class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Modifier", 'id' => 'modifierDieu', 'class' => 'bouton', 'title' => "Permet de valider les modifications pour le dieu."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Annuler", 'id' => 'annulerEditerDieu', 'class' => 'bouton', 'title' => "Permet de retourner au dieu."));
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Liste dieux", 'id' => 'retourListeDieu', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des dieux."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la dieu -->
+<div id="divDieu" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreDieuEdition", "class" => "formulaireField titreEdition", "value" => $dieu->nom)); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuDieu" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImgDieuEdition">
+            <?php echo Phalcon\Tag::image([$dieu->img, "class" => 'imgDieuEdition', 'id' => 'imageDieu']); ?>
+            <div id="listeImageDieu">
+                <?php echo $dieu->genererListeImagesDieu(); ?>
+            </div>
+            <div id="divAjouterImageDieu">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageDieu", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageDieu', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div id="divDescriptionDieuEdition">
+            <?php echo Fonctions::rawTextArea("descriptionDieuEdition", str_replace("\n", "&#13;&#10;", $dieu->description), "texteDescriptionReferentiel"); ?>
+        </div>
+
+        <!-- Detail  -->
+        <div id="divInformationDieuEdition" class="divInformationReferentiel">
+            <!-- Article du wiki lié -->
+            <div id="divArticleDieuEdition" class="divArticleReferentiel">
+                <div id="autocompleteDieuWiki">
+                    <label for="s">Article Wiki </label>
+                    <?php
+                    if ($dieu->article != null) {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field", "value" => $dieu->article->titre));
+                    } else {
+                        echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    }
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurDieuEdition" class="divContenuInformationReferentiel">
+                <label for="couleurDieuEdition">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurDieuEdition", "class" => "formulaireField couleurCarre", "value" => $dieu->couleur)); ?>
+                <span id="carreCouleurDieu" style="background-color:<?php echo $dieu->couleur; ?>" class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionDieuEdition" class="divContenuInformationReferentiel">
+                <?php
+                if ($dieu->isDispoInscription) {
+                    echo "<label for='isDispoInscriptionDieuEdition'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionDieuEdition' class='tickcrossFormulaireAdministration' checked />";
+                } else {
+                    echo "<label for='isDispoInscriptionDieuEdition'>Disponible à l'incsription ? </label><input type='checkbox' id='isDispoInscriptionDieuEdition' class='tickcrossFormulaireAdministration' />";
+                }
+                ?>
+            </div>
+
+            <!-- Race du dieu -->
+            <div id="divRaceDieuEdition" class="divContenuInformationReferentiel">
+                <label for="raceDieuEdition">Race </label>
+                <?php
+                $listeRace = Races::find();
+                echo "<select id='raceDieuEdition'><option value='0'>Selectionnez une race</option>";
+                foreach ($listeRace as $race) {
+                    if ($race->id == $dieu->idRace) {
+                        echo "<option value='" . $race->id . "' selected>" . $race->nom . "</option>";
+                    } else {
+                        echo "<option value='" . $race->id . "'>" . $race->nom . "</option>";
+                    }
+                }
+                echo "</select>";
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

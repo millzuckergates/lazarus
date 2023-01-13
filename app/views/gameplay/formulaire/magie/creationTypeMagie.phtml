@@ -1,0 +1,92 @@
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerTypeMagie', 'class' => 'bouton', 'title' => "Créer le type de magie."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Retour liste", 'id' => 'retourListeTypeMagie', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des Types de Magie."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour la nature de magie -->
+<div id="divTitreFormNatureMagie" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormNatureMagie", "class" => "formulaireField titreEdition", "value" => "Type de Magie")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuNatureMagie" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageNatureMagie" style="width:100%;">
+            <?php echo Phalcon\Tag::image(['public/img/site/illustrations/naturesmagie/default.jpg', "class" => 'imageMagieCreation', 'id' => 'imageNatureMagie']); ?>
+            <div id="listeImageTypeMagie">
+                <?php echo Naturesmagie::genererListeImageTypeMagieVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterImageTypeMagie">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageTypeMagie", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageTypeMagie', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionMagieCreation">
+            <?php echo Phalcon\Tag::textArea(["descriptionNatureMagieCreation", "value" => "Entrez une description", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <div id="divInformationNatureMagieCreation" class="divInformationMagie">
+            <!-- Article du wiki lié -->
+            <div id="divArticleNatureMagieCreation" class="divArticleReferentiel">
+                <div id="autocompleteTypeMagieWiki">
+                    <label for="s">Article du wiki </label>
+                    <?php
+                    echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Couleur -->
+            <div id="divCouleurNatureMagieCreation" class="divContenuInformationReferentiel">
+                <label for="couleurNatureMagieCreation">Couleur </label>
+                <?php echo Phalcon\Tag::textField(array("couleurNatureMagieCreation", "class" => "formulaireField couleurCarre", "value" => "")); ?>
+                <span id="carreCouleurNatureMagie" style="background-color:white"
+                      class="carreCouleur">&nbsp;&nbsp;</span>
+            </div>
+
+            <!-- Type de magie -->
+            <div id="divTypeNatureMagie" class="divContenuInformationReferentiel">
+                <label for="typeNatureMagie">Type </label>
+                <span id="typeNatureMagie"><?php echo Naturesmagie::getSelectTypeNatureMagieVide(); ?></span>
+            </div>
+
+            <!-- Fichier Technique pour la nature de magie -->
+            <div id="divScriptNatureMagie" class="divContenuInformationReferentiel">
+                <label for="scriptNatureMagie">Script utilisé </label>
+                <span id="scriptNatureMagie"><?php echo Naturesmagie::getListeFichiersVide($this->getDI()->get('config')->application->scriptNaturesMagieDir); ?></span>
+            </div>
+
+            <!-- Disponible à l'inscription -->
+            <div id="divInscriptionNatureMagieCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isDispoInscriptionNatureMagieCreation'>Disponible à l'inscription ? </label><input type='checkbox' id='isDispoInscriptionNatureMagieCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div id="divBloqueNatureMagieCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isBloqueNatureMagieCreation'>Utilisation bloquée ? </label><input type='checkbox' id='isBloqueNatureMagieCreation' class='tickcrossFormulaireGameplay'/>";
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

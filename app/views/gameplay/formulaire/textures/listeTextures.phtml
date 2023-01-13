@@ -1,0 +1,42 @@
+<div id="divActionTextures">
+    <?php if (Autorisations::hasAutorisation(Autorisations::GESTION_GAMEPLAY_TERRAINS, $auth['autorisations'])) { ?>
+        <div class="divBoutonAjouterReferentiel">
+            <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'ajouterTexture', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une texture.")); ?>
+        </div>
+    <?php } ?>
+</div>
+
+<?php
+$listeTextures = Textures::find();
+?>
+
+<div id="listesTablesTextures">
+    <div class='divListeTextures'>
+        <div class='enteteTableTexture'>
+            <span class='nomTypeTexture'> Nombre de textures : <?php echo count($listeTextures); ?></span>
+        </div>
+        <div class='divTableTextures'>
+            <?php
+            if ($listeTextures != false && count($listeTextures) > 0) {
+                echo "<table class='tableTexture'>";
+                echo "<tr>
+                            <th width='40%'></th>
+                            <th width='60%'>Nom</th>
+                          </tr>";
+                $i = 0;
+                foreach ($listeTextures as $texture) {
+                    $ligne = "ligne_" . $i % 2;
+                    echo "<tr class='" . $ligne . "' onclick='afficherDetailTexture(" . $texture->id . ");'>";
+                    echo "<td>" . Phalcon\Tag::image([$texture->getImage(), "class" => 'imgTextureReferentiel']) . "</td>";
+                    echo "<td><span class='nomListeReferentiel'>" . $texture->nom . "</span></td>";
+                    echo "</tr>";
+                    $i++;
+                }
+                echo "</table>";
+            } else {
+                echo "<span class='resultatVideTexture'>Il n'y a aucune texture à afficher.</span>";
+            }
+            ?>
+        </div>
+    </div>
+</div>

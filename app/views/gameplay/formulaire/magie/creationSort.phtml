@@ -1,0 +1,183 @@
+<!-- Div pour les boutons -->
+<div class="boutonsActionReferentiel">
+    <div>
+        <?php
+        if (Autorisations::hasAutorisation(Autorisations::GAMEPLAY_GESTION_MAGIE_MODIFIER, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("Créer", 'id' => 'creerSort', 'class' => 'bouton', 'title' => "Créer le sort."));
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        echo Phalcon\Tag::SubmitButton(array("Liste sort", 'id' => 'retourListeSort', 'class' => 'bouton', 'title' => "Permet de retourner à la liste des Sorts."));
+        ?>
+    </div>
+</div>
+
+<!-- Div pour l'école de magie -->
+<div id="divFormSort" class="divReferentiel">
+    <!-- En-tête -->
+    <div id="divEnteteReferentiel">
+        <?php echo Phalcon\Tag::textField(array("titreFormSort", "class" => "formulaireField titreEdition", "value" => "Nom du sort")); ?>
+    </div>
+
+    <!-- div Contenu -->
+    <div id="divContenuSort" class="divContenuReferentiel">
+        <!-- Image -->
+        <div id="divImageSortCreation">
+            <?php echo Phalcon\Tag::image(['public/img/site/illustrations/sorts/default.jpg', "class" => 'imageMagie', 'id' => 'imageSort']); ?>
+            <div id="listeImageSort">
+                <?php echo Sorts::genererListeImageSortVide($this->getDI()->get('config')->application->imgDir); ?>
+            </div>
+            <div id="divAjouterImageSort">
+                <?php
+                echo Phalcon\Tag::textField(array("newImageSort", "class" => "inputNouvelleImage", "value" => "Url de l'image"));
+                echo Phalcon\Tag::SubmitButton(array("Charger", 'id' => 'chargerNewImageSort', 'class' => 'bouton', 'title' => "Permet d'ajouter une image à partir d'une url."));
+                ?>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="divDescriptionMagieCreation">
+            <?php echo Phalcon\Tag::textArea(["descriptionSortCreation", "value" => "Entrez une description.", "class" => "texteDescriptionReferentiel"]); ?>
+        </div>
+
+        <!-- Message RP -->
+        <div class="divMessageRPMagieCreation">
+            <?php echo Phalcon\Tag::textArea(["messageRPSortCreation", "value" => "Entrez le message qui s'affichera sur le plateau de jeu lors de la réussite du sort.", "class" => "texteMessageRPReferentiel"]); ?>
+        </div>
+
+        <!-- Event Lanceur -->
+        <div class="divEventLanceurMagieCreation">
+            <?php echo Phalcon\Tag::textArea(["eventLanceur", "value" => "Entrez l'evenement qui s'affichera dans l'historique du lanceur.", "class" => "eventReferentiel"]); ?>
+        </div>
+
+        <!-- Event Global -->
+        <div class="divEventGlobalMagieCreation">
+            <?php echo Phalcon\Tag::textArea(["eventGlobal", "value" => "Entrez l'evenement qui s'affichera dans l'historique des observateurs.", "class" => "eventReferentiel"]); ?>
+        </div>
+
+        <div id="divInformationSortCreation" class="divInformationMagie">
+
+            <!-- Article du wiki lié -->
+            <div id="divArticleSortCreation" class="divArticleReferentiel">
+                <div id="autocompleteSortWiki">
+                    <label for="s">Article du wiki </label>
+                    <?php
+                    echo Phalcon\Tag::textField(array("s", "class" => "field"));
+                    ?>
+                    <div id="suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Ecole de magie -->
+            <div id="divEcoleMagieSort" class="divContenuInformationReferentiel">
+                <label for="ecoleMagieSort">Ecole de magie </label>
+                <span id="ecoleMagieSort"><?php echo Sorts::getSelectEcoleMagieVide(); ?></span>
+            </div>
+
+            <!-- Arcane -->
+            <div id="divArcaneSortCreation" class="divContenuInformationReferentiel">
+                <label for="arcaneSortCreation">Arcane </label>
+                <?php echo Phalcon\Tag::textField(array("arcaneSortCreation", "class" => "formulaireField", "value" => "0", "size" => 5)); ?>
+            </div>
+
+            <!-- Formule Mana -->
+            <div id="divManaSortCreation" class="divContenuInformationReferentiel">
+                <label for="manaSort">Mana </label>
+                <span id="manaSort">0</span>
+                <input type="button" value="Changer formule" onclick="afficherFormulaireFormule('manaSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule" class="boutonFormule"/>
+            </div>
+
+            <!-- Formule de la portée -->
+            <div id="divPorteeSortCreation" class="divContenuInformationReferentiel">
+                <label for="porteeSort">Portée </label>
+                <span id="porteeSort">0</span>
+                <input type="button" value="Changer formule" onclick="afficherFormulaireFormule('porteeSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule" class="boutonFormule"/>
+            </div>
+
+            <!-- Formule du coût en PA-->
+            <div id="divPaSortCreation" class="divContenuInformationReferentiel">
+                <label for="paSort">Coût en PA </label>
+                <span id="paSort">0</span>
+                <input type="button" value="Changer formule" onclick="afficherFormulaireFormule('paSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule" class="boutonFormule"/>
+            </div>
+
+            <!-- Durée du sort -->
+            <div id="divDureeSortCreation" class="divContenuInformationReferentiel">
+                <label for="dureeSort">Durée du sort </label>
+                <span id="dureeSort">Instantané</span>
+                <input type="button" value="Changer formule" onclick="afficherFormulaireFormule('dureeSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule" class="boutonFormule"/>
+            </div>
+
+            <!-- Durée maximum du sort -->
+            <div id="divDureeMaxSortCreation" class="divContenuInformationReferentiel">
+                <label for="dureeMaxSort">Durée maximum du sort </label>
+                <span id="dureeMaxSort">Non concerné</span>
+                <input type="button" value="Changer formule" onclick="afficherFormulaireFormule('dureeMaxSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule" class="boutonFormule"/>
+            </div>
+
+            <!-- Nombre d'occurence maximum du sort -->
+            <div id="divCumulQuantiteSortCreation" class="divContenuInformationReferentiel">
+                <label for="cumulQuantiteSort">Nombre d'occurence maximum du sort </label>
+                <span id="cumulQuantiteSort">Non cumulable</span>
+                <input type="button" value="Changer formule" onclick="afficherFormulaireFormule('cumulQuantiteSort');"
+                       title="Permet d'ouvrir le formulaire afin de modifier la formule" class="boutonFormule"/>
+            </div>
+
+            <!-- Disponible utilisation bloquée -->
+            <div id="divBloqueSortCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isBloqueSortCreation'>Utilisation bloquée ? </label><input type='checkbox' id='isBloqueSortCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Disponible à l'enseignement -->
+            <div id="divEnseignableSortCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isEnseignableSortSortCreation'>Peut être enseigné ? </label><input type='checkbox' id='isEnseignableSortSortCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Le sort est il esquivable -->
+            <div id="divEsquivableSortCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isEsquivableSortSortCreation'>Peut être esquivé ? </label><input type='checkbox' id='isEsquivableSortSortCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Le sort est il soumis au JS -->
+            <div id="divJSSortCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isJSSortCreation'>Soumis au Jet de Sauvegarde ? </label><input type='checkbox' id='isJSSortCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <!-- Le sort est il soumis à une résistance vitale -->
+            <div id="divJSEVSortCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isJSEVSortCreation'>Soumis à la Résistance Vitale ? </label><input type='checkbox' id='isJSEVSortCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+                <div class='divAide' id='divAideJSEV'
+                     onMouseOver='afficherAide("Détermine si le sort peut être contré en fonction du % de vie qu&#39;à la cible.","divAideJSEV");'
+                     onMouseOut='cacherAide();'></div>
+            </div>
+
+            <!-- Le sort est il retranscriptible sur un parchemin -->
+            <div id="divRetranscriptibleSortCreation" class="divContenuInformationReferentiel">
+                <?php
+                echo "<label for='isRetranscriptibleSortSortCreation'>Peut être écrit sur un parchemin ? </label><input type='checkbox' id='isRetranscriptibleSortSortCreation' class='tickcrossFormulaireGameplay' />";
+                ?>
+            </div>
+
+            <div id="blocParticulierNatureMagie">
+                <span id='specificiteNatureMagie'>Ce sort n'étant lié à aucun type de magie, il n'y a pas de spécificités associées.</span>
+            </div>
+        </div>
+    </div>
+</div>

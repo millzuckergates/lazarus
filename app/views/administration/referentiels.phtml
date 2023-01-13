@@ -1,0 +1,25 @@
+<?php echo $this->tag->hiddenField(["referentielSelect", "value" => "Royaume"]); ?>
+<!-- En tete -->
+<div class='entetePageAdministration'>
+    <span class="titrePage">Gestion des référentiels</span>
+</div>
+
+<!-- Liste des référentiel en accès -->
+<div id="divAccesReferentiel">
+    <span class=""><?php echo Phalcon\Tag::SubmitButton(array("Royaumes", 'id' => 'boutonRefRoyaume', 'class' => 'boutonReferentiel boutonReferentielSelect', 'title' => "Permet d'afficher le réferentiel des royaumes.")); ?></span>
+    <span class=""><?php echo Phalcon\Tag::SubmitButton(array("Races", 'id' => 'boutonRefRace', 'class' => 'boutonReferentiel', 'title' => "Permet d'afficher le réferentiel des races.")); ?></span>
+    <span class=""><?php echo Phalcon\Tag::SubmitButton(array("Religions", 'id' => 'boutonRefReligion', 'class' => 'boutonReferentiel', 'title' => "Permet d'afficher le réferentiel des religions.")); ?></span>
+    <span class=""><?php echo Phalcon\Tag::SubmitButton(array("Divinités", 'id' => 'boutonRefDivinite', 'class' => 'boutonReferentiel', 'title' => "Permet d'afficher le réferentiel des divinités.")); ?></span>
+    <span class=""><?php echo Phalcon\Tag::SubmitButton(array("Villes", 'id' => 'boutonRefVille', 'class' => 'boutonReferentiel', 'title' => "Permet d'afficher le réferentiel des villes.")); ?></span>
+</div>
+
+<!-- Div pour la liste résumé -->
+<div id="divListeResume">
+    <?php echo $this->partial('administration/referentiel/listeRoyaumes'); ?>
+</div>
+
+<!-- Div pour le referentiel en Consultation -->
+<div id="divDetailConsultationReferentiel" class="divDetailReferentiel" style="display:none"></div>
+
+<!-- Div pour le réferentiel en edition ou creation -->
+<div id="divDetailEditionReferentiel" class="divDetailReferentiel" style="display:none"></div>

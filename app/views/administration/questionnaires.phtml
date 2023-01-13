@@ -1,0 +1,39 @@
+<?php
+if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_QUESTIONNAIRE_INSCRIPTION_CONSULTATION, $auth['autorisations'])) {
+    echo $this->tag->hiddenField(["type", "value" => $type]);
+    echo $this->tag->hiddenField(["idType", "value" => $idType]);
+    echo $this->tag->hiddenField(["idDeleteQuestionnaire", "value" => ""]);
+    ?>
+    <!-- En tete -->
+    <div class='entetePageAdministration'>
+        <span class="titrePage">Questionnaires pour les inscriptions</span>
+    </div>
+
+    <?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_QUESTIONNAIRE_INSCRIPTION_MODIFIER, $auth['autorisations'])) { ?>
+        <div id="divBoutonAjouterQuestion">
+            <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterQuestion', 'class' => 'bouton', 'title' => "Permet d'ajouter une nouvelle question.")); ?>
+        </div>
+    <?php } ?>
+
+    <div id="divQuestionsActives" class="blocTableQuestionnaire">
+        <span id="nbQuestionsActives"
+              class="soustitreQuestionnaire"><?php echo Questionnaires::getQuestions($type, $idType, 1); ?> questions actives :</span>
+        <div id="tableauQuestionsActives"><?php echo Questionnaires::buildTableauQuestionnaire($type, $idType, 1, $auth); ?></div>
+    </div>
+
+    <div id="divQuestionsInactives" class="blocTableQuestionnaire">
+        <span id="nbQuestionsInactives"
+              class="soustitreQuestionnaire"><?php echo Questionnaires::getQuestions($type, $idType, 0); ?> questions inactives :</span>
+        <div id="tableauQuestionsInactives"><?php echo Questionnaires::buildTableauQuestionnaire($type, $idType, 0, $auth); ?></div>
+    </div>
+
+    <div id="divBoutonRetourFormulaire">
+        <?php echo Phalcon\Tag::SubmitButton(array("Retour", 'id' => 'boutonRetourFormulaire', 'class' => 'bouton', 'title' => "Permet de retourner au formulaire.")); ?>
+    </div>
+
+    <div id="popupQuestionnaire" style="display:none">
+
+    </div>
+<?php }
+?>
+

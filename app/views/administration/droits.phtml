@@ -1,0 +1,26 @@
+<?php
+if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_DROITS_CONSULTATION, $auth['autorisations'])) {
+    ?>
+    <!-- En tete -->
+    <div class='entetePageAdministration'>
+        <span class="titrePage">Gestion des droits</span>
+    </div>
+
+    <!-- Liste des droits -->
+    <div id="listeDroits">
+        <label for="selectListeDroit">Liste des profils</label>
+        <?php echo Droits::genererListeProfils($auth); ?>
+        <!-- Bouton de gestion des droits -->
+        <?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_DROITS_MODIFICATION, $auth['autorisations'])) {
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'boutonModifierDroit', 'class' => 'buttonActualiser', 'title' => "Permet de modifier le profil sélectionné."));
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'boutonAjouterDroit', 'class' => 'buttonPlus', 'title' => "Permet d'ajouter un nouveau profil."));
+            echo Phalcon\Tag::SubmitButton(array("", 'id' => 'boutonSupprimerDroit', 'class' => 'buttonMoins', 'title' => "Permet de supprimer le profil sélectionné."));
+        } ?>
+    </div>
+
+    <!-- Liste des autorisations -->
+    <div id="listeAutorisationsDroit">
+        <?php echo Droits::genererListeAutorisations($auth, null); ?>
+    </div>
+<?php }
+?>

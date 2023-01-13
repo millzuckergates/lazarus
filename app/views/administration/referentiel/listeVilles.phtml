@@ -1,0 +1,23 @@
+<?php if (Autorisations::hasAutorisation(Autorisations::ADMINISTRATION_FORMULAIRES_GERER, $auth['autorisations'])) { ?>
+    <div class="divBoutonAjouterReferentiel">
+        <?php echo Phalcon\Tag::SubmitButton(array("Ajouter", 'id' => 'boutonAjouterVille', 'class' => 'bouton', 'title' => "Permet d'accéder au formulaire de création d'une ville.")); ?>
+    </div>
+<?php } ?>
+
+<?php
+echo "<div id='listeVilleReferentielAdministration'>";
+$listeRoyaumes = Royaumes::find(['order' => 'nom']);
+if ($listeRoyaumes != false && count($listeRoyaumes) > 0) {
+    foreach ($listeRoyaumes as $royaume) {
+        echo "<div class='divVillesParRoyaume'>";
+        echo "<div class='enteteDivVilleParRoyaume'>";
+        echo Phalcon\Tag::image([$royaume->etendard, "class" => 'etendardMinimaliste']);
+        echo "<span class='titreVilleParRoyaume'>" . $royaume->nom . "</span>";
+        echo Phalcon\Tag::image([$royaume->etendard, "class" => 'etendardMinimaliste']);
+        echo "</div>";
+        echo $royaume->genererListeVilles($auth);
+        echo "</div>";
+    }
+}
+echo "</div>";
+?>
